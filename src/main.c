@@ -3,9 +3,9 @@
 
 int main(void)
 {
-    //char*** tablero = obtenerTableroInicial();
+    //char*** tablero = TableroInicializar();
 
-    //imprimirTablero(tablero);
+    //TableroImprimir(tablero);
 
     return EXIT_SUCCESS;
 }

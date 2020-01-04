@@ -18,7 +18,7 @@
 #define TORRE_NEGRO "TN"
 #define NADA "  "
 
-void imprimirTablero(char*** tablero)
+void TableroImprimir(char*** tablero)
 {
     printf("\n—————————————————————————————————————————\n");
     
@@ -35,7 +35,7 @@ void imprimirTablero(char*** tablero)
     }
 }
 
-char*** obtenerTableroInicial()
+char*** TableroInicializar()
 {
     char tableroProvisorio[FILAS][COLUMNAS][3] = 
     {
