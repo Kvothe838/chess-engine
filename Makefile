@@ -14,8 +14,8 @@ all: $(MAIN) $(TEST) clean run
 $(MAIN): $(OBJECTS)
 	$(CC) -o bin/$(MAIN) $(OBJECTS) $(CFLAGSMAIN) 
 
-$(TEST):
-	$(CC) -o test/$(TEST) $(OBJECTS) $(CFLAGSMAIN)
+$(TEST): $(OBJECTS)
+	$(CC) -o test/$(TEST) $(OBJECTS) $(CFLAGSTEST)
 
 clean:
 	$(RM) $(OBJECTS) *.gch
