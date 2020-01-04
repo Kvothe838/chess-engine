@@ -1,4 +1,3 @@
-/*Archivo inicializado con runc*/
 #include<stdio.h>
 #include<stdlib.h>
 
