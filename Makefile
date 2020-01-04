@@ -4,19 +4,21 @@ CFLAGSTEST = -Wall -Werror -pedantic -O0 -ggdb -lm
 
 SOURCES ?= $(wildcard src/*.c)
 
-OBJECTSMAIN = $(patsubst %.c, %.o, $(SOURCES))
-OBJECTSTEST = $(patsubst %.c, %.o, $(SOURCES))
+OBJECTS = $(patsubst %.c, %.o, $(SOURCES))
 
 MAIN = main
 TEST = test
 
-all: $(MAIN) clean run
+all: $(MAIN) $(TEST) clean run
 
-$(MAIN): $(OBJECTSMAIN)
-	$(CC) -o bin/$(MAIN) $(OBJECTSMAIN) $(CFLAGSMAIN) 
+$(MAIN): $(OBJECTS)
+	$(CC) -o bin/$(MAIN) $(OBJECTS) $(CFLAGSMAIN) 
+
+$(TEST):
+	$(CC) -o test/$(TEST) $(OBJECTS) $(CFLAGSMAIN)
 
 clean:
-	$(RM) $(OBJECTSMAIN) *.gch
+	$(RM) $(OBJECTS) *.gch
 
 run:
 	./bin/$(MAIN)
