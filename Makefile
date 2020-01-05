@@ -10,7 +10,7 @@ SOURCES ?= $(wildcard src/*.c)
 OBJECTS = $(patsubst %.c, %.o, $(SOURCES))
 
 
-CPPFLAGS ?= -I$(LIBS) -ggdb # Flags de objetos
+CPPFLAGS ?= -I$(LIBS) -ggdb # Variable interna de Makefile para definir los flgas de los objetos
 
 MAIN = main
 TEST = test
