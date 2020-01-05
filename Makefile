@@ -10,7 +10,7 @@ SOURCES ?= $(wildcard src/*.c)
 OBJECTS = $(patsubst %.c, %.o, $(SOURCES))
 
 
-CPPFLAGS ?= -I$(LIBS) # Flags de objetos
+CPPFLAGS ?= -I$(LIBS) -ggdb # Flags de objetos
 
 MAIN = main
 TEST = test
