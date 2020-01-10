@@ -8,22 +8,11 @@
 
 size_t NUMERO_PRUEBAS = 0;
 size_t PRUEBAS_APROBADAS = 0;
-bool EJECUTAR_FINAL = true;
-
-#define FUNCION_FINAL \
-void __attribute__  ((destructor)) resultado()\
-{\
-    if (EJECUTAR_FINAL)\
-    {\
-            printf("%s %s: %lu/%lu\n\n", RESULTADO, __FILE__, PRUEBAS_APROBADAS, NUMERO_PRUEBAS);\
-            EJECUTAR_FINAL = false;\
-    }\
-}
 
 #define ASSERT(CONDICION)\
 {\
     NUMERO_PRUEBAS++;\
-    printf("Probando %s: ", __FUNCTION__);\
+    printf("Probando %s: ", __func__);\
     if(CONDICION)\
     {\
         printf("%s\n", APROBADO), PRUEBAS_APROBADAS++;\
@@ -33,6 +22,10 @@ void __attribute__  ((destructor)) resultado()\
         printf("%s %s\n", FALLO, #CONDICION);\
     }\
     printf("\n");\
-    FUNCION_FINAL\
+}
+
+void __attribute__((destructor)) resultado()
+{
+    printf("%s %s: %lu/%lu\n\n", RESULTADO, ARCHIVO, PRUEBAS_APROBADAS, NUMERO_PRUEBAS);
 }
 
