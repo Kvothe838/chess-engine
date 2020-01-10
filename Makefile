@@ -16,9 +16,9 @@ DEBUG = degub
 CFLAGS = -Wall -Werror -pedantic -std=c99
 CFLAGS_MAIN  = $(CFLAGS) -O3  -lm
 CFLAGS_DEBUG = $(CFLAGS) -O0  -ggdb -lm
-CFLAGS_TEST  = $(CFLAGS)
+CFLAGS_TEST  = $(CFLAGS) 
 # Variable interna de Makefile para definir los flgas de los objetos
-CPPFLAGS ?= -I$(LIB_DIR) -ggdb 
+CPPFLAGS ?= $(CFLAGS) -I$(LIB_DIR) -ggdb
 
 # Los archivos .h que fueron usados en el programa (Actaulmente no usado)
 HEADERS ?= $(wildcard $(LIB_DIR)/*.h)
@@ -82,6 +82,9 @@ run:
 # Funcion de print usada para debuggear este makefile
 print:
 	@echo $(MAIN_OBJECTS)
+
+$(TEST_DIR)/%.o: $(TEST_DIR)/%.c
+	$(CC) $< $(CPPFLAGS) -DARCHIVO=\"$<\" -c -o $@
 
 # Regla para crear todos los objetos a partir de los sources
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
