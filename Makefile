@@ -58,11 +58,13 @@ all: $(MAIN) $(DEBUG) clean run
 # Etiqueta que compila el programa princial una vez compilados
 # los objetos
 $(MAIN): $(OBJECTS) 
+	@echo "\033[0;32m [OK] \033[0m  \033[0;33m Compiling:\033[0m" $(MAIN)
 	@$(CC) -o $(BIN_DIR)/main/$(MAIN) $(OBJECTS) $(CFLAGS_MAIN) 
 
 # Etiqueta que compila el programa para debuggear una vez compilados
 # los objetos
 $(DEBUG): $(OBJECTS)
+	@echo "\033[0;32m [OK] \033[0m  \033[0;33m Compiling:\033[0m" $(DEBUG)
 	@$(CC) -o $(BIN_DIR)/debug/$(DEBUG) $(OBJECTS) $(CFLAGS_DEBUG)
 
 # Etiqueta que llama a la etiquiqueta de creacion de los ejecutables
@@ -72,6 +74,7 @@ test: $(TEST_NAMES)
 
 # Etiqueta que compila cada test y luego lo ejecuta 
 $(TEST_NAMES): $(TEST_OBJECTS)
+	@echo "\033[0;32m [OK] \033[0m  \033[0;33m Compiling:\033[0m" $<
 	@$(CC) -o $@ $@.o $(MAIN_OBJECTS) $(CFLAGS_TEST)
 	@./$@
 
@@ -85,10 +88,12 @@ print:
 
 # Regla de crear los objetos del directorio test
 $(TEST_DIR)/%.o: $(TEST_DIR)/%.c
+	@echo "\033[0;32m [OK] \033[0m  \033[0;33m Compiling:\033[0m" $<
 	@$(CC) $< $(CPPFLAGS) -DARCHIVO=\"$<\" -c -o $@
 
 # Regla para crear todos los objetos a partir de los sources
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@echo "\033[0;32m [OK] \033[0m  \033[0;33m Compiling:\033[0m" $<
 	@$(CC) $< $(CPPFLAGS) -c -o $@
 
 # Elimina los posibles archivos extras que se creen en el proceso (actualmente no hace mucho)
