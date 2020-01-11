@@ -92,15 +92,12 @@ all: $(MAIN) $(DEBUG) clean run
 # Etiqueta que compila el programa princial una vez compilados
 # los objetos
 $(MAIN): $(OBJECTS) 
-# 	@/bin/echo -e "\033[0;32m[OK] \033[0m    \033[0;33m Compiling:\033[0m" $(MAIN)
-# 	@printf "%b" "$(COM_COLOR)$(COM_STRING) $(OBJ_COLOR)$(@)$(NO_COLOR)\n";
 	@mkdir -p $(BIN_DIR)/main
 	@$(call PRETTY_PRINT, $(CC) -o $(BIN_DIR)/main/$(MAIN) $(OBJECTS) $(CFLAGS_MAIN))
 
 # Etiqueta que compila el programa para debuggear una vez compilados
 # los objetos
 $(DEBUG): $(OBJECTS)
-# 	@/bin/echo -e "\033[0;32m[OK] \033[0m    \033[0;33m Compiling:\033[0m" $(DEBUG)
 	@mkdir -p $(BIN_DIR)/debug
 	@$(call PRETTY_PRINT, $(CC) -o $(BIN_DIR)/debug/$(DEBUG) $(OBJECTS) $(CFLAGS_DEBUG))
 
