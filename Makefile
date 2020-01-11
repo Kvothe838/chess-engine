@@ -13,7 +13,7 @@ MAIN = main
 DEBUG = degub
 
 # Flags con los que se van a compilar los correspondientes ejecutables
-CFLAGS = -Wall 
+CFLAGS = -Wall -Werror -pedantic -std=c99
 CFLAGS_MAIN  = $(CFLAGS) -O3  -lm
 CFLAGS_DEBUG = $(CFLAGS) -O0  -ggdb -lm
 CFLAGS_TEST  = $(CFLAGS) 
@@ -59,18 +59,19 @@ NO_COLOR    = \033[m
 OK_STRING    = "[OK]"
 ERROR_STRING = "[ERROR]"
 WARN_STRING  = "[ADVERTENCIA]"
-COM_STRING   = "Compilando"
+COM_STRING   = "Compilando:"
+
 
 .ONESHELL:
 define PRETTY_PRINT
 $(1) 2> $@.log; \
 RESULT=$$?; \
 if [ $$RESULT -ne 0 ]; then \
-  printf "%-40b%b" "$(COM_COLOR)$(COM_STRING)$(OBJ_COLOR) $@" "$(ERROR_COLOR)$(ERROR_STRING)$(NO_COLOR)\n"   ; \
+  printf "%-50b%b" "$(COM_COLOR)$(COM_STRING)$(OBJ_COLOR) $(@F)" "$(ERROR_COLOR)$(ERROR_STRING)$(NO_COLOR)\n" | sed -e 's/ /./g' -e 's/.$(@F)/ $(@F)/' ; \
 elif [ -s $@.log ]; then \
-  printf "%-40b%b" "$(COM_COLOR)$(COM_STRING)$(OBJ_COLOR) $@" "$(WARN_COLOR)$(WARN_STRING)$(NO_COLOR)\n"   ; \
+  printf "%-50b%b" "$(COM_COLOR)$(COM_STRING)$(OBJ_COLOR) $(@F)" "$(WARN_COLOR)$(WARN_STRING)$(NO_COLOR)\n" | sed -e 's/ /./g' -e 's/.$(@F)/ $(@F)/'  ; \
 else  \
-  printf "%-40b%b" "$(COM_COLOR)$(COM_STRING)$(OBJ_COLOR) $(@F)" "$(OK_COLOR)$(OK_STRING)$(NO_COLOR)\n"   ; \
+  printf "%-50b%b" "$(COM_COLOR)$(COM_STRING)$(OBJ_COLOR) $(@F)" "$(OK_COLOR)$(OK_STRING)$(NO_COLOR)\n" | sed -e 's/ /./g' -e 's/.$(@F)/ $(@F)/' ; \
 fi; \
 cat $@.log; \
 rm -f $@.log; 
@@ -120,7 +121,7 @@ run:
 
 # Funcion de print usada para debuggear este makefile
 print:
-	@echo $(MAIN_OBJECTS)
+	@echo $(pad)
 
 # Regla de crear los objetos del directorio test
 $(TEST_DIR)/%.o: $(TEST_DIR)/%.c
