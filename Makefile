@@ -13,7 +13,7 @@ MAIN = main
 DEBUG = degub
 
 # Flags con los que se van a compilar los correspondientes ejecutables
-CFLAGS = -Wall 
+CFLAGS = -Wall -Werror -pedantic -std=c99
 CFLAGS_MAIN  = $(CFLAGS) -O3  -lm
 CFLAGS_DEBUG = $(CFLAGS) -O0  -ggdb -lm
 CFLAGS_TEST  = $(CFLAGS) 
@@ -59,18 +59,19 @@ NO_COLOR    = \033[m
 OK_STRING    = "[OK]"
 ERROR_STRING = "[ERROR]"
 WARN_STRING  = "[ADVERTENCIA]"
-COM_STRING   = "Compilando"
+COM_STRING   = "Compilando:"
+
 
 .ONESHELL:
 define PRETTY_PRINT
 $(1) 2> $@.log; \
 RESULT=$$?; \
 if [ $$RESULT -ne 0 ]; then \
-  printf "%-40b%b" "$(COM_COLOR)$(COM_STRING)$(OBJ_COLOR) $@" "$(ERROR_COLOR)$(ERROR_STRING)$(NO_COLOR)\n"   ; \
+  printf "%-50b%b" "$(COM_COLOR)$(COM_STRING)$(OBJ_COLOR) $(@F)" "$(ERROR_COLOR)$(ERROR_STRING)$(NO_COLOR)\n" | sed -e 's/ /./g' -e 's/.$(@F)/ $(@F)/' ; \
 elif [ -s $@.log ]; then \
-  printf "%-40b%b" "$(COM_COLOR)$(COM_STRING)$(OBJ_COLOR) $@" "$(WARN_COLOR)$(WARN_STRING)$(NO_COLOR)\n"   ; \
+  printf "%-50b%b" "$(COM_COLOR)$(COM_STRING)$(OBJ_COLOR) $(@F)" "$(WARN_COLOR)$(WARN_STRING)$(NO_COLOR)\n" | sed -e 's/ /./g' -e 's/.$(@F)/ $(@F)/'  ; \
 else  \
-  printf "%-40b%b" "$(COM_COLOR)$(COM_STRING)$(OBJ_COLOR) $(@F)" "$(OK_COLOR)$(OK_STRING)$(NO_COLOR)\n"   ; \
+  printf "%-50b%b" "$(COM_COLOR)$(COM_STRING)$(OBJ_COLOR) $(@F)" "$(OK_COLOR)$(OK_STRING)$(NO_COLOR)\n" | sed -e 's/ /./g' -e 's/.$(@F)/ $(@F)/' ; \
 fi; \
 cat $@.log; \
 rm -f $@.log; 
@@ -91,15 +92,12 @@ all: $(MAIN) $(DEBUG) clean run
 # Etiqueta que compila el programa princial una vez compilados
 # los objetos
 $(MAIN): $(OBJECTS) 
-# 	@/bin/echo -e "\033[0;32m[OK] \033[0m    \033[0;33m Compiling:\033[0m" $(MAIN)
-# 	@printf "%b" "$(COM_COLOR)$(COM_STRING) $(OBJ_COLOR)$(@)$(NO_COLOR)\n";
 	@mkdir -p $(BIN_DIR)/main
 	@$(call PRETTY_PRINT, $(CC) -o $(BIN_DIR)/main/$(MAIN) $(OBJECTS) $(CFLAGS_MAIN))
 
 # Etiqueta que compila el programa para debuggear una vez compilados
 # los objetos
 $(DEBUG): $(OBJECTS)
-# 	@/bin/echo -e "\033[0;32m[OK] \033[0m    \033[0;33m Compiling:\033[0m" $(DEBUG)
 	@mkdir -p $(BIN_DIR)/debug
 	@$(call PRETTY_PRINT, $(CC) -o $(BIN_DIR)/debug/$(DEBUG) $(OBJECTS) $(CFLAGS_DEBUG))
 
@@ -120,7 +118,7 @@ run:
 
 # Funcion de print usada para debuggear este makefile
 print:
-	@echo $(MAIN_OBJECTS)
+	@echo $(pad)
 
 # Regla de crear los objetos del directorio test
 $(TEST_DIR)/%.o: $(TEST_DIR)/%.c
