@@ -1,10 +1,10 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<tablero.h>
+#include<pieza.h>
 
 #define CANTIDAD_PIEZAS 32
 
-void CrearPieza(Pieza* pieza, TipoPieza tipo, bool esBlanca, Columna columna, Fila fila);
 int TraducirColumnaAIndice(Columna columna);
 
 void TableroInicializar(Tablero* tablero)
@@ -107,13 +107,6 @@ void TableroDestruir(Tablero tablero)
     }
 
     free(tablero);
-}
-
-void CrearPieza(Pieza* pieza, TipoPieza tipo, bool esBlanca, Columna columna, Fila fila) {
-    pieza->tipo = tipo;
-    pieza->esBlanca = esBlanca;
-    pieza->columnaActual = columna;
-    pieza->filaActual = fila;
 }
 
 int TraducirColumnaAIndice(Columna columna) {
