@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<tablero.h>
+#include <posicion.h>
 #include<pieza.h>
 
 #define CANTIDAD_PIEZAS 32
@@ -21,23 +22,24 @@ void TableroInicializar(Tablero* tablero)
     alfilNegro1, alfilNegro2,
     reyNegro, reinaNegro;    
 
-    PiezaCrear(&peonBlanco1, PEON, true, G, UNO);
-    PiezaCrear(&peonBlanco2, PEON, true, G, DOS);
-    PiezaCrear(&peonBlanco3, PEON, true, G, TRES);
-    PiezaCrear(&peonBlanco4, PEON, true, G, CUATRO);
-    PiezaCrear(&peonBlanco5, PEON, true, G, CINCO);
-    PiezaCrear(&peonBlanco6, PEON, true, G, SEIS);
-    PiezaCrear(&peonBlanco7, PEON, true, G, SIETE);
-    PiezaCrear(&peonBlanco8, PEON, true, G, OCHO);
     
-    PiezaCrear(&torreBlanco1, TORRE, true, H, UNO);
-    PiezaCrear(&torreBlanco2, TORRE, true, H, OCHO);
-    PiezaCrear(&caballoBlanco1, CABALLO, true, H, DOS);
-    PiezaCrear(&caballoBlanco2, CABALLO, true, H, SIETE);
-    PiezaCrear(&alfilBlanco1, ALFIL, true, H, TRES);
-    PiezaCrear(&alfilBlanco2, ALFIL, true, H, SEIS);
-    PiezaCrear(&reyBlanco, REY, true, H, CUATRO);
-    PiezaCrear(&reinaBlanco, REINA, true, H, CINCO);
+    PiezaCrear(&torreBlanco1  , TORRE  , true, G, UNO);
+    PiezaCrear(&torreBlanco2  , TORRE  , true, G, OCHO);
+    PiezaCrear(&caballoBlanco1, CABALLO, true, G, DOS);
+    PiezaCrear(&caballoBlanco2, CABALLO, true, G, SIETE);
+    PiezaCrear(&alfilBlanco1  , ALFIL  , true, G, TRES);
+    PiezaCrear(&alfilBlanco2  , ALFIL  , true, G, SEIS);
+    PiezaCrear(&reyBlanco     , REY    , true, G, CUATRO);
+    PiezaCrear(&reinaBlanco   , REINA  , true, G, CINCO);
+
+    PiezaCrear(&peonBlanco1, PEON, true, H, UNO);
+    PiezaCrear(&peonBlanco2, PEON, true, H, DOS);
+    PiezaCrear(&peonBlanco3, PEON, true, H, TRES);
+    PiezaCrear(&peonBlanco4, PEON, true, H, CUATRO);
+    PiezaCrear(&peonBlanco5, PEON, true, H, CINCO);
+    PiezaCrear(&peonBlanco6, PEON, true, H, SEIS);
+    PiezaCrear(&peonBlanco7, PEON, true, H, SIETE);
+    PiezaCrear(&peonBlanco8, PEON, true, H, OCHO);
 
     PiezaCrear(&peonNegro1, PEON, false, B, UNO);
     PiezaCrear(&peonNegro2, PEON, false, B, DOS);
@@ -63,25 +65,40 @@ void TableroInicializar(Tablero* tablero)
         peonNegro1, peonNegro2, peonNegro3, peonNegro4, peonNegro5, peonNegro6, peonNegro7, peonNegro8,
         torreNegro1, torreNegro2, caballoNegro1, caballoNegro2, alfilNegro1, alfilNegro2, reyNegro, reinaNegro
     };
-    
-    Pieza tableroProvisorio[FILAS][COLUMNAS];
 
-    for(int i = 0; i < CANTIDAD_PIEZAS; i++) {
-        int columnaIndice = TraducirColumnaAIndice(piezas[i].columnaActual);
-        tableroProvisorio[piezas[i].filaActual - 1][columnaIndice] = piezas[i];
-    }
-
-    *tablero = (Tablero) malloc(FILAS * sizeof(Pieza*));
-
-    for (int i = 0; i < FILAS; i++)
+    *tablero = (Tablero) malloc(FILAS * sizeof(Posicion*));
+    int coordenada[2];
+    for (int y = 0; y < FILAS; y++)
     {
-        (*tablero)[i] = tableroProvisorio[i];
+        coordenada[1] = y;
+        (*tablero)[y] = (Posicion*)malloc(COLUMNAS * sizeof(Posicion));
+        for (int x = 0; x < COLUMNAS; x++)
+        {
+            coordenada[0] = x;
+            PosicionInicializar(&((*tablero)[y][x]), coordenada);
+        }
     }
+
+    for(int i = 0; i < CANTIDAD_PIEZAS; i++)
+    {
+        TableroColocarPieza(tablero, piezas[i]);
+    }
+}
+
+void __imprimirLineaHorizontal(size_t largo)
+{
+    printf("\n");
+    for (int i = 0; i < (5*largo)+1; ++i)
+    {
+        printf("%s", "—");
+    }
+    printf("\n");
+   
 }
 
 void TableroImprimir(Tablero tablero)
 {
-    printf("\n—————————————————————————————————————————\n");
+    __imprimirLineaHorizontal(COLUMNAS);
     
     for (int i = 0; i < FILAS; i++)
     {
@@ -89,22 +106,40 @@ void TableroImprimir(Tablero tablero)
 
         for (int j = 0; j < COLUMNAS; j++)
         {
-            Pieza piezaTemp = tablero[i][j];
-            printf(" %c%c |", piezaTemp.esPieza ? (char)piezaTemp.tipo : ' ', piezaTemp.esPieza ? (piezaTemp.esBlanca ? 'B' : 'N') : ' ');
+            if(!PosicionEstaVacia(tablero[i][j])) 
+            {
+                Pieza piezaTemp = *tablero[i][j].ranura;
+                printf(" %c%c ", piezaTemp.tipo, (piezaTemp.esBlanca ? 'B' : 'N'));
+            }
+            else
+            {
+                printf("    ");
+            }
+            printf("|");
         }
 
-        printf("\n—————————————————————————————————————————\n");
+        __imprimirLineaHorizontal(COLUMNAS);
     }
 }
 
-void TableroDestruir(Tablero tablero)
+void TableroColocarPieza(Tablero* tablero, Pieza pieza) {
+    int columnaIndice = TraducirColumnaAIndice(pieza.columnaActual);
+    (*tablero)[pieza.filaActual - 1][columnaIndice].ranura = (Pieza*)malloc(sizeof(Pieza));
+    PiezaCopiar((*tablero)[pieza.filaActual - 1][columnaIndice].ranura, pieza);
+}
+ 
+void TableroDestruir(Tablero *tablero)
 {
-    for (int i = 0; i < FILAS; i++)
+    for (int y = 0; y < FILAS; y++)
     {
-        free(tablero[i]);
+        for (int x = 0; x < COLUMNAS; x++)
+        {
+            PosicionDestruir(&(*tablero)[y][x]);
+        }
+        free((*tablero)[y]);
     }
 
-    free(tablero);
+    free(*tablero);
 }
 
 int TraducirColumnaAIndice(Columna columna) {

@@ -3,14 +3,16 @@
 
 #include <stdbool.h>
 #include <pieza.h>
+#include <posicion.h>
 
 #define FILAS 8
 #define COLUMNAS 8
 
-typedef Pieza** Tablero;
+typedef Posicion** Tablero;
 
 void TableroInicializar(Tablero* tablero);
 void TableroImprimir(Tablero tablero);
-void TableroDestruir(Tablero tablero);
+void TableroColocarPieza(Tablero*, Pieza);
+void TableroDestruir(Tablero *tablero);
 
 #endif
