@@ -5,7 +5,7 @@
 #define CANTIDAD_PIEZAS 32
 
 void CrearPieza(Pieza* pieza, TipoPieza tipo, bool esBlanca, Columna columna, Fila fila);
-char TraducirColumnaAIndice(Columna columna);
+int TraducirColumnaAIndice(Columna columna);
 
 void TableroInicializar(Tablero* tablero)
 {
@@ -31,7 +31,7 @@ void TableroInicializar(Tablero* tablero)
     CrearPieza(&peonBlanco8, PEON, true, G, OCHO);
     
     CrearPieza(&torreBlanco1, TORRE, true, H, UNO);
-    CrearPieza(&torreBlanco1, TORRE, true, H, OCHO);
+    CrearPieza(&torreBlanco2, TORRE, true, H, OCHO);
     CrearPieza(&caballoBlanco1, CABALLO, true, H, DOS);
     CrearPieza(&caballoBlanco2, CABALLO, true, H, SIETE);
     CrearPieza(&alfilBlanco1, ALFIL, true, H, TRES);
@@ -63,24 +63,19 @@ void TableroInicializar(Tablero* tablero)
         peonNegro1, peonNegro2, peonNegro3, peonNegro4, peonNegro5, peonNegro6, peonNegro7, peonNegro8,
         torreNegro1, torreNegro2, caballoNegro1, caballoNegro2, alfilNegro1, alfilNegro2, reyNegro, reinaNegro
     };
-
+    
     Pieza tableroProvisorio[FILAS][COLUMNAS];
 
     for(int i = 0; i < CANTIDAD_PIEZAS; i++) {
-        char columnaIndice = TraducirColumnaAIndice(piezas[i].columnaActual);
-        tableroProvisorio[piezas[i].filaActual][columnaIndice] = piezas[i];
+        int columnaIndice = TraducirColumnaAIndice(piezas[i].columnaActual);
+        tableroProvisorio[piezas[i].filaActual - 1][columnaIndice] = piezas[i];
     }
 
     *tablero = (Tablero) malloc(FILAS * sizeof(Pieza*));
 
     for (int i = 0; i < FILAS; i++)
     {
-        (*tablero)[i] = (Pieza*) malloc(COLUMNAS * sizeof(Pieza));
-
-        for (int j = 0; j < COLUMNAS; j++)
-        {
-            (*tablero)[i][j] = tableroProvisorio[i][j];
-        }
+        (*tablero)[i] = tableroProvisorio[i];
     }
 }
 
@@ -90,11 +85,14 @@ void TableroImprimir(Tablero tablero)
     
     for (int i = 0; i < FILAS; i++)
     {
-        printf("|");
+        printf("|");        
 
         for (int j = 0; j < COLUMNAS; j++)
         {
-            printf(" %s |", tablero[i][j].tipo + (tablero[i][j].esBlanca ? "B" : "N"));            
+            char variableTurbiaParaMostrar[2];
+            variableTurbiaParaMostrar[0] = tablero[i][j].tipo;
+            variableTurbiaParaMostrar[1] = (tablero[i][j].esBlanca ? 'B' : 'N');
+            printf(" %s |", variableTurbiaParaMostrar);
         }
 
         printf("\n—————————————————————————————————————————\n");
@@ -105,11 +103,6 @@ void TableroDestruir(Tablero tablero)
 {
     for (int i = 0; i < FILAS; i++)
     {
-        // for (int j = 0; j < COLUMNAS; j++)
-        // {
-        //     free(tablero[i][j]);
-        // }
-
         free(tablero[i]);
     }
 
@@ -123,32 +116,6 @@ void CrearPieza(Pieza* pieza, TipoPieza tipo, bool esBlanca, Columna columna, Fi
     pieza->filaActual = fila;
 }
 
-char TraducirColumnaAIndice(Columna columna) {
-    switch (columna)
-    {
-    case A:
-        return 0;
-        break;    
-    case B:
-        return 1;
-        break;
-    case C:
-        return 2;
-        break;
-    case D:
-        return 3;
-        break;
-    case E:
-        return 4;
-        break;
-    case F:
-        return 5;
-        break;
-    case G:
-        return 6;
-        break;
-    case H:
-        return 7;
-        break;
-    }
+int TraducirColumnaAIndice(Columna columna) {
+    return (int)(columna - 'A');
 }
