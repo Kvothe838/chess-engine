@@ -1,8 +1,9 @@
 #include <pieza.h>
 
-void CrearPieza(Pieza* pieza, TipoPieza tipo, bool esBlanca, Columna columna, Fila fila) {
-    pieza->tipo = tipo;
+void PiezaCrear(Pieza* pieza, TipoPieza tipo, bool esBlanca, Columna columna, Fila fila) {
+    pieza->tipo = (TipoPieza)tipo;
     pieza->esBlanca = esBlanca;
-    pieza->columnaActual = columna;
-    pieza->filaActual = fila;
+    pieza->esPieza = true; //Lo más sad que vas a ver hoy.
+    pieza->columnaActual = (Columna)columna;
+    pieza->filaActual = (Fila)fila;
 }

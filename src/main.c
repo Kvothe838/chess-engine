@@ -8,9 +8,9 @@ int main(void)
 
     TableroInicializar(&tablero);
 
-    // TableroImprimir(tablero);
+    TableroImprimir(tablero);
 
-    // TableroDestruir(tablero);
+    TableroDestruir(tablero);
 
     return EXIT_SUCCESS;
 }

@@ -38,11 +38,12 @@ typedef enum {
 typedef struct {
     TipoPieza tipo;
     bool esBlanca;
+    bool esPieza; //C WITHOUT POO FTW
     Columna columnaActual;
     Fila filaActual;
     //función diciendo si se puede mover a tal lugar?
 } Pieza;
 
-void CrearPieza(Pieza* pieza, TipoPieza tipo, bool esBlanca, Columna columna, Fila fila);
+void PiezaCrear(Pieza* pieza, TipoPieza tipo, bool esBlanca, Columna columna, Fila fila);
 
 #endif
