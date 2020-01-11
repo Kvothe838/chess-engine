@@ -13,7 +13,7 @@ MAIN = main
 DEBUG = degub
 
 # Flags con los que se van a compilar los correspondientes ejecutables
-CFLAGS = -Wall -Werror -pedantic -std=c99
+CFLAGS = -Wall 
 CFLAGS_MAIN  = $(CFLAGS) -O3  -lm
 CFLAGS_DEBUG = $(CFLAGS) -O0  -ggdb -lm
 CFLAGS_TEST  = $(CFLAGS) 
@@ -46,6 +46,39 @@ TEST_OBJECTS = $(patsubst %.c,%.o, $(TESTS))
 # Nombre de los tests usados para la compilacion de los .c
 TEST_NAMES = $(patsubst %.c,%, $(TESTS))
 
+
+COMILLA = \"
+
+COM_COLOR   = \033[0;36m
+OBJ_COLOR   = \033[m
+OK_COLOR    = \033[0;32m
+ERROR_COLOR = \033[0;31m
+WARN_COLOR  = \033[0;33m
+NO_COLOR    = \033[m
+
+OK_STRING    = "[OK]"
+ERROR_STRING = "[ERROR]"
+WARN_STRING  = "[ADVERTENCIA]"
+COM_STRING   = "Compilando"
+
+.ONESHELL:
+define PRETTY_PRINT
+$(1) 2> $@.log; \
+RESULT=$$?; \
+if [ $$RESULT -ne 0 ]; then \
+  printf "%-40b%b" "$(COM_COLOR)$(COM_STRING)$(OBJ_COLOR) $@" "$(ERROR_COLOR)$(ERROR_STRING)$(NO_COLOR)\n"   ; \
+elif [ -s $@.log ]; then \
+  printf "%-40b%b" "$(COM_COLOR)$(COM_STRING)$(OBJ_COLOR) $@" "$(WARN_COLOR)$(WARN_STRING)$(NO_COLOR)\n"   ; \
+else  \
+  printf "%-40b%b" "$(COM_COLOR)$(COM_STRING)$(OBJ_COLOR) $(@F)" "$(OK_COLOR)$(OK_STRING)$(NO_COLOR)\n"   ; \
+fi; \
+cat $@.log; \
+rm -f $@.log; 
+endef
+
+
+
+
 # Lista que mantiene actualizados los programas ante
 # los cambios realizados en el proyecto
 .PHONY: test clean print all
@@ -58,12 +91,17 @@ all: $(MAIN) $(DEBUG) clean run
 # Etiqueta que compila el programa princial una vez compilados
 # los objetos
 $(MAIN): $(OBJECTS) 
-	@$(CC) -o $(BIN_DIR)/main/$(MAIN) $(OBJECTS) $(CFLAGS_MAIN) 
+# 	@/bin/echo -e "\033[0;32m[OK] \033[0m    \033[0;33m Compiling:\033[0m" $(MAIN)
+# 	@printf "%b" "$(COM_COLOR)$(COM_STRING) $(OBJ_COLOR)$(@)$(NO_COLOR)\n";
+	@mkdir -p $(BIN_DIR)/main
+	@$(call PRETTY_PRINT, $(CC) -o $(BIN_DIR)/main/$(MAIN) $(OBJECTS) $(CFLAGS_MAIN))
 
 # Etiqueta que compila el programa para debuggear una vez compilados
 # los objetos
 $(DEBUG): $(OBJECTS)
-	@$(CC) -o $(BIN_DIR)/debug/$(DEBUG) $(OBJECTS) $(CFLAGS_DEBUG)
+# 	@/bin/echo -e "\033[0;32m[OK] \033[0m    \033[0;33m Compiling:\033[0m" $(DEBUG)
+	@mkdir -p $(BIN_DIR)/debug
+	@$(call PRETTY_PRINT, $(CC) -o $(BIN_DIR)/debug/$(DEBUG) $(OBJECTS) $(CFLAGS_DEBUG))
 
 # Etiqueta que llama a la etiquiqueta de creacion de los ejecutables
 # los tests y luego los elimina
@@ -72,12 +110,13 @@ test: $(TEST_NAMES)
 
 # Etiqueta que compila cada test y luego lo ejecuta 
 $(TEST_NAMES): $(TEST_OBJECTS)
-	@$(CC) -o $@ $@.o $(MAIN_OBJECTS) $(CFLAGS_TEST)
+	@$(call PRETTY_PRINT,$(CC) -o $@ $@.o $(MAIN_OBJECTS) $(CFLAGS_TEST))
+
 	@./$@
 
 # Ejecuta el programa princial
 run:
-	./$(BIN_DIR)/main/$(MAIN)
+	@./$(BIN_DIR)/main/$(MAIN)
 
 # Funcion de print usada para debuggear este makefile
 print:
@@ -85,12 +124,13 @@ print:
 
 # Regla de crear los objetos del directorio test
 $(TEST_DIR)/%.o: $(TEST_DIR)/%.c
-	@$(CC) $< $(CPPFLAGS) -DARCHIVO=\"$<\" -c -o $@
+	@$(call PRETTY_PRINT, $(CC) $< $(CPPFLAGS) -DARCHIVO=$(COMILLA)$<$(COMILLA) -c -o $@)
 
 # Regla para crear todos los objetos a partir de los sources
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@$(CC) $< $(CPPFLAGS) -c -o $@
+	@mkdir -p $(OBJ_DIR)
+	@$(call PRETTY_PRINT, $(CC) $< $(CPPFLAGS) -c -o $@)
 
 # Elimina los posibles archivos extras que se creen en el proceso (actualmente no hace mucho)
 clean:
-	$(RM) *.gch
+	@$(RM) *.gch
