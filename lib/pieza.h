@@ -46,9 +46,9 @@ struct Pieza
     Posicion* posicion;
 };
 
-void PiezaCrear(Pieza*, TipoPieza, bool);
-void PiezaCopiar(Pieza*, Pieza);
-bool PiezaEstaPuesta(Pieza);
+void PiezaCrear(Pieza* pieza, TipoPieza tipo, bool esBlanca);
+void PiezaCopiar(Pieza* copia, Pieza original);
+bool PiezaEstaPuesta(Pieza pieza);
 void PiezaEsColocada(Pieza* pieza, Posicion* posicion);
 void PiezaImprimir(Pieza pieza);
 

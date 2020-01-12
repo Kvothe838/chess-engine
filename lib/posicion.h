@@ -6,13 +6,13 @@
 
 struct Posicion
 {
-    char horiontal;
+    char horizontal;
     int vertical;
     Pieza* ranura;
 };
 
-void PosicionInicializar(Posicion*, int[2]);
-bool PosicionEstaVacia(Posicion);
-void PosicionDestruir(Posicion*);
+void PosicionInicializar(Posicion* posicion, int coordenada[2]);
+bool PosicionEstaVacia(Posicion posicion);
+void PosicionDestruir(Posicion* posicion);
 
 #endif

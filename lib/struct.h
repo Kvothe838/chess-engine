@@ -3,4 +3,5 @@
 
 typedef struct Pieza Pieza;
 typedef struct Posicion Posicion;
+
 #endif

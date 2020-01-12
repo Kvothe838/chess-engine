@@ -4,13 +4,14 @@
 
 void __PiezaClasificarRepresentacion(Pieza* pieza, TipoPieza tipo)
 {
-
     setlocale(LC_ALL, "");
     int base = 0x2654;
+
     if(pieza->esBlanca)
     {
         base += 6;
     }
+    
     switch (tipo) {
         case REY:
             base += 0;
@@ -36,6 +37,7 @@ void __PiezaClasificarRepresentacion(Pieza* pieza, TipoPieza tipo)
             base += 5;
             break;   
     }
+    
     pieza->representacion = base;
 }
 

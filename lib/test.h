@@ -13,7 +13,6 @@ size_t PRUEBAS_APROBADAS = 0;
 char* FUNCION_ACTUAL = NULL;
 bool FUNCION_PASA = true;
 
-
 #define PRINT_ANALISIS()\
 {\
     if(FUNCION_PASA)\
