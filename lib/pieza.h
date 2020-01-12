@@ -4,7 +4,8 @@
 #include <stdbool.h>
 #include <struct.h>
 
-typedef enum {
+typedef enum
+{
     ALFIL = 'A',
     CABALLO = 'C',
     PEON = 'P',
@@ -14,7 +15,8 @@ typedef enum {
     NADA = ' '
 } TipoPieza;
 
-typedef enum {
+typedef enum
+{
     A = 'A',
     B = 'B',
     C = 'C',
@@ -25,7 +27,8 @@ typedef enum {
     H = 'H'
 } Columna;
 
-typedef enum {
+typedef enum
+{
     UNO = 1,
     DOS = 2,
     TRES = 3,
@@ -36,17 +39,17 @@ typedef enum {
     OCHO = 8
 } Fila;
 
-struct Pieza{
+struct Pieza
+{
     TipoPieza tipo;
     bool esBlanca;
     Posicion* posicion;
-/*    Columna columnaActual;
-    Fila filaActual;*/
-    //función diciendo si se puede mover a tal lugar?
 };
 
 void PiezaCrear(Pieza*, TipoPieza, bool);
 void PiezaCopiar(Pieza*, Pieza);
 bool PiezaEstaPuesta(Pieza);
+void PiezaEsColocada(Pieza* pieza, Posicion* posicion);
+void PiezaImprimir(Pieza pieza);
 
 #endif
