@@ -56,7 +56,7 @@ void __imprimirLineaHorizontalSuperior(size_t largo)
     printf("\u250C");
     for (int i = 0; i < largo; ++i)
     {
-        for (int j = 0; j < 4; ++j)
+        for (int j = 0; j < 3; ++j)
         {
             printf("\u2500");
         }
@@ -78,7 +78,7 @@ void __imprimirLineaHorizontalCentral(size_t largo)
     printf("\u251C");
     for (int i = 0; i < largo; ++i)
     {
-        for (int j = 0; j < 4; ++j)
+        for (int j = 0; j < 3; ++j)
         {
             printf("\u2500");
         }
@@ -100,7 +100,7 @@ void __imprimirLineaHorizontalInferior(size_t largo)
     printf("\u2514");
     for (int i = 0; i < largo; ++i)
     {
-        for (int j = 0; j < 4; ++j)
+        for (int j = 0; j < 3; ++j)
         {
             printf("\u2500");
         }
@@ -114,6 +114,7 @@ void __imprimirLineaHorizontalInferior(size_t largo)
     printf("\n");
    
 }
+
 void TableroImprimir(Tablero tablero)
 {
     __imprimirLineaHorizontalSuperior(COLUMNAS);
@@ -127,11 +128,12 @@ void TableroImprimir(Tablero tablero)
             if(!PosicionEstaVacia(tablero[i][j])) 
             {
                 Pieza piezaTemp = *tablero[i][j].ranura;
-                printf(" %c%c ", piezaTemp.tipo, (piezaTemp.esBlanca ? 'B' : 'N'));
-            }
+                PiezaImprimir(piezaTemp);
+                /*printf(" %c%c ", piezaTemp.tipo, (piezaTemp.esBlanca ? 'B' : 'N'));*/
+            } 
             else
             {
-                printf("    ");
+                printf("   ");
             }
             printf("\u2502");
         }
