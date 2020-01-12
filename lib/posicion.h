@@ -2,13 +2,14 @@
 #define _POSICION_H_
 
 #include <stdbool.h>
-#include <pieza.h>
+#include <struct.h>
 
-typedef struct{
+struct Posicion
+{
     char horiontal;
     int vertical;
     Pieza* ranura;
-} Posicion;
+};
 
 void PosicionInicializar(Posicion*, int[2]);
 bool PosicionEstaVacia(Posicion);
