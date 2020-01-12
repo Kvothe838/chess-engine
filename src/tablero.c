@@ -49,24 +49,78 @@ void TableroInicializar(Tablero* tablero)
 
 }
 
-void __imprimirLineaHorizontal(size_t largo)
+
+void __imprimirLineaHorizontalSuperior(size_t largo)
 {
     printf("\n");
-    for (int i = 0; i < (5*largo)+1; ++i)
+    printf("\u250C");
+    for (int i = 0; i < largo; ++i)
     {
-        printf("%s", "—");
+        for (int j = 0; j < 4; ++j)
+        {
+            printf("\u2500");
+        }
+        if(i != (largo - 1))
+        {
+            printf("\u252C");
+        }
+        
     }
+    printf("\u2510");
+    printf("\n");
+
+   
+}
+
+void __imprimirLineaHorizontalCentral(size_t largo)
+{
+    printf("\n");
+    printf("\u251C");
+    for (int i = 0; i < largo; ++i)
+    {
+        for (int j = 0; j < 4; ++j)
+        {
+            printf("\u2500");
+        }
+        if(i != (largo - 1))
+        {
+            printf("\u253C");
+        }
+        
+    }
+    printf("\u2524");
     printf("\n");
    
 }
 
+
+void __imprimirLineaHorizontalInferior(size_t largo)
+{
+    printf("\n");
+    printf("\u2514");
+    for (int i = 0; i < largo; ++i)
+    {
+        for (int j = 0; j < 4; ++j)
+        {
+            printf("\u2500");
+        }
+        if(i != (largo - 1))
+        {
+            printf("\u2534");
+        }
+        
+    }
+    printf("\u2518");
+    printf("\n");
+   
+}
 void TableroImprimir(Tablero tablero)
 {
-    __imprimirLineaHorizontal(COLUMNAS);
+    __imprimirLineaHorizontalSuperior(COLUMNAS);
     
     for (int i = 0; i < FILAS; i++)
     {
-        printf("|");        
+        printf("\u2502");
 
         for (int j = 0; j < COLUMNAS; j++)
         {
@@ -79,10 +133,17 @@ void TableroImprimir(Tablero tablero)
             {
                 printf("    ");
             }
-            printf("|");
+            printf("\u2502");
         }
-
-        __imprimirLineaHorizontal(COLUMNAS);
+        if(i != (FILAS - 1))
+        {
+            __imprimirLineaHorizontalCentral(COLUMNAS);
+        }
+        else
+        {
+            __imprimirLineaHorizontalInferior(COLUMNAS);
+        }
+        
     }
 }
 
