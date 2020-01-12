@@ -2,6 +2,7 @@
 #define _PIEZA_H_
 
 #include <stdbool.h>
+#include <struct.h>
 
 typedef enum {
     ALFIL = 'A',
@@ -35,15 +36,17 @@ typedef enum {
     OCHO = 8
 } Fila;
 
-typedef struct {
+struct Pieza{
     TipoPieza tipo;
     bool esBlanca;
-    Columna columnaActual;
-    Fila filaActual;
+    Posicion* posicion;
+/*    Columna columnaActual;
+    Fila filaActual;*/
     //función diciendo si se puede mover a tal lugar?
-} Pieza;
+};
 
-void PiezaCrear(Pieza*, TipoPieza, bool, Columna, Fila);
+void PiezaCrear(Pieza*, TipoPieza, bool);
 void PiezaCopiar(Pieza*, Pieza);
+bool PiezaEstaPuesta(Pieza);
 
 #endif
