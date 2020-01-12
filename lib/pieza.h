@@ -11,8 +11,7 @@ typedef enum
     PEON = 'P',
     REINA = 'R',
     REY = 'K',
-    TORRE = 'T',
-    NADA = ' '
+    TORRE = 'T'
 } TipoPieza;
 
 typedef enum
@@ -43,6 +42,7 @@ struct Pieza
 {
     TipoPieza tipo;
     bool esBlanca;
+    int representacion;
     Posicion* posicion;
 };
 
