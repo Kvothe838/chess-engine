@@ -4,6 +4,8 @@
 #include <stdbool.h>
 #include <struct.h>
 
+typedef int Coordenada[2];
+
 struct Posicion
 {
     char horizontal;
@@ -11,7 +13,7 @@ struct Posicion
     Pieza* ranura;
 };
 
-void PosicionInicializar(Posicion* posicion, int coordenada[2]);
+void PosicionInicializar(Posicion* posicion, Coordenada coordenada);
 bool PosicionEstaVacia(Posicion posicion);
 void PosicionDestruir(Posicion* posicion);
 
