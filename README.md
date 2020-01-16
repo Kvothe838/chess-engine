@@ -3,6 +3,7 @@
 
 
 Tabla de la razon:
+
 |Mauri | Facu|
 |------|-----|
 |   2  |  -1 |
