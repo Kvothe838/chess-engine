@@ -5,17 +5,12 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
-//Sacado operador ... porque por ahora está al pedo.
-void __PiezaCrearCoordenadas(Coordenada* coordenadas, int len, int* coordenadasEnNumero/*, ...*/) {
-    coordenadas = (Coordenada*) malloc(len * sizeof(Coordenada));
+void __PiezaCrearCoordenadas(Coordenada** coordenadas, int len, int** coordenadasEnNumero/*, ...*/) {
+    (*coordenadas) = (Coordenada*) malloc(len * sizeof(Coordenada));
 
     for (int i = 0; i < len; i++) {
-        /*Esta mierda es la que falla. Probé de todo, pero hay algo que no estoy entendiendo.
-        (como a quién verga se le ocurrió inventar esta cosa llamada C, puaj)*/
-        /*problema--->*/*(coordenadas[i]) = (Coordenada*) malloc(sizeof(Coordenada));
-        coordenadas[i][0] = coordenadasEnNumero[2*i];
-        coordenadas[i][1] = coordenadasEnNumero[2*i+1];
-        printf("x: %d | y: %d", coordenadas[i][0], coordenadas[i][1]);    
+        (*coordenadas)[i][0] = (*coordenadasEnNumero)[2*i];
+        (*coordenadas)[i][1] = (*coordenadasEnNumero)[2*i+1];
     }
 }
 
@@ -24,6 +19,7 @@ void __PiezaRepresentacionYMovimientos(Pieza* pieza, TipoPieza tipo)
     setlocale(LC_ALL, "");
     int base = 0x2654;
     Coordenada* coordenadas;
+    int * posiciones;
 
     if(pieza->esBlanca)
     {
@@ -33,53 +29,58 @@ void __PiezaRepresentacionYMovimientos(Pieza* pieza, TipoPieza tipo)
     switch (tipo) {
         case REY:
             base += 0;
-            //Ignora2 porque ya le saqué el operador ...
-            // __PiezaCrearCoordenadas(&coordenadas, 8, 
-            //     0, 1, 
-            //     0, -1, 
-            //     1, 0, 
-            //     -1, 0, 
-            //     1, 1, 
-            //     1, -1, 
-            //     -1, 1, 
-            //     -1, -1);
+            
+            posiciones = (int*) malloc(16 * sizeof(int));
+            posiciones[0] = posiciones[2] = posiciones[5] = posiciones[7] = 0;
+            posiciones[1] = posiciones[4] = posiciones[8] = posiciones[9] = posiciones[10] = posiciones[13] = 1;
+            posiciones[3] = posiciones[6] = posiciones[11] = posiciones[12] = posiciones[14] = posiciones[15] = -1;
+            //Coordenadas más visibles 
+        /*  (0,1), 
+            (0,-1), 
+            (1,0), 
+            (-1,0), 
+            (1,1), 
+            (1,-1), 
+            (-1,1), 
+            (-1,-1)  */
+            __PiezaCrearCoordenadas(&coordenadas, 16, &posiciones);
             break;
 
         case REINA:
             base += 1;
-            int* posicionesReina = (int*) malloc(56*sizeof(int));
+            posiciones = (int*) malloc(56 * sizeof(int));
 
             for(int i = 0; i < 7; i++) {
-                if(i >= 0 && i < 7) {
-                    posicionesReina[2*i] = 0;
-                    posicionesReina[2*i+1] = i+1;
-                } else if(i >= 7 && i < 14) {
-                    posicionesReina[2*i] = 0;
-                    posicionesReina[2*i+1] = 6-i;
-                } else if(i >= 14 && i < 21) {
-                    posicionesReina[2*i] = i-14;
-                    posicionesReina[2*i+1] = 0;
-                } else if(i >= 21 && i < 28) {
-                    posicionesReina[2*i] = 21-i;
-                    posicionesReina[2*i+1] = 0;
-                } else if (i >= 28 && i < 35) {
-                    posicionesReina[2*i] = i-27;
-                    posicionesReina[2*i+1] = i-27;
-                } else if (i >= 35 && i < 42) {
-                    posicionesReina[2*i] = 34-i;
-                    posicionesReina[2*i+1] = 34-i;
-                } else if (i >= 42 && i < 49) {
-                    posicionesReina[2*i] = i-41;
-                    posicionesReina[2*i+1] = 41-i;
-                } else if (i >= 49 && i < 56) {
-                    posicionesReina[2*i] = 48-i;
-                    posicionesReina[2*i+1] = i-48;
-                }
+                for(int j = i*7; j < (i+1)*7; j++) {
+                    if(j >= 0 && j < 7) {
+                        posiciones[2*j] = 0;
+                        posiciones[2*j+1] = j+1;
+                    } else if(j >= 7 && j < 14) {
+                        posiciones[2*j] = 0;
+                        posiciones[2*j+1] = 6-j;
+                    } else if(j >= 14 && j < 21) {
+                        posiciones[2*j] = j-14;
+                        posiciones[2*j+1] = 0;
+                    } else if(j >= 21 && j < 28) {
+                        posiciones[2*j] = 21-j;
+                        posiciones[2*j+1] = 0;
+                    } else if (j >= 28 && j < 35) {
+                        posiciones[2*j] = j-27;
+                        posiciones[2*j+1] = j-27;
+                    } else if (j >= 35 && j < 42) {
+                        posiciones[2*j] = 34-j;
+                        posiciones[2*j+1] = 34-j;
+                    } else if (j >= 42 && j < 49) {
+                        posiciones[2*j] = j-41;
+                        posiciones[2*j+1] = 41-j;
+                    } else if (j >= 49 && j < 56) {
+                        posiciones[2*j] = 48-j;
+                        posiciones[2*j+1] = j-48;
+                    }
+                }                
             }
 
-            //Estos parámetros son pruebas, la verdad no entiendo qué poronga mandar.
-            __PiezaCrearCoordenadas(&(*coordenadas), 56, &(*posicionesReina));
-            free(posicionesReina);
+            __PiezaCrearCoordenadas(&coordenadas, 56, &posiciones);
             break;
 
         case TORRE:
@@ -98,6 +99,8 @@ void __PiezaRepresentacionYMovimientos(Pieza* pieza, TipoPieza tipo)
             base += 5;
             break;   
     }
+
+    //Liberar posiciones.
     
     pieza->representacion = base;
     pieza->coordenadasMovimientosPosibles = coordenadas;
