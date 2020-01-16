@@ -3,5 +3,6 @@
 
 typedef struct Pieza Pieza;
 typedef struct Posicion Posicion;
+typedef int Coordenada[2];
 
 #endif

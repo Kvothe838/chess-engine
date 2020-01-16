@@ -4,8 +4,6 @@
 #include <stdbool.h>
 #include <struct.h>
 
-typedef int Coordenada[2];
-
 struct Posicion
 {
     char horizontal;
