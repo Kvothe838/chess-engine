@@ -9,21 +9,21 @@ void __PiezaCrearCoordenadas(Coordenada** coordenadas, int len, int** coordenada
     (*coordenadas) = (Coordenada*) malloc(len * sizeof(Coordenada));
 
     for (int i = 0; i < len; i++) {
-        (*coordenadas)[i][0] = (*coordenadasEnNumero)[2*i];
-        (*coordenadas)[i][1] = (*coordenadasEnNumero)[2*i+1];
+        ((*coordenadas)[i])[0] = (*coordenadasEnNumero)[2*i];
+        ((*coordenadas)[i])[1] = (*coordenadasEnNumero)[2*i+1];
     }
 }
 
-void __PiezaLiberarValoresCoordenadas(int len, int** coordenadasEnNumero) {
-    for (int i = 0; i < len; i++) {
-        free(coordenadasEnNumero[i]);
-    }
+// void __PiezaLiberarValoresCoordenadas(int len, int** coordenadasEnNumero) {
+//     for (int i = 0; i < 2*len; i++) {
+//         free((*coordenadasEnNumero)[i]);
+//     }
 
-    free(coordenadasEnNumero);
-}
+//     free(*coordenadasEnNumero);
+// }
 
 void __ValoresCoordenadasInicializar(int** valoresCoordenadas, int cantidadMovimientos) {
-    (*valoresCoordenadas) = (int*) malloc(cantidadMovimientos * sizeof(int));
+    (*valoresCoordenadas) = (int*) malloc(2 * cantidadMovimientos * sizeof(int));
 }
 
 void __ValoresCoordenadasLlenar_Rey(int** valoresCoordenadas) {
@@ -150,7 +150,7 @@ void __PiezaRepresentacionYMovimientos(Pieza* pieza, TipoPieza tipo)
     switch (tipo) {
         case REY:
             base += 0;
-            cantidadMovimientos = 16;
+            cantidadMovimientos = 8;
             __ValoresCoordenadasInicializar(&valoresCoordenadas, cantidadMovimientos);
             __ValoresCoordenadasLlenar_Rey(&valoresCoordenadas);
             
@@ -193,16 +193,17 @@ void __PiezaRepresentacionYMovimientos(Pieza* pieza, TipoPieza tipo)
             cantidadMovimientos = 1;
             __ValoresCoordenadasInicializar(&valoresCoordenadas, cantidadMovimientos);
             __ValoresCoordenadasLlenar_Peon(&valoresCoordenadas);
-            //TODO: Devolver falta el movimiento de la primer fila 
 
-            break;   
+            break;
     }
 
     __PiezaCrearCoordenadas(&coordenadas, cantidadMovimientos, &valoresCoordenadas);
-    __PiezaLiberarValoresCoordenadas(cantidadMovimientos, &valoresCoordenadas);
     
     pieza->representacion = base;
     pieza->coordenadasMovimientosPosibles = coordenadas;
+
+    free(valoresCoordenadas);
+    free(coordenadas);
 }
 
 void PiezaCrear(Pieza* pieza, TipoPieza tipo, bool esBlanca)
