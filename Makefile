@@ -87,7 +87,7 @@ endef
 # Etiqueta principal, este se ejecuta al ejecutar make
 # sin ninguna etiquita de referencia, en ella se ejecutan
 # las etiquetas en el orden escritos 
-all: $(MAIN) $(DEBUG) clean run
+all: clean $(MAIN) $(DEBUG) run
 
 # Etiqueta que compila el programa princial una vez compilados
 # los objetos
@@ -131,4 +131,6 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 # Elimina los posibles archivos extras que se creen en el proceso (actualmente no hace mucho)
 clean:
-	@$(RM) *.gch
+	@$(RM) *.gch OBJECTS 
+	@$(RM) -r $(BIN_DIR)/*
+	@echo "Objetos Y binarios eliminados" 
