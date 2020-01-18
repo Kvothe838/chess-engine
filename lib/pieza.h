@@ -44,6 +44,7 @@ struct Pieza
     bool esBlanca;
     int representacion;
     Posicion* posicion;
+    Coordenada* coordenadasMovimientosPosibles;
 };
 
 void PiezaCrear(Pieza* pieza, TipoPieza tipo, bool esBlanca);

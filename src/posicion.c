@@ -2,7 +2,7 @@
 #include <posicion.h>
 #include <stdlib.h>
 
-void PosicionInicializar(Posicion* posicion, int coordenada[2]) {
+void PosicionInicializar(Posicion* posicion, Coordenada coordenada) {
     posicion->horizontal = (char)(coordenada[1] + 'A');
     posicion->vertical = coordenada[0];
     posicion->ranura = NULL;
