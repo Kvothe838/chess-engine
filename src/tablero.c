@@ -152,7 +152,7 @@ void TableroImprimir(Tablero tablero)
 void TableroColocarPieza(Posicion* posicion, Pieza *pieza)
 {
     posicion->ranura = pieza;
-    PiezaEsColocada(pieza, posicion);
+    PiezaColocar(pieza, posicion);
 }
  
 void TableroDestruir(Tablero *tablero)

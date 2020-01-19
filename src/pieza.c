@@ -14,14 +14,6 @@ void __PiezaCrearCoordenadas(Coordenada** coordenadas, int len, int** coordenada
     }
 }
 
-// void __PiezaLiberarValoresCoordenadas(int len, int** coordenadasEnNumero) {
-//     for (int i = 0; i < 2*len; i++) {
-//         free((*coordenadasEnNumero)[i]);
-//     }
-
-//     free(*coordenadasEnNumero);
-// }
-
 void __ValoresCoordenadasInicializar(int** valoresCoordenadas, int cantidadMovimientos) {
     (*valoresCoordenadas) = (int*) malloc(2 * cantidadMovimientos * sizeof(int));
 }
@@ -220,7 +212,7 @@ void PiezaCopiar(Pieza* copia, Pieza original)
     copia->esBlanca = original.esBlanca;
 }
 
-void PiezaEsColocada(Pieza* pieza, Posicion* posicion)
+void PiezaColocar(Pieza* pieza, Posicion* posicion)
 {
     pieza->posicion = posicion;
 }
