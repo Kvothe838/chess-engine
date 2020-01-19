@@ -6,8 +6,7 @@
 
 struct Posicion
 {
-    char horizontal;
-    int vertical;
+    Casilla* casilla;
     Pieza* ranura;
 };
 

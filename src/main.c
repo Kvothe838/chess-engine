@@ -7,6 +7,7 @@ int main(void)
     Tablero tablero;
 
     TableroInicializar(&tablero);
+    TableroMovimiento(&tablero);
     TableroImprimir(tablero);
     TableroDestruir(&tablero);
 

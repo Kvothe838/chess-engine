@@ -4,6 +4,7 @@
 #include <tablero.h>
 #include <posicion.h>
 #include <pieza.h>
+#include <casilla.h>
 
 #define CANTIDAD_PIEZAS 32
 
@@ -170,7 +171,18 @@ void TableroDestruir(Tablero *tablero)
     free(*tablero);
 }
 
-int TraducirColumnaAIndice(Columna columna)
-{
-    return (int)(columna - 'A');
+void TableroMovimiento(Tablero *tablero) {
+    Pieza* pieza = tablero[0][0]->ranura;
+    Posicion* posicion = pieza->posicion;
+    Casilla* casillas;
+    int cantidadPosiblesMovimientos = CasillaObtenerPosibles(posicion, &casillas);
+
+    printf("COLOR: %c\n", pieza->esBlanca ? 'B' : 'N');
+    printf("TIPO: %c\n", pieza->tipo);
+    printf("CANTIDAD: %d\n", cantidadPosiblesMovimientos);
+    printf("CASILLAS A LAS QUE SE PUEDE MOVER: \n\n");
+
+    for(int i = 0; i < cantidadPosiblesMovimientos; i++) {
+        printf("CASILLA %d: %c%d\n", i, casillas[i].columna, casillas[i].fila);
+    }
 }

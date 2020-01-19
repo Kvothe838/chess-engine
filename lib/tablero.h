@@ -28,5 +28,6 @@ void TableroInicializar(Tablero* tablero);
 void TableroImprimir(Tablero tablero);
 void TableroColocarPieza(Posicion* posicion, Pieza* pieza);
 void TableroDestruir(Tablero *tablero);
+void TableroMovimiento(Tablero *tablero);
 
 #endif

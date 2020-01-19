@@ -11,6 +11,10 @@ void __PiezaCrearCoordenadas(Coordenada** coordenadas, int len, int** coordenada
     for (int i = 0; i < len; i++) {
         ((*coordenadas)[i])[0] = (*coordenadasEnNumero)[2*i];
         ((*coordenadas)[i])[1] = (*coordenadasEnNumero)[2*i+1];
+
+        // printf("IMPRIMITE FORRO: %d %d %d %d\n",
+        // ((*coordenadas)[i])[0], (*coordenadasEnNumero)[2*i],
+        // ((*coordenadas)[i])[1], (*coordenadasEnNumero)[2*i+1]);
     }
 }
 
@@ -43,10 +47,10 @@ void __ValoresCoordenadasLlenar_Reina(int** valoresCoordenadas) {
                 (*valoresCoordenadas)[2*j] = 0;
                 (*valoresCoordenadas)[2*j+1] = 6-j;
             } else if(j >= 14 && j < 21) {
-                (*valoresCoordenadas)[2*j] = j-14;
+                (*valoresCoordenadas)[2*j] = j-13;
                 (*valoresCoordenadas)[2*j+1] = 0;
             } else if(j >= 21 && j < 28) {
-                (*valoresCoordenadas)[2*j] = 21-j;
+                (*valoresCoordenadas)[2*j] = 20-j;
                 (*valoresCoordenadas)[2*j+1] = 0;
             } else if (j >= 28 && j < 35) {
                 (*valoresCoordenadas)[2*j] = j-27;
@@ -66,8 +70,7 @@ void __ValoresCoordenadasLlenar_Reina(int** valoresCoordenadas) {
 }
 
 void __ValoresCoordenadasLlenar_Torre(int** valoresCoordenadas) {
-    for(int i = 0; i < 4; i++) {
-        for(int j = i*7; j < (i+1)*7; j++) {
+        for(int j = 0; j < 28; j++) {
             if(j >= 0 && j < 7) {
                 (*valoresCoordenadas)[2*j] = 0;
                 (*valoresCoordenadas)[2*j+1] = j+1;
@@ -75,14 +78,13 @@ void __ValoresCoordenadasLlenar_Torre(int** valoresCoordenadas) {
                 (*valoresCoordenadas)[2*j] = 0;
                 (*valoresCoordenadas)[2*j+1] = 6-j;
             } else if(j >= 14 && j < 21) {
-                (*valoresCoordenadas)[2*j] = j-14;
+                (*valoresCoordenadas)[2*j] = j-13;
                 (*valoresCoordenadas)[2*j+1] = 0;
             } else if(j >= 21 && j < 28) {
-                (*valoresCoordenadas)[2*j] = 21-j;
+                (*valoresCoordenadas)[2*j] = 20-j;
                 (*valoresCoordenadas)[2*j+1] = 0;
             }
-        }                
-    }
+        }
 }
 
 void __ValoresCoordenadasLlenar_Alfil(int** valoresCoordenadas) {
@@ -126,13 +128,46 @@ void __ValoresCoordenadasLlenar_Peon(int** valoresCoordenadas) {
     (*valoresCoordenadas)[1] = 1;
 }
 
+int PiezaObtenerCantidadMovimientos(TipoPieza tipo) {
+    int cantidad;
+
+    switch (tipo) {
+        case REY:
+            cantidad = 8;            
+            break;
+
+        case REINA:
+            cantidad = 56;
+            break;
+
+        case TORRE:
+            cantidad = 28;
+            break;
+
+        case ALFIL:
+            cantidad = 28;
+            break;
+
+        case CABALLO:
+            cantidad = 8;
+            break;
+
+        case PEON:
+            cantidad = 1;
+            break;
+    }
+
+    return cantidad;
+}
+
 void __PiezaRepresentacionYMovimientos(Pieza* pieza, TipoPieza tipo)
 {
     setlocale(LC_ALL, "");
     int base = 0x2654;
     Coordenada* coordenadas;
     int* valoresCoordenadas;
-    int cantidadMovimientos;
+    int cantidadMovimientos = PiezaObtenerCantidadMovimientos(tipo);
+    __ValoresCoordenadasInicializar(&valoresCoordenadas, cantidadMovimientos);
 
     if(pieza->esBlanca)
     {
@@ -142,60 +177,64 @@ void __PiezaRepresentacionYMovimientos(Pieza* pieza, TipoPieza tipo)
     switch (tipo) {
         case REY:
             base += 0;
-            cantidadMovimientos = 8;
-            __ValoresCoordenadasInicializar(&valoresCoordenadas, cantidadMovimientos);
             __ValoresCoordenadasLlenar_Rey(&valoresCoordenadas);
             
             break;
 
         case REINA:
             base += 1;
-            cantidadMovimientos = 56;
-            __ValoresCoordenadasInicializar(&valoresCoordenadas, cantidadMovimientos);
             __ValoresCoordenadasLlenar_Reina(&valoresCoordenadas);            
 
             break;
 
         case TORRE:
             base += 2;
-            cantidadMovimientos = 28;
-            __ValoresCoordenadasInicializar(&valoresCoordenadas, cantidadMovimientos);
             __ValoresCoordenadasLlenar_Torre(&valoresCoordenadas);
 
             break;
 
         case ALFIL:
             base += 3;
-            cantidadMovimientos = 28;
-            __ValoresCoordenadasInicializar(&valoresCoordenadas, cantidadMovimientos);
             __ValoresCoordenadasLlenar_Alfil(&valoresCoordenadas);
 
             break;
 
         case CABALLO:
             base += 4;
-            cantidadMovimientos = 8;
-            __ValoresCoordenadasInicializar(&valoresCoordenadas, cantidadMovimientos);
             __ValoresCoordenadasLlenar_Caballo(&valoresCoordenadas);
 
             break;
 
         case PEON:
             base += 5;
-            cantidadMovimientos = 1;
-            __ValoresCoordenadasInicializar(&valoresCoordenadas, cantidadMovimientos);
             __ValoresCoordenadasLlenar_Peon(&valoresCoordenadas);
 
             break;
     }
 
     __PiezaCrearCoordenadas(&coordenadas, cantidadMovimientos, &valoresCoordenadas);
-    
+    if(pieza->tipo == 'T' && pieza->esBlanca){
+        for (int i = 0; i < cantidadMovimientos; i++)
+        {
+            printf("COORDENADA: %d%d\n", coordenadas[i][0], coordenadas[i][1]);
+        }
+    }
+
+
+    free(valoresCoordenadas); 
+    if(pieza->tipo == 'T' && pieza->esBlanca){
+        for (int i = 0; i < cantidadMovimientos; i++)
+        {
+            printf("COORDENADA AFTER: %d%d\n", coordenadas[i][0], coordenadas[i][1]);
+        }
+    }   
     pieza->representacion = base;
     pieza->coordenadasMovimientosPosibles = coordenadas;
 
-    free(valoresCoordenadas);
-    free(coordenadas);
+    /*TODO Por alguna razón, hacer esto rompe todo, pero debería ser posible pasarle
+    el valor de coordenadas a pieza->coordenadasMovimientosPosibles y liberar coordendas.
+    Qué se yo, lo dejo en mejora o por si Valgrind me rompe las pelotas.*/
+    //free(coordenadas);
 }
 
 void PiezaCrear(Pieza* pieza, TipoPieza tipo, bool esBlanca)

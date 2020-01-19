@@ -4,40 +4,6 @@
 #include <stdbool.h>
 #include <struct.h>
 
-typedef enum
-{
-    ALFIL = 'A',
-    CABALLO = 'C',
-    PEON = 'P',
-    REINA = 'R',
-    REY = 'K',
-    TORRE = 'T'
-} TipoPieza;
-
-typedef enum
-{
-    A = 'A',
-    B = 'B',
-    C = 'C',
-    D = 'D',
-    E = 'E',
-    F = 'F',
-    G = 'G',
-    H = 'H'
-} Columna;
-
-typedef enum
-{
-    UNO = 1,
-    DOS = 2,
-    TRES = 3,
-    CUATRO = 4,
-    CINCO = 5,
-    SEIS = 6,
-    SIETE = 7,
-    OCHO = 8
-} Fila;
-
 struct Pieza
 {
     TipoPieza tipo;
@@ -52,5 +18,6 @@ void PiezaCopiar(Pieza* copia, Pieza original);
 bool PiezaEstaPuesta(Pieza pieza);
 void PiezaColocar(Pieza* pieza, Posicion* posicion);
 void PiezaImprimir(Pieza pieza);
+int PiezaObtenerCantidadMovimientos(TipoPieza tipo);
 
 #endif
