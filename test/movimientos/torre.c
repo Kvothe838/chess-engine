@@ -6,15 +6,15 @@ void TableroMoverPieza(Tablero* tablero, char coordenadas[4])
 
 }
 
-void testMoverLaTorreHaciaAbajo()
+void testMoverLaTorreVertical()
 {
     char tableroProvisorio[FILAS][COLUMNAS][3] = 
     {
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, TORRE_BLANCO, NADA, NADA, NADA, NADA},
+        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
+        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
+        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
+        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA}
@@ -25,15 +25,33 @@ void testMoverLaTorreHaciaAbajo()
     TableroInicializarDeCiertaForma(&tablero, tableroProvisorio);
     /*TableroImprimir(tablero);*/
 
-    TableroMoverPieza(&tablero, "TD7");
-    /*TableroImprimir(tablero);*/
+    char* posicionInicial = "TD1";
+    char* movimiento;
+    movimiento = calloc(3+1, sizeof(char));
+    movimiento[0] = 'T';
+    movimiento[1] = 'D';
+  //movimiento[2] = '1';
+    movimiento[3] = '\0';
+    for (int i = 1; i < 8; ++i)
+    {
+        movimiento[2] = '1' + (char)i;
+        TableroMoverPieza(&tablero, movimiento);
+        /*TableroImprimir(tablero);*/
+        
+        ASSERT(tablero[0][3].ranura == NULL);
+        ASSERT(tablero[i][3].ranura != NULL);
 
-    ASSERT(tablero[4][3].ranura == NULL);
-    ASSERT(tablero[6][3].ranura != NULL);
+        TableroMoverPieza(&tablero, posicionInicial);
+        ASSERT(tablero[0][3].ranura != NULL);
+        ASSERT(tablero[i][3].ranura == NULL);
+
+    }
+    
+    free(movimiento);
     TableroDestruir(&tablero);
 }
 
-void testMoverLaTorreHaciaArriba()
+void testMoverLaTorreHorizontal()
 {
     char tableroProvisorio[FILAS][COLUMNAS][3] = 
     {
@@ -41,7 +59,7 @@ void testMoverLaTorreHaciaArriba()
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, TORRE_BLANCO, NADA, NADA, NADA, NADA},
+        {TORRE_BLANCO, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA}
@@ -52,74 +70,37 @@ void testMoverLaTorreHaciaArriba()
     TableroInicializarDeCiertaForma(&tablero, tableroProvisorio);
     /*TableroImprimir(tablero);*/
 
-    TableroMoverPieza(&tablero, "TD3");
-    /*TableroImprimir(tablero);*/
-
-    ASSERT(tablero[4][3].ranura == NULL);
-    ASSERT(tablero[2][3].ranura != NULL);
-    TableroDestruir(&tablero);
-}
-
-void testMoverLaTorreHaciaLaIzquierda()
-{
-    char tableroProvisorio[FILAS][COLUMNAS][3] = 
+    char* posicionInicial = "TA5";
+    char* movimiento;
+    movimiento = calloc(3+1, sizeof(char));
+    movimiento[0] = 'T';
+  //movimiento[1] = 'A';
+    movimiento[2] = '5';
+    movimiento[3] = '\0';
+    for (int i = 1; i < 8; ++i)
     {
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, TORRE_BLANCO, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA}
-    };
+        movimiento[1] = 'A' + (char)i;
+        TableroMoverPieza(&tablero, movimiento);
+        /*TableroImprimir(tablero);*/
+        
+        ASSERT(tablero[4][0].ranura == NULL);
+        ASSERT(tablero[4][i].ranura != NULL);
 
-    Tablero tablero;
+        TableroMoverPieza(&tablero, posicionInicial);
+        /*TableroImprimir(tablero);*/
+        ASSERT(tablero[4][0].ranura != NULL);
+        ASSERT(tablero[4][i].ranura == NULL);
 
-    TableroInicializarDeCiertaForma(&tablero, tableroProvisorio);
-    /*TableroImprimir(tablero);*/
-
-    TableroMoverPieza(&tablero, "TA5");
-    /*TableroImprimir(tablero);*/
-
-    ASSERT(tablero[4][3].ranura == NULL);
-    ASSERT(tablero[4][0].ranura != NULL);
+    }
+    
+    free(movimiento);
     TableroDestruir(&tablero);
 }
 
-
-void testMoverLaTorreHaciaLaDerecha()
-{
-    char tableroProvisorio[FILAS][COLUMNAS][3] = 
-    {
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, TORRE_BLANCO, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA}
-    };
-
-    Tablero tablero;
-
-    TableroInicializarDeCiertaForma(&tablero, tableroProvisorio);
-    /*TableroImprimir(tablero);*/
-
-    TableroMoverPieza(&tablero, "TH5");
-    /*TableroImprimir(tablero);*/
-
-    ASSERT(tablero[4][3].ranura == NULL);
-    ASSERT(tablero[4][7].ranura != NULL);
-    TableroDestruir(&tablero);
-}
 
 int main(void)
 {   
-    testMoverLaTorreHaciaAbajo();
-    testMoverLaTorreHaciaArriba();
-    testMoverLaTorreHaciaLaIzquierda();
-    testMoverLaTorreHaciaLaDerecha();
+    testMoverLaTorreVertical();
+    testMoverLaTorreHorizontal();
     return 0;
 }
