@@ -11,10 +11,6 @@ void __PiezaCrearCoordenadas(Coordenada** coordenadas, int len, int** coordenada
     for (int i = 0; i < len; i++) {
         ((*coordenadas)[i])[0] = (*coordenadasEnNumero)[2*i];
         ((*coordenadas)[i])[1] = (*coordenadasEnNumero)[2*i+1];
-
-        // printf("IMPRIMITE FORRO: %d %d %d %d\n",
-        // ((*coordenadas)[i])[0], (*coordenadasEnNumero)[2*i],
-        // ((*coordenadas)[i])[1], (*coordenadasEnNumero)[2*i+1]);
     }
 }
 
@@ -213,21 +209,8 @@ void __PiezaRepresentacionYMovimientos(Pieza* pieza, TipoPieza tipo)
     }
 
     __PiezaCrearCoordenadas(&coordenadas, cantidadMovimientos, &valoresCoordenadas);
-    if(pieza->tipo == 'T' && pieza->esBlanca){
-        for (int i = 0; i < cantidadMovimientos; i++)
-        {
-            printf("COORDENADA: %d%d\n", coordenadas[i][0], coordenadas[i][1]);
-        }
-    }
+    free(valoresCoordenadas);
 
-
-    free(valoresCoordenadas); 
-    if(pieza->tipo == 'T' && pieza->esBlanca){
-        for (int i = 0; i < cantidadMovimientos; i++)
-        {
-            printf("COORDENADA AFTER: %d%d\n", coordenadas[i][0], coordenadas[i][1]);
-        }
-    }   
     pieza->representacion = base;
     pieza->coordenadasMovimientosPosibles = coordenadas;
 
