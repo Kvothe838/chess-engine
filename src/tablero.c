@@ -4,10 +4,15 @@
 #include <tablero.h>
 #include <posicion.h>
 #include <pieza.h>
+#include <casilla.h>
 
 #define CANTIDAD_PIEZAS 32
 
-int TraducirColumnaAIndice(Columna columna);
+Pieza** piezasBlancas;
+int cantidadDePiezasBlancas;
+
+Pieza** piezasNegras;
+int cantidadDePiezasNegras;
 
 void TableroInicializar(Tablero* tablero)
 {
@@ -27,6 +32,9 @@ void TableroInicializar(Tablero* tablero)
     int coordenada[2];
 
     *tablero = (Tablero) malloc(FILAS * sizeof(Posicion*));
+
+    cantidadDePiezasBlancas = 0;
+    cantidadDePiezasNegras = 0;
     
     for (int y = 0; y < FILAS; y++)
     {
@@ -43,6 +51,18 @@ void TableroInicializar(Tablero* tablero)
                 pieza = (Pieza*)malloc(sizeof(Pieza));
                 PiezaCrear(pieza, tableroProvisorio[y][x][0], tableroProvisorio[y][x][1] == 'B');
                 TableroColocarPieza(&(*tablero)[y][x], pieza);
+                if (pieza->esBlanca)
+                {
+                    piezasBlancas = (Pieza**)realloc(piezasBlancas,(cantidadDePiezasBlancas + 1) * sizeof(Pieza*));
+                    piezasBlancas[cantidadDePiezasBlancas] = pieza;
+                    cantidadDePiezasBlancas++;
+                }
+                else
+                {
+                    piezasNegras = (Pieza**)realloc(piezasNegras,(cantidadDePiezasNegras + 1) * sizeof(Pieza*));
+                    piezasNegras[cantidadDePiezasNegras] = pieza;
+                    cantidadDePiezasNegras++;
+                }
             }            
         }
     }
@@ -152,7 +172,7 @@ void TableroImprimir(Tablero tablero)
 void TableroColocarPieza(Posicion* posicion, Pieza *pieza)
 {
     posicion->ranura = pieza;
-    PiezaEsColocada(pieza, posicion);
+    PiezaColocar(pieza, posicion);
 }
  
 void TableroDestruir(Tablero *tablero)
@@ -167,10 +187,85 @@ void TableroDestruir(Tablero *tablero)
         free((*tablero)[y]);
     }
 
+    free(piezasBlancas);
+    free(piezasNegras);
+
     free(*tablero);
 }
 
-int TraducirColumnaAIndice(Columna columna)
+void TableroMovimiento(Tablero *tablero)
+{
+    Pieza* pieza = tablero[0][0]->ranura;
+    Posicion* posicion = pieza->posicion;
+    Casilla* casillas;
+    int cantidadPosiblesMovimientos = CasillaObtenerPosibles(posicion, &casillas);
+
+    printf("COLOR: %c\n", pieza->esBlanca ? 'B' : 'N');
+    printf("TIPO: %c\n", pieza->tipo);
+    printf("CANTIDAD: %d\n", cantidadPosiblesMovimientos);
+    printf("CASILLAS A LAS QUE SE PUEDE MOVER: \n\n");
+
+    for(int i = 0; i < cantidadPosiblesMovimientos; i++) {
+        printf("CASILLA %d: %c%d\n", i, casillas[i].columna, casillas[i].fila);
+    }
+    free(casillas);
+}
+
+int __TraducirFilaAInteger(Fila fila)
+{
+    return (int)(fila - 1);
+}
+
+int __TraducirColumnaAInteger(Columna columna)
 {
     return (int)(columna - 'A');
+}
+
+Posicion* TableroObtenerPieza(Tablero tablero, Casilla casilla)
+{
+    int fila, columna;
+    fila = __TraducirFilaAInteger(casilla.fila);
+    columna = __TraducirColumnaAInteger(casilla.columna);
+    return &tablero[fila][columna];
+}
+
+void TableroMoverPieza(Tablero* tablero, char movimiento[4])
+{
+    //Supongo que siempre mueve las blancas, hay que hacer algo para alternar
+    Pieza* pieza;
+    Casilla* casillas;
+    Posicion* posicionInicial, * posicionFinal;
+    bool salir;
+
+    for (int i = 0; i < cantidadDePiezasBlancas; ++i)
+    {
+        if (piezasBlancas[i]->tipo == movimiento[0])
+        {
+            /*printf("%s\n", "SE ECONTRO EL TIPO DE PIEZA");*/
+            pieza = piezasBlancas[i];
+            posicionInicial = pieza->posicion;
+            salir = false;
+
+            int cantidadPosiblesMovimientos = CasillaObtenerPosibles(posicionInicial, &casillas);
+            for (int j = 0; j < cantidadPosiblesMovimientos; ++j)
+            {
+                /*printf("%c%d\n", casillas[j].columna, casillas[j].fila);*/
+                if (casillas[j].columna == (Columna)movimiento[1] &&
+                    casillas[j].fila == (Fila)(movimiento[2] - '0'))
+                {
+                    /*printf("%s\n", "ECONTRO LA CASILLA");*/
+
+                    posicionFinal = TableroObtenerPieza(*tablero, casillas[j]);
+                    posicionInicial->ranura = NULL;
+                    TableroColocarPieza(posicionFinal, pieza);
+                    salir = true;
+                    break;
+                }
+            }
+            if (salir)
+            {
+                break;
+            }
+        }
+    }
 }
