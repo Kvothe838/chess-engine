@@ -193,28 +193,61 @@ void TableroDestruir(Tablero *tablero)
     free(*tablero);
 }
 
-void TableroMovimiento(Tablero *tablero) {
-    Posicion* posicion = &((*tablero)[0][2]);
-    Pieza* pieza = posicion->ranura;
-    
-    if(pieza == NULL){
-        printf("No hay pieza.");
-        return;
+void TableroMovimiento(Tablero *tablero, char movimiento[3], char color) {
+    printf("1");
+    Pieza** piezasDelColor = color != 'B' ? piezasBlancas : piezasNegras;
+    int cantidadDelColor = color != 'B' ? cantidadDePiezasBlancas : cantidadDePiezasNegras;    
+    Casilla* casillas;    
+    Pieza** piezas = NULL;
+    int cantidadPiezas = 0;
+
+    for(int i = 0; i < cantidadDelColor; i++) {
+        Pieza* piezaAEvaluar = piezasDelColor[i];
+        
+        if(piezaAEvaluar->tipo == movimiento[0]) {
+
+            int cantidadPosiblesMovimientos = CasillaObtenerPosibles(piezaAEvaluar->posicion, &casillas);
+            bool found = false;
+            
+            for(int j = 0; j < cantidadPosiblesMovimientos; j++) {
+                
+                Casilla casilla = casillas[j];
+                char str[1] = {movimiento[2]};
+                int filaMovimiento = atoi(str);
+
+                if(casilla.columna == movimiento[1] && casilla.fila == filaMovimiento) {
+                    found = true;
+                    break;
+                }
+            }
+
+            if(found) {
+
+                if(piezas == NULL){
+                    *piezas = malloc(sizeof(Pieza));
+                } else {
+                    *piezas = (Pieza*) realloc(*piezas, (cantidadPiezas + 1) * sizeof(Pieza));
+                }
+
+                piezas[cantidadPiezas] = piezaAEvaluar;
+                cantidadPiezas++;
+            }
+            
+            free(casillas);
+        }
     }
 
-    Casilla* casillas;
-    int cantidadPosiblesMovimientos = CasillaObtenerPosibles(posicion, &casillas);
-
-    printf("COLOR: %c\n", pieza->esBlanca ? 'B' : 'N');
-    printf("TIPO: %c\n", pieza->tipo);
-    printf("POSICION: %c%d\n", posicion->casilla->columna, posicion->casilla->fila+1);
-    printf("CANTIDAD: %d\n", cantidadPosiblesMovimientos);
-    printf("CASILLAS A LAS QUE SE PUEDE MOVER: \n\n");
-
-    for(int i = 0; i < cantidadPosiblesMovimientos; i++) {
-        printf("CASILLA %d: %c%d\n", i, casillas[i].columna, casillas[i].fila);
+    switch(cantidadPiezas) {
+        case 0:
+            printf("No se pudo mover ninguna pieza.");
+            break;
+        case 1:
+            printf("Pieza movida.");
+            break;
+        default:
+            printf("Más de una pieza del tipo especificado pueden moverse a la posición especificada.\nPor favor, escriba el comando detallando la columna o fila a la que pertenece la pieza que se quiere mover.");
+            break;
     }
-    free(casillas);
 }
 
 int __TraducirFilaAInteger(Fila fila)
