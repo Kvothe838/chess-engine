@@ -34,8 +34,8 @@ void __ValoresCoordenadasLlenar_Rey(int** valoresCoordenadas) {
 }
 
 void __ValoresCoordenadasLlenar_Reina(int** valoresCoordenadas) {
-    for(int i = 0; i < 8; i++) {
-        for(int j = i*7; j < (i+1)*7; j++) {
+    // for(int i = 0; i < 8; i++) {
+        for(int j = 0; j < 56; j++) {
             if(j >= 0 && j < 7) {
                 (*valoresCoordenadas)[2*j] = 0;
                 (*valoresCoordenadas)[2*j+1] = j+1;
@@ -62,7 +62,7 @@ void __ValoresCoordenadasLlenar_Reina(int** valoresCoordenadas) {
                 (*valoresCoordenadas)[2*j+1] = j-48;
             }
         }                
-    }
+    // }
 }
 
 void __ValoresCoordenadasLlenar_Torre(int** valoresCoordenadas) {
@@ -84,22 +84,20 @@ void __ValoresCoordenadasLlenar_Torre(int** valoresCoordenadas) {
 }
 
 void __ValoresCoordenadasLlenar_Alfil(int** valoresCoordenadas) {
-    for(int i = 0; i < 4; i++) {
-        for(int j = i*7; j < (i+1)*7; j++) {
-            if (j >= 28 && j < 35) {
-                (*valoresCoordenadas)[2*j] = j-27;
-                (*valoresCoordenadas)[2*j+1] = j-27;
-            } else if (j >= 35 && j < 42) {
-                (*valoresCoordenadas)[2*j] = 34-j;
-                (*valoresCoordenadas)[2*j+1] = 34-j;
-            } else if (j >= 42 && j < 49) {
-                (*valoresCoordenadas)[2*j] = j-41;
-                (*valoresCoordenadas)[2*j+1] = 41-j;
-            } else if (j >= 49 && j < 56) {
-                (*valoresCoordenadas)[2*j] = 48-j;
-                (*valoresCoordenadas)[2*j+1] = j-48;
-            }
-        }                
+    for(int j = 0; j < 28; j++) {
+        if (j >= 0 && j < 7) {
+            (*valoresCoordenadas)[2*j] = j+1;
+            (*valoresCoordenadas)[2*j+1] = j+1;
+        } else if (j >= 7 && j < 14) {
+            (*valoresCoordenadas)[2*j] = 6-j;
+            (*valoresCoordenadas)[2*j+1] = 6-j;
+        } else if (j >= 14 && j < 21) {
+            (*valoresCoordenadas)[2*j] = j-13;
+            (*valoresCoordenadas)[2*j+1] = 13-j;
+        } else if (j >= 21 && j < 28) {
+            (*valoresCoordenadas)[2*j] = 20-j;
+            (*valoresCoordenadas)[2*j+1] = j-20;
+        }
     }
 }
 
@@ -120,8 +118,8 @@ void __ValoresCoordenadasLlenar_Caballo(int** valoresCoordenadas) {
 }
 
 void __ValoresCoordenadasLlenar_Peon(int** valoresCoordenadas) {
-    (*valoresCoordenadas)[0] = 0;
-    (*valoresCoordenadas)[1] = 1;
+    (*valoresCoordenadas)[0] = 1;
+    (*valoresCoordenadas)[1] = 0;
 }
 
 int PiezaObtenerCantidadMovimientos(TipoPieza tipo) {
