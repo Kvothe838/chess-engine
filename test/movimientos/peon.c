@@ -1,10 +1,5 @@
 #include <test.h>
-#include <tableroPersonabilizable.h>
-
-void TableroMoverPieza(Tablero* tablero, char coordenadas[4])
-{
-
-}
+#include <tablero.h>
 
 void testMoverUnPeonEnUnaPosicion()
 {

@@ -25,6 +25,7 @@
 typedef Posicion** Tablero;
 
 void TableroInicializar(Tablero* tablero);
+void TableroInicializarDeCiertaForma(Tablero*, char[FILAS][COLUMNAS][3]);
 void TableroImprimir(Tablero tablero);
 void TableroColocarPieza(Posicion* posicion, Pieza* pieza);
 void TableroMovimiento(Tablero* tablero);

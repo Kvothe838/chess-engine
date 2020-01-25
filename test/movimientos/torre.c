@@ -1,10 +1,6 @@
 #include <test.h>
-#include <tableroPersonabilizable.h>
+#include <tablero.h>
 
-void TableroMoverPieza(Tablero* tablero, char coordenadas[4])
-{
-
-}
 
 void testMoverLaTorreVertical()
 {

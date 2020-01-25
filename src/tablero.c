@@ -51,6 +51,50 @@ void TableroInicializar(Tablero* tablero)
                 pieza = (Pieza*)malloc(sizeof(Pieza));
                 PiezaCrear(pieza, tableroProvisorio[y][x][0], tableroProvisorio[y][x][1] == 'B');
                 TableroColocarPieza(&(*tablero)[y][x], pieza);
+
+                if (pieza->esBlanca)
+                {
+                    piezasBlancas = (Pieza**)realloc(piezasBlancas,(cantidadDePiezasBlancas + 1) * sizeof(Pieza*));
+                    piezasBlancas[cantidadDePiezasBlancas] = pieza;
+                    cantidadDePiezasBlancas++;
+                }
+                else
+                {
+                    piezasNegras = (Pieza**)realloc(piezasNegras,(cantidadDePiezasNegras + 1) * sizeof(Pieza*));
+                    piezasNegras[cantidadDePiezasNegras] = pieza;
+                    cantidadDePiezasNegras++;
+                }
+            }            
+        }
+    }
+}
+
+void TableroInicializarDeCiertaForma(Tablero* tablero, char tableroProvisorio[FILAS][COLUMNAS][3])
+{
+    Pieza *pieza;
+    int coordenada[2];
+
+    *tablero = (Tablero) malloc(FILAS * sizeof(Posicion*));
+
+    cantidadDePiezasBlancas = 0;
+    cantidadDePiezasNegras = 0;
+    
+    for (int y = 0; y < FILAS; y++)
+    {
+        coordenada[1] = y;
+        (*tablero)[y] = (Posicion*)malloc(COLUMNAS * sizeof(Posicion));
+
+        for (int x = 0; x < COLUMNAS; x++)
+        {
+            coordenada[0] = x;
+            PosicionInicializar(&((*tablero)[y][x]), coordenada);
+            
+            if (strcmp(tableroProvisorio[y][x], NADA) != 0)
+            {
+                pieza = (Pieza*)malloc(sizeof(Pieza));
+                PiezaCrear(pieza, tableroProvisorio[y][x][0], tableroProvisorio[y][x][1] == 'B');
+                TableroColocarPieza(&(*tablero)[y][x], pieza);
+
                 if (pieza->esBlanca)
                 {
                     piezasBlancas = (Pieza**)realloc(piezasBlancas,(cantidadDePiezasBlancas + 1) * sizeof(Pieza*));
