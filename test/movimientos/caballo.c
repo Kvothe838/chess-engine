@@ -1,5 +1,7 @@
 #include <test.h>
 #include <tablero.h>
+#define TABLERO_PERSONALIZADO
+#include <tipo_tablero.h>
 
 void testMoverUnCaballoComoL()
 {
@@ -14,10 +16,11 @@ void testMoverUnCaballoComoL()
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA}
     };
+    TableroCopiarPersonalizacion(tableroProvisorio);
 
     Tablero tablero;
 
-    TableroInicializarDeCiertaForma(&tablero, tableroProvisorio);
+    TableroInicializar(&tablero);
     /*TableroImprimir(tablero);*/
 
     TableroMoverPieza(&tablero, "CE7");

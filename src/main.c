@@ -1,6 +1,8 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<tablero.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdarg.h> 
+#include <tablero.h>
+#include <tipo_tablero.h>
 
 int main(void)
 {

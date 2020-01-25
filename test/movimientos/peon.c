@@ -1,5 +1,7 @@
 #include <test.h>
 #include <tablero.h>
+#define TABLERO_PERSONALIZADO
+#include <tipo_tablero.h>
 
 void testMoverUnPeonEnUnaPosicion()
 {
@@ -14,10 +16,11 @@ void testMoverUnPeonEnUnaPosicion()
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA}
     };
+    TableroCopiarPersonalizacion(tableroProvisorio);
 
     Tablero tablero;
 
-    TableroInicializarDeCiertaForma(&tablero, tableroProvisorio);
+    TableroInicializar(&tablero);
     /*TableroImprimir(tablero);*/
 
     TableroMoverPieza(&tablero, "PA2");
@@ -41,10 +44,11 @@ void testMoverUnPeonDosPosicionesEnSuPosiconInicial()
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA}
     };
+    TableroCopiarPersonalizacion(tableroProvisorio);
 
     Tablero tablero;
 
-    TableroInicializarDeCiertaForma(&tablero, tableroProvisorio);
+    TableroInicializar(&tablero);
     /*TableroImprimir(tablero);*/
 
     TableroMoverPieza(&tablero, "PA3");
@@ -68,10 +72,11 @@ void testNoMoverUnPeonDosPosicionesEnUnaPosicionesNoInicial()
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA}
     };
+    TableroCopiarPersonalizacion(tableroProvisorio);
 
     Tablero tablero;
 
-    TableroInicializarDeCiertaForma(&tablero, tableroProvisorio);
+    TableroInicializar(&tablero);
     /*TableroImprimir(tablero);*/
 
     TableroMoverPieza(&tablero, "PA2");

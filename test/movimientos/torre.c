@@ -1,5 +1,7 @@
 #include <test.h>
 #include <tablero.h>
+#define TABLERO_PERSONALIZADO
+#include <tipo_tablero.h>
 
 
 void testMoverLaTorreVertical()
@@ -15,10 +17,11 @@ void testMoverLaTorreVertical()
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA}
     };
+    TableroCopiarPersonalizacion(tableroProvisorio);
 
     Tablero tablero;
 
-    TableroInicializarDeCiertaForma(&tablero, tableroProvisorio);
+    TableroInicializar(&tablero);
     /*TableroImprimir(tablero);*/
 
     char* posicionInicial = "TD1";
@@ -60,10 +63,11 @@ void testMoverLaTorreHorizontal()
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA}
     };
+    TableroCopiarPersonalizacion(tableroProvisorio);
 
     Tablero tablero;
 
-    TableroInicializarDeCiertaForma(&tablero, tableroProvisorio);
+    TableroInicializar(&tablero);
     /*TableroImprimir(tablero);*/
 
     char* posicionInicial = "TA5";

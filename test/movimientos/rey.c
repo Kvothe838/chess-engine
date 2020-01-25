@@ -1,5 +1,7 @@
 #include <test.h>
 #include <tablero.h>
+#define TABLERO_PERSONALIZADO
+#include <tipo_tablero.h>
 
 void testMoverElReyHaciaAbajo()
 {
@@ -14,10 +16,11 @@ void testMoverElReyHaciaAbajo()
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA}
     };
+    TableroCopiarPersonalizacion(tableroProvisorio);
 
     Tablero tablero;
 
-    TableroInicializarDeCiertaForma(&tablero, tableroProvisorio);
+    TableroInicializar(&tablero);
     /*TableroImprimir(tablero);*/
 
     TableroMoverPieza(&tablero, "KD6");
@@ -41,10 +44,11 @@ void testMoverElReyHaciaArriba()
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA}
     };
+    TableroCopiarPersonalizacion(tableroProvisorio);
 
     Tablero tablero;
 
-    TableroInicializarDeCiertaForma(&tablero, tableroProvisorio);
+    TableroInicializar(&tablero);
     /*TableroImprimir(tablero);*/
 
     TableroMoverPieza(&tablero, "KD4");
@@ -68,10 +72,11 @@ void testMoverElReyHaciaLaIzquierda()
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA}
     };
+    TableroCopiarPersonalizacion(tableroProvisorio);
 
     Tablero tablero;
 
-    TableroInicializarDeCiertaForma(&tablero, tableroProvisorio);
+    TableroInicializar(&tablero);
     /*TableroImprimir(tablero);*/
 
     TableroMoverPieza(&tablero, "KC5");
@@ -96,10 +101,11 @@ void testMoverElReyHaciaLaDerecha()
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA}
     };
+    TableroCopiarPersonalizacion(tableroProvisorio);
 
     Tablero tablero;
 
-    TableroInicializarDeCiertaForma(&tablero, tableroProvisorio);
+    TableroInicializar(&tablero);
     /*TableroImprimir(tablero);*/
 
     TableroMoverPieza(&tablero, "KE5");
@@ -123,10 +129,11 @@ void testMoverElReyDiagonalSuperiorIzquierda()
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA}
     };
+    TableroCopiarPersonalizacion(tableroProvisorio);
 
     Tablero tablero;
 
-    TableroInicializarDeCiertaForma(&tablero, tableroProvisorio);
+    TableroInicializar(&tablero);
     /*TableroImprimir(tablero);*/
 
     TableroMoverPieza(&tablero, "KC4");
@@ -150,10 +157,11 @@ void testMoverElReyDiagonalSuperiorDerecha()
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA}
     };
+    TableroCopiarPersonalizacion(tableroProvisorio);
 
     Tablero tablero;
 
-    TableroInicializarDeCiertaForma(&tablero, tableroProvisorio);
+    TableroInicializar(&tablero);
     /*TableroImprimir(tablero);*/
 
     TableroMoverPieza(&tablero, "KE4");
@@ -177,10 +185,11 @@ void testMoverElReyDiagonalInferiorIzquierda()
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA}
     };
+    TableroCopiarPersonalizacion(tableroProvisorio);
 
     Tablero tablero;
 
-    TableroInicializarDeCiertaForma(&tablero, tableroProvisorio);
+    TableroInicializar(&tablero);
     /*TableroImprimir(tablero);*/
 
     TableroMoverPieza(&tablero, "KC6");
@@ -205,10 +214,11 @@ void testMoverElReyDiagonalInferiorDerecha()
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA}
     };
+    TableroCopiarPersonalizacion(tableroProvisorio);
 
     Tablero tablero;
 
-    TableroInicializarDeCiertaForma(&tablero, tableroProvisorio);
+    TableroInicializar(&tablero);
     /*TableroImprimir(tablero);*/
 
     TableroMoverPieza(&tablero, "KE6");
