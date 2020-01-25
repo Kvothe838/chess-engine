@@ -81,12 +81,12 @@ void TableroInicializarDeCiertaForma(Tablero* tablero, char tableroProvisorio[FI
     
     for (int y = 0; y < FILAS; y++)
     {
-        coordenada[1] = y;
+        coordenada[0] = y;
         (*tablero)[y] = (Posicion*)malloc(COLUMNAS * sizeof(Posicion));
 
         for (int x = 0; x < COLUMNAS; x++)
         {
-            coordenada[0] = x;
+            coordenada[1] = x;
             PosicionInicializar(&((*tablero)[y][x]), coordenada);
             
             if (strcmp(tableroProvisorio[y][x], NADA) != 0)
