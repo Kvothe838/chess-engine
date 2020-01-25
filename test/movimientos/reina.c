@@ -3,15 +3,15 @@
 #define TABLERO_PERSONALIZADO
 #include <tipo_tablero.h>
 
-void testMoverLaReinaHaciaAbajo()
+void testMoverLaReinaVertical()
 {
     char tableroProvisorio[FILAS][COLUMNAS][3] = 
     {
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, REINA_BLANCO, NADA, NADA, NADA, NADA},
+        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
+        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
+        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
+        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA}
@@ -23,15 +23,33 @@ void testMoverLaReinaHaciaAbajo()
     TableroInicializar(&tablero);
     /*TableroImprimir(tablero);*/
 
-    TableroMoverPieza(&tablero, "RD7");
-    /*TableroImprimir(tablero);*/
+    char* posicionInicial = "RD1";
+    char* movimiento;
+    movimiento = calloc(3+1, sizeof(char));
+    movimiento[0] = 'R';
+    movimiento[1] = 'D';
+  //movimiento[2] = '1';
+    movimiento[3] = '\0';
+    for (int i = 1; i < 8; ++i)
+    {
+        movimiento[2] = posicionInicial[2] + (char)i;
+        TableroMoverPieza(&tablero, movimiento);
+        /*TableroImprimir(tablero);*/
+        
+        ASSERT(tablero[0][3].ranura == NULL);
+        ASSERT(tablero[i][3].ranura != NULL);
 
-    ASSERT(tablero[4][3].ranura == NULL);
-    ASSERT(tablero[6][3].ranura != NULL);
+        TableroMoverPieza(&tablero, posicionInicial);
+        ASSERT(tablero[0][3].ranura != NULL);
+        ASSERT(tablero[i][3].ranura == NULL);
+
+    }
+    
+    free(movimiento);
     TableroDestruir(&tablero);
 }
 
-void testMoverLaReinaHaciaArriba()
+void testMoverLaReinaHorizontal()
 {
     char tableroProvisorio[FILAS][COLUMNAS][3] = 
     {
@@ -39,7 +57,7 @@ void testMoverLaReinaHaciaArriba()
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, REINA_BLANCO, NADA, NADA, NADA, NADA},
+        {REINA_BLANCO, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA}
@@ -51,23 +69,43 @@ void testMoverLaReinaHaciaArriba()
     TableroInicializar(&tablero);
     /*TableroImprimir(tablero);*/
 
-    TableroMoverPieza(&tablero, "RD3");
-    /*TableroImprimir(tablero);*/
+    char* posicionInicial = "RA5";
+    char* movimiento;
+    movimiento = calloc(3+1, sizeof(char));
+    movimiento[0] = 'R';
+  //movimiento[1] = 'A';
+    movimiento[2] = '5';
+    movimiento[3] = '\0';
+    for (int i = 1; i < 8; ++i)
+    {
+        movimiento[1] = posicionInicial[1] + (char)i;
+        TableroMoverPieza(&tablero, movimiento);
+        /*TableroImprimir(tablero);*/
+        
+        ASSERT(tablero[4][0].ranura == NULL);
+        ASSERT(tablero[4][i].ranura != NULL);
 
-    ASSERT(tablero[4][3].ranura == NULL);
-    ASSERT(tablero[2][3].ranura != NULL);
+        TableroMoverPieza(&tablero, posicionInicial);
+        /*TableroImprimir(tablero);*/
+        ASSERT(tablero[4][0].ranura != NULL);
+        ASSERT(tablero[4][i].ranura == NULL);
+
+    }
+    
+    free(movimiento);
     TableroDestruir(&tablero);
 }
 
-void testMoverLaReinaHaciaLaIzquierda()
+
+void testMoverLaReinaDiagonalPositiva()
 {
     char tableroProvisorio[FILAS][COLUMNAS][3] = 
     {
+        {REINA_BLANCO, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, REINA_BLANCO, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA}
@@ -79,24 +117,42 @@ void testMoverLaReinaHaciaLaIzquierda()
     TableroInicializar(&tablero);
     /*TableroImprimir(tablero);*/
 
-    TableroMoverPieza(&tablero, "RA5");
-    /*TableroImprimir(tablero);*/
+    char* posicionInicial = "RA1";
+    char* movimiento;
+    movimiento = calloc(3+1, sizeof(char));
+    movimiento[0] = 'R';
+    movimiento[1] = 'A';
+    movimiento[2] = '1';
+    movimiento[3] = '\0';
+    for (int i = 1; i < 8; ++i)
+    {
+        movimiento[1] = posicionInicial[1] + (char)i;
+        movimiento[2] = posicionInicial[2] + (char)i;
+        TableroMoverPieza(&tablero, movimiento);
+        /*TableroImprimir(tablero);*/
+        
+        ASSERT(tablero[0][0].ranura == NULL);
+        ASSERT(tablero[i][i].ranura != NULL);
 
-    ASSERT(tablero[4][3].ranura == NULL);
-    ASSERT(tablero[4][0].ranura != NULL);
+        TableroMoverPieza(&tablero, posicionInicial);
+        ASSERT(tablero[0][0].ranura != NULL);
+        ASSERT(tablero[i][i].ranura == NULL);
+
+    }
+    
+    free(movimiento);
     TableroDestruir(&tablero);
 }
 
-
-void testMoverLaReinaHaciaLaDerecha()
+void testMoverLaReinaDiagonalNegatica()
 {
     char tableroProvisorio[FILAS][COLUMNAS][3] = 
     {
+        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, REINA_BLANCO},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, REINA_BLANCO, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA}
@@ -108,136 +164,39 @@ void testMoverLaReinaHaciaLaDerecha()
     TableroInicializar(&tablero);
     /*TableroImprimir(tablero);*/
 
-    TableroMoverPieza(&tablero, "RH5");
-    /*TableroImprimir(tablero);*/
-
-    ASSERT(tablero[4][3].ranura == NULL);
-    ASSERT(tablero[4][7].ranura != NULL);
-    TableroDestruir(&tablero);
-}
-
-void testMoverLaReinaDiagonalSuperiorIzquierda()
-{
-    char tableroProvisorio[FILAS][COLUMNAS][3] = 
+    char* posicionInicial = "RH1";
+    char* movimiento;
+    movimiento = calloc(3+1, sizeof(char));
+    movimiento[0] = 'R';
+    movimiento[1] = 'H';
+    movimiento[2] = '1';
+    movimiento[3] = '\0';
+    for (int i = 1; i < 8; ++i)
     {
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, REINA_BLANCO, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA}
-    };
-    TableroCopiarPersonalizacion(tableroProvisorio);
+        movimiento[1] = posicionInicial[1] - (char)i;
+        movimiento[2] = posicionInicial[2] + (char)i;
+        TableroMoverPieza(&tablero, movimiento);
+        /*TableroImprimir(tablero);*/
+        
+        ASSERT(tablero[0][7].ranura == NULL);
+        ASSERT(tablero[i][7 - i].ranura != NULL);
 
-    Tablero tablero;
+        TableroMoverPieza(&tablero, posicionInicial);
+        ASSERT(tablero[0][7].ranura != NULL);
+        ASSERT(tablero[i][7 - i].ranura == NULL);
 
-    TableroInicializar(&tablero);
-    /*TableroImprimir(tablero);*/
-
-    TableroMoverPieza(&tablero, "RB3");
-    /*TableroImprimir(tablero);*/
-
-    ASSERT(tablero[4][3].ranura == NULL);
-    ASSERT(tablero[2][1].ranura != NULL);
+    }
+    
+    free(movimiento);
     TableroDestruir(&tablero);
 }
 
-void testMoverLaReinaDiagonalSuperiorDerecha()
-{
-    char tableroProvisorio[FILAS][COLUMNAS][3] = 
-    {
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, REINA_BLANCO, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA}
-    };
-    TableroCopiarPersonalizacion(tableroProvisorio);
-
-    Tablero tablero;
-
-    TableroInicializar(&tablero);
-    /*TableroImprimir(tablero);*/
-
-    TableroMoverPieza(&tablero, "RE4");
-    /*TableroImprimir(tablero);*/
-
-    ASSERT(tablero[4][3].ranura == NULL);
-    ASSERT(tablero[3][4].ranura != NULL);
-    TableroDestruir(&tablero);
-}
-
-void testMoverLaReinaDiagonalInferiorIzquierda()
-{
-    char tableroProvisorio[FILAS][COLUMNAS][3] = 
-    {
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, REINA_BLANCO, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA}
-    };
-    TableroCopiarPersonalizacion(tableroProvisorio);
-
-    Tablero tablero;
-
-    TableroInicializar(&tablero);
-    /*TableroImprimir(tablero);*/
-
-    TableroMoverPieza(&tablero, "RB7");
-    /*TableroImprimir(tablero);*/
-
-    ASSERT(tablero[4][3].ranura == NULL);
-    ASSERT(tablero[6][1].ranura != NULL);
-    TableroDestruir(&tablero);
-}
-
-
-void testMoverLaReinaDiagonalInferiorDerecha()
-{
-    char tableroProvisorio[FILAS][COLUMNAS][3] = 
-    {
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, REINA_BLANCO, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA}
-    };
-    TableroCopiarPersonalizacion(tableroProvisorio);
-
-    Tablero tablero;
-
-    TableroInicializar(&tablero);
-    /*TableroImprimir(tablero);*/
-
-    TableroMoverPieza(&tablero, "RG8");
-    /*TableroImprimir(tablero);*/
-
-    ASSERT(tablero[4][3].ranura == NULL);
-    ASSERT(tablero[7][6].ranura != NULL);
-    TableroDestruir(&tablero);
-}
 
 int main(void)
 {   
-    testMoverLaReinaHaciaAbajo();
-    testMoverLaReinaHaciaArriba();
-    testMoverLaReinaHaciaLaIzquierda();
-    testMoverLaReinaHaciaLaDerecha();
-    testMoverLaReinaDiagonalSuperiorIzquierda();
-    testMoverLaReinaDiagonalSuperiorDerecha();
-    testMoverLaReinaDiagonalInferiorIzquierda();
-    testMoverLaReinaDiagonalInferiorDerecha();
+    testMoverLaReinaVertical();
+    testMoverLaReinaHorizontal();
+    testMoverLaReinaDiagonalPositiva();
+    testMoverLaReinaDiagonalNegatica();
     return 0;
 }

@@ -33,7 +33,7 @@ void testMoverLaTorreVertical()
     movimiento[3] = '\0';
     for (int i = 1; i < 8; ++i)
     {
-        movimiento[2] = '1' + (char)i;
+        movimiento[2] = posicionInicial[2] + (char)i;
         TableroMoverPieza(&tablero, movimiento);
         /*TableroImprimir(tablero);*/
         
@@ -79,7 +79,7 @@ void testMoverLaTorreHorizontal()
     movimiento[3] = '\0';
     for (int i = 1; i < 8; ++i)
     {
-        movimiento[1] = 'A' + (char)i;
+        movimiento[1] = posicionInicial[1] + (char)i;
         TableroMoverPieza(&tablero, movimiento);
         /*TableroImprimir(tablero);*/
         
