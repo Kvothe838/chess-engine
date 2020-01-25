@@ -6,4 +6,4 @@ Tabla de la razon:
 
 |Mauri | Facu|
 |------|-----|
-|   2  |  -1 |
+|   2  |  1  |
