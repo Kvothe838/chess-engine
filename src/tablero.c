@@ -38,12 +38,12 @@ void TableroInicializar(Tablero* tablero)
     
     for (int y = 0; y < FILAS; y++)
     {
-        coordenada[1] = y;
+        coordenada[0] = y;
         (*tablero)[y] = (Posicion*)malloc(COLUMNAS * sizeof(Posicion));
 
         for (int x = 0; x < COLUMNAS; x++)
         {
-            coordenada[0] = x;
+            coordenada[1] = x;
             PosicionInicializar(&((*tablero)[y][x]), coordenada);
             
             if (strcmp(tableroProvisorio[y][x], NADA) != 0)
@@ -237,15 +237,21 @@ void TableroDestruir(Tablero *tablero)
     free(*tablero);
 }
 
-void TableroMovimiento(Tablero *tablero)
-{
-    Pieza* pieza = tablero[0][0]->ranura;
-    Posicion* posicion = pieza->posicion;
+void TableroMovimiento(Tablero *tablero) {
+    Posicion* posicion = &((*tablero)[0][2]);
+    Pieza* pieza = posicion->ranura;
+    
+    if(pieza == NULL){
+        printf("No hay pieza.");
+        return;
+    }
+
     Casilla* casillas;
     int cantidadPosiblesMovimientos = CasillaObtenerPosibles(posicion, &casillas);
 
     printf("COLOR: %c\n", pieza->esBlanca ? 'B' : 'N');
     printf("TIPO: %c\n", pieza->tipo);
+    printf("POSICION: %c%d\n", posicion->casilla->columna, posicion->casilla->fila+1);
     printf("CANTIDAD: %d\n", cantidadPosiblesMovimientos);
     printf("CASILLAS A LAS QUE SE PUEDE MOVER: \n\n");
 
