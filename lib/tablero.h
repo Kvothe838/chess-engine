@@ -27,9 +27,8 @@ typedef Posicion** Tablero;
 void TableroInicializar(Tablero* tablero);
 void TableroImprimir(Tablero tablero);
 void TableroColocarPieza(Posicion* posicion, Pieza* pieza);
-void TableroMovimiento(Tablero* tablero, char movimiento[3], char color);
 Posicion* TableroObtenerPieza(Tablero tablero, Casilla casilla);
-void TableroMoverPieza(Tablero* tablero, char movimiento[4]);
+void TableroMoverPieza(Tablero* tablero, char movimiento[4], char color);
 void TableroDestruir(Tablero *tablero);
 
 #endif

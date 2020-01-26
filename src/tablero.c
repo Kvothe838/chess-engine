@@ -193,62 +193,60 @@ void TableroDestruir(Tablero *tablero)
     free(*tablero);
 }
 
-void TableroMovimiento(Tablero *tablero, char movimiento[3], char color) {
-    printf("1");
-    Pieza** piezasDelColor = color != 'B' ? piezasBlancas : piezasNegras;
-    int cantidadDelColor = color != 'B' ? cantidadDePiezasBlancas : cantidadDePiezasNegras;    
-    Casilla* casillas;    
-    Pieza** piezas = NULL;
-    int cantidadPiezas = 0;
+// void TableroMovimiento(Tablero *tablero, char movimiento[3], char color) {
+//     Pieza** piezasDelColor = color != 'B' ? piezasBlancas : piezasNegras;
+//     int cantidadDelColor = color != 'B' ? cantidadDePiezasBlancas : cantidadDePiezasNegras;    
+//     Casilla* casillas;    
+//     Pieza* piezas = NULL;
+//     int cantidadPiezas = 0;
 
-    for(int i = 0; i < cantidadDelColor; i++) {
-        Pieza* piezaAEvaluar = piezasDelColor[i];
+//     for(int i = 0; i < cantidadDelColor; i++) {
+//         Pieza piezaAEvaluar = piezasDelColor[i];
         
-        if(piezaAEvaluar->tipo == movimiento[0]) {
+//         if(piezaAEvaluar->tipo == movimiento[0]) {
+//             printf("ENTRÉ ACÁ POR LA PIEZA EN LA POSICIÓN %c%d", piezaAEvaluar->posicion->casilla->columna, piezaAEvaluar->posicion->casilla->fila);
 
-            int cantidadPosiblesMovimientos = CasillaObtenerPosibles(piezaAEvaluar->posicion, &casillas);
-            bool found = false;
+//             int cantidadPosiblesMovimientos = CasillaObtenerPosibles(piezaAEvaluar->posicion, &casillas);
+//             bool found = false;
             
-            for(int j = 0; j < cantidadPosiblesMovimientos; j++) {
-                
-                Casilla casilla = casillas[j];
-                char str[1] = {movimiento[2]};
-                int filaMovimiento = atoi(str);
+//             for(int j = 0; j < cantidadPosiblesMovimientos; j++) {                
+//                 Casilla casilla = casillas[j];
+//                 char str[1] = {movimiento[2]};
+//                 int filaMovimiento = atoi(str);
 
-                if(casilla.columna == movimiento[1] && casilla.fila == filaMovimiento) {
-                    found = true;
-                    break;
-                }
-            }
+//                 if(casilla.columna == movimiento[1] && casilla.fila == filaMovimiento) {
+//                     found = true;
+//                     break;
+//                 }
+//             }
 
-            if(found) {
+//             if(found) {
+//                 if(piezas == NULL){
+//                     *piezas = malloc(sizeof(Pieza));
+//                 } else {
+//                     *piezas = (Pieza*) realloc(*piezas, (cantidadPiezas + 1) * sizeof(Pieza));
+//                 }
 
-                if(piezas == NULL){
-                    *piezas = malloc(sizeof(Pieza));
-                } else {
-                    *piezas = (Pieza*) realloc(*piezas, (cantidadPiezas + 1) * sizeof(Pieza));
-                }
-
-                piezas[cantidadPiezas] = piezaAEvaluar;
-                cantidadPiezas++;
-            }
+//                 piezas[cantidadPiezas] = piezaAEvaluar;
+//                 cantidadPiezas++;
+//             }
             
-            free(casillas);
-        }
-    }
+//             free(casillas);
+//         }
+//     }
 
-    switch(cantidadPiezas) {
-        case 0:
-            printf("No se pudo mover ninguna pieza.");
-            break;
-        case 1:
-            printf("Pieza movida.");
-            break;
-        default:
-            printf("Más de una pieza del tipo especificado pueden moverse a la posición especificada.\nPor favor, escriba el comando detallando la columna o fila a la que pertenece la pieza que se quiere mover.");
-            break;
-    }
-}
+//     switch(cantidadPiezas) {
+//         case 0:
+//             printf("No se pudo mover ninguna pieza.");
+//             break;
+//         case 1:
+//             printf("Pieza movida.");
+//             break;
+//         default:
+//             printf("Más de una pieza del tipo especificado pueden moverse a la posición especificada.\nPor favor, escriba el comando detallando la columna o fila a la que pertenece la pieza que se quiere mover.");
+//             break;
+//     }
+// }
 
 int __TraducirFilaAInteger(Fila fila)
 {
@@ -268,43 +266,66 @@ Posicion* TableroObtenerPieza(Tablero tablero, Casilla casilla)
     return &tablero[fila][columna];
 }
 
-void TableroMoverPieza(Tablero* tablero, char movimiento[4])
+void __MoverPieza(Tablero* tablero, Casilla casilla, Posicion* posicionInicial, Pieza* pieza)
 {
-    //Supongo que siempre mueve las blancas, hay que hacer algo para alternar
-    Pieza* pieza;
-    Casilla* casillas;
-    Posicion* posicionInicial, * posicionFinal;
-    bool salir;
+    Posicion* posicionFinal = TableroObtenerPieza(*tablero, casilla);
+    posicionInicial->ranura = NULL;
+    TableroColocarPieza(posicionFinal, pieza);
+}
 
-    for (int i = 0; i < cantidadDePiezasBlancas; ++i)
+void TableroMoverPieza(Tablero* tablero, char movimiento[4], char color)
+{
+    Pieza* piezaAEvaluar;
+    Pieza** piezasDelColor = color == 'B' ? piezasBlancas : piezasNegras;
+    Pieza** piezasPosibles = NULL;
+    Casilla* casillas;
+    Casilla* casillasPosibles = NULL;
+    Posicion* posicionInicial;
+    bool found;
+    int cantidadDePiezasDelColor = color == 'B' ? cantidadDePiezasBlancas : cantidadDePiezasNegras;    
+    int cantidadPiezasPosibles = 0;
+
+    for (int i = 0; i < cantidadDePiezasDelColor; ++i)
     {
-        if (piezasBlancas[i]->tipo == movimiento[0])
+        piezaAEvaluar = piezasDelColor[i];
+
+        if (piezaAEvaluar->tipo == movimiento[0])
         {
-            /*printf("%s\n", "SE ECONTRO EL TIPO DE PIEZA");*/
-            pieza = piezasBlancas[i];
-            posicionInicial = pieza->posicion;
-            salir = false;
+            posicionInicial = piezaAEvaluar->posicion;
+            found = false;
 
             int cantidadPosiblesMovimientos = CasillaObtenerPosibles(posicionInicial, &casillas);
+            
             for (int j = 0; j < cantidadPosiblesMovimientos; ++j)
             {
-                /*printf("%c%d\n", casillas[j].columna, casillas[j].fila);*/
                 if (casillas[j].columna == (Columna)movimiento[1] &&
                     casillas[j].fila == (Fila)(movimiento[2] - '0'))
                 {
-                    /*printf("%s\n", "ECONTRO LA CASILLA");*/
-
-                    posicionFinal = TableroObtenerPieza(*tablero, casillas[j]);
-                    posicionInicial->ranura = NULL;
-                    TableroColocarPieza(posicionFinal, pieza);
-                    salir = true;
+                    casillasPosibles = (Casilla*) realloc(casillasPosibles, (cantidadPiezasPosibles+1) * sizeof(Casilla));                    
+                    casillasPosibles[cantidadPiezasPosibles] = casillas[j];
+                    found = true;
                     break;
                 }
             }
-            if (salir)
+
+            if(found) 
             {
-                break;
+                piezasPosibles = (Pieza**) realloc(piezasPosibles, (cantidadPiezasPosibles + 1) * sizeof(Pieza*));                
+                piezasPosibles[cantidadPiezasPosibles] = piezaAEvaluar;
+                cantidadPiezasPosibles++;
             }
         }
+    }
+
+    switch(cantidadPiezasPosibles){
+        case 0:
+            printf("No se encontraron movimientos posibles.");
+            break;
+        case 1:
+            __MoverPieza(tablero, casillasPosibles[0], piezasPosibles[0][0].posicion, &piezasPosibles[0][0]);
+            break;
+        default:
+            printf("Se encontró más de una pieza posible para mover.");
+            break;
     }
 }
