@@ -323,6 +323,14 @@ void TableroMoverPieza(Tablero* tablero, char movimiento[4], char color)
             break;
         case 1:
             __MoverPieza(tablero, casillasPosibles[0], piezasPosibles[0][0].posicion, &piezasPosibles[0][0]);
+            free(casillasPosibles);
+
+            // for(int i = 0; i < cantidadPiezasPosibles; i++)
+            // {
+            //     free(piezasPosibles[i]);
+            // }
+
+            // free(piezasPosibles);
             break;
         default:
             printf("Se encontró más de una pieza posible para mover.");

@@ -5,7 +5,7 @@
 int main(void)
 {
     Tablero tablero;
-    char movimiento[4]= "KD7";
+    char movimiento[4]= "TA1";
 
     TableroInicializar(&tablero);
     TableroMoverPieza(&tablero, movimiento, 'N');
