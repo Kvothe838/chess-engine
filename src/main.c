@@ -5,10 +5,10 @@
 int main(void)
 {
     Tablero tablero;
-    char movimiento[4]= "TA1";
+    char movimiento[4]= "CA3";
 
     TableroInicializar(&tablero);
-    TableroMoverPieza(&tablero, movimiento, 'N');
+    TableroMoverPieza(&tablero, movimiento, 'B');
     TableroImprimir(tablero);
     TableroDestruir(&tablero);
 

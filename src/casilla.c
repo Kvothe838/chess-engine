@@ -41,7 +41,7 @@ int CasillaObtenerPosibles(Posicion* posicion, Casilla** casillas) {
             if(casillas == NULL) {
                 (*casillas) = malloc(sizeof(Coordenada));
             } else {
-                (*casillas) = realloc((*casillas), (cantidadMovimientos + 1) * sizeof(Coordenada));
+                (*casillas) = realloc(*casillas, (cantidadMovimientos + 1) * sizeof(Coordenada));
             }            
 
             (*casillas)[cantidadMovimientos-1] = *casillaTemp;
@@ -49,6 +49,8 @@ int CasillaObtenerPosibles(Posicion* posicion, Casilla** casillas) {
 
         free(casillaTemp);
     }
+
+    free(movimientosPosibles);
 
     return cantidadMovimientos;
 }

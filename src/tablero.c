@@ -322,8 +322,9 @@ void TableroMoverPieza(Tablero* tablero, char movimiento[4], char color)
             printf("No se encontraron movimientos posibles.");
             break;
         case 1:
-            __MoverPieza(tablero, casillasPosibles[0], piezasPosibles[0][0].posicion, &piezasPosibles[0][0]);
+            __MoverPieza(tablero, casillasPosibles[0], piezasPosibles[0]->posicion, piezasPosibles[0]);
             free(casillasPosibles);
+            //free(piezasPosibles);
 
             // for(int i = 0; i < cantidadPiezasPosibles; i++)
             // {
