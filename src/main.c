@@ -1,18 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdarg.h> 
-#include <tablero.h>
-#include <tipo_tablero.h>
+#include <interfaz.h>
 
 int main(void)
 {
-    Tablero tablero;
-    char movimiento[4]= "TA1";
+    Juego juego;
 
-    TableroInicializar(&tablero);
-    TableroMoverPieza(&tablero, movimiento, 'N');
-    TableroImprimir(tablero);
-    TableroDestruir(&tablero);
+    Empezar(&juego);
 
     return EXIT_SUCCESS;
 }
