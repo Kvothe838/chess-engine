@@ -29,10 +29,9 @@ char tableroPersonalizado[FILAS][COLUMNAS][3];
 void __TableroInicializar(char[FILAS][COLUMNAS][3], Tablero* tablero);
 void TableroImprimir(Tablero tablero);
 void TableroColocarPieza(Posicion* posicion, Pieza* pieza);
-void TableroMovimiento(Tablero* tablero);
 Posicion* TableroObtenerPieza(Tablero tablero, Casilla casilla);
-void TableroMoverPieza(Tablero* tablero, char movimiento[4]);
 void TableroCopiarPersonalizacion(char[FILAS][COLUMNAS][3]);
+void TableroMoverPieza(Tablero* tablero, char movimiento[4], char color);
 void TableroDestruir(Tablero *tablero);
 
 #endif

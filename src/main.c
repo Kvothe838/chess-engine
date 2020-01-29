@@ -7,9 +7,10 @@
 int main(void)
 {
     Tablero tablero;
+    char movimiento[4]= "TA1";
 
     TableroInicializar(&tablero);
-    TableroMovimiento(&tablero);
+    TableroMoverPieza(&tablero, movimiento, 'N');
     TableroImprimir(tablero);
     TableroDestruir(&tablero);
 
