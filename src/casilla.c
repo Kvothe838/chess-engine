@@ -35,22 +35,15 @@ int CasillaObtenerPosibles(Posicion* posicion, Casilla** casillas) {
     
     for(int i = 0; i < cantidadMovimientosPosibles; i++) {
         Casilla* casillaTemp = (Casilla*) malloc(sizeof(Casilla));
+        
         if(__PosicionPosibleValida(movimientosPosibles[i], *(posicion->casilla), casillaTemp)) {
             cantidadMovimientos++;
-
-            if(casillas == NULL) {
-                (*casillas) = malloc(sizeof(Coordenada));
-            } else {
-                (*casillas) = realloc(*casillas, (cantidadMovimientos + 1) * sizeof(Coordenada));
-            }            
-
+            (*casillas) = realloc(*casillas, cantidadMovimientos * sizeof(Coordenada));
             (*casillas)[cantidadMovimientos-1] = *casillaTemp;
         }
 
         free(casillaTemp);
-    }
-
-    free(movimientosPosibles);
+    }    
 
     return cantidadMovimientos;
 }

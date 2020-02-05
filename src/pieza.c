@@ -229,20 +229,10 @@ void PiezaCrear(Pieza* pieza, TipoPieza tipo, bool esBlanca)
 
 void PiezaDestruir(Pieza* pieza)
 {
-    if(pieza != NULL)
+    if(pieza != NULL && pieza->coordenadasMovimientosPosibles != NULL)
     {
-        if(pieza->posicion != NULL)
-        {
-            free(pieza->posicion);
-        }
-
-        if(pieza->coordenadasMovimientosPosibles != NULL)
-        {
-            free(pieza->coordenadasMovimientosPosibles);
-        }
-
-        free(pieza);
-    }    
+        free(pieza->coordenadasMovimientosPosibles);
+    }
 }
 
 void PiezaCopiar(Pieza* copia, Pieza original)

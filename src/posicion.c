@@ -18,6 +18,7 @@ bool PosicionEstaVacia(Posicion posicion) {
 
 void PosicionDestruir(Posicion* posicion) {
     free(posicion->ranura);
+    free(posicion->casilla);
 }
 
 int TraducirColumnaAIndice(Columna columna)

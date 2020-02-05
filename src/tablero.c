@@ -180,7 +180,7 @@ void TableroDestruir(Tablero *tablero)
 {
     for (int i = 0; i < cantidadDePiezasBlancas; i++)
     {
-        PiezaDestruir(&piezasBlancas[i]);
+        PiezaDestruir(piezasBlancas[i]);
     }
 
     for(int i = 0; i < cantidadDePiezasNegras; i++)
@@ -280,6 +280,8 @@ void TableroMoverPieza(Tablero* tablero, char movimiento[4], char color)
         case 1:
             __MoverPieza(tablero, casillasPosibles[0], piezasPosibles[0]->posicion, piezasPosibles[0]);
             free(casillasPosibles);
+            free(piezasPosibles);
+            free(casillas);
             break;
         default:
             printf("Se encontró más de una pieza posible para mover.");
