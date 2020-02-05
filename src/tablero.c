@@ -234,7 +234,6 @@ void TableroMoverPieza(Tablero* tablero, char movimiento[4], char color)
     Pieza* piezaAEvaluar;
     Pieza** piezasDelColor = color == 'B' ? piezasBlancas : piezasNegras;
     Pieza** piezasPosibles = NULL;
-    Casilla* casillas;
     Casilla* casillasPosibles = NULL;
     Posicion* posicionInicial;
     bool found;
@@ -243,6 +242,7 @@ void TableroMoverPieza(Tablero* tablero, char movimiento[4], char color)
 
     for (int i = 0; i < cantidadDePiezasDelColor; ++i)
     {
+        Casilla* casillas = NULL;
         piezaAEvaluar = piezasDelColor[i];
 
         if (piezaAEvaluar->tipo == movimiento[0])
@@ -271,6 +271,8 @@ void TableroMoverPieza(Tablero* tablero, char movimiento[4], char color)
                 cantidadPiezasPosibles++;
             }
         }
+
+        free(casillas);
     }
 
     switch(cantidadPiezasPosibles){
@@ -279,12 +281,12 @@ void TableroMoverPieza(Tablero* tablero, char movimiento[4], char color)
             break;
         case 1:
             __MoverPieza(tablero, casillasPosibles[0], piezasPosibles[0]->posicion, piezasPosibles[0]);
-            free(casillasPosibles);
-            free(piezasPosibles);
-            free(casillas);
             break;
         default:
             printf("Se encontró más de una pieza posible para mover.");
             break;
     }
+
+    free(casillasPosibles);
+    free(piezasPosibles);
 }
