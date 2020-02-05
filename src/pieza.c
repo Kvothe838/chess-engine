@@ -223,7 +223,16 @@ void PiezaCrear(Pieza* pieza, TipoPieza tipo, bool esBlanca)
     pieza->tipo = tipo;
     pieza->esBlanca = esBlanca;
     pieza->posicion = NULL;
+    pieza->coordenadasMovimientosPosibles = NULL;
     __PiezaRepresentacionYMovimientos(pieza, tipo);
+}
+
+void PiezaDestruir(Pieza* pieza)
+{
+    if(pieza != NULL && pieza->coordenadasMovimientosPosibles != NULL)
+    {
+        free(pieza->coordenadasMovimientosPosibles);
+    }
 }
 
 void PiezaCopiar(Pieza* copia, Pieza original)
