@@ -1,14 +1,11 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<tablero.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <interfaz.h>
 
 int main(void)
 {
-    Tablero tablero;
+    Juego juego;
 
-    TableroInicializar(&tablero);
-    TableroImprimir(tablero);
-    TableroDestruir(&tablero);
-
+    Empezar(&juego);
     return EXIT_SUCCESS;
 }
