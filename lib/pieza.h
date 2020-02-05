@@ -14,6 +14,7 @@ struct Pieza
 };
 
 void PiezaCrear(Pieza* pieza, TipoPieza tipo, bool esBlanca);
+void PiezaDestruir(Pieza* pieza);
 void PiezaCopiar(Pieza* copia, Pieza original);
 bool PiezaEstaPuesta(Pieza pieza);
 void PiezaColocar(Pieza* pieza, Posicion* posicion);
