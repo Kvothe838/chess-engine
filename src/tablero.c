@@ -150,9 +150,9 @@ void TableroImprimir(Tablero tablero)
 
         for (int j = 0; j < COLUMNAS; j++)
         {
-            if(!PosicionEstaVacia(tablero[i][j])) 
+            if(!PosicionEstaVacia(tablero[FILAS-i-1][j])) 
             {
-                Pieza piezaTemp = *tablero[i][j].ranura;
+                Pieza piezaTemp = *tablero[FILAS-i-1][j].ranura;
                 PiezaImprimir(piezaTemp);
             } 
             else
