@@ -14,20 +14,8 @@ int cantidadDePiezasBlancas;
 Pieza** piezasNegras;
 int cantidadDePiezasNegras;
 
-void TableroInicializar(Tablero* tablero)
+void __TableroInicializar(char tableroProvisorio[FILAS][COLUMNAS][3], Tablero* tablero)
 {
-    char tableroProvisorio[FILAS][COLUMNAS][3] = 
-    {
-        {TORRE_BLANCO, CABALLO_BLANCO, ALFIL_BLANCO, REY_BLANCO, REINA_BLANCO, ALFIL_BLANCO, CABALLO_BLANCO, TORRE_BLANCO},
-        {PEON_BLANCO, PEON_BLANCO, PEON_BLANCO, PEON_BLANCO, PEON_BLANCO, PEON_BLANCO, PEON_BLANCO, PEON_BLANCO},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
-        {PEON_NEGRO, PEON_NEGRO, PEON_NEGRO, PEON_NEGRO, PEON_NEGRO, PEON_NEGRO, PEON_NEGRO, PEON_NEGRO},
-        {TORRE_NEGRO, CABALLO_NEGRO, ALFIL_NEGRO, REY_NEGRO, REINA_NEGRO, ALFIL_NEGRO, CABALLO_NEGRO, TORRE_NEGRO}
-    };
-    
     Pieza *pieza;
     int coordenada[2];
 
@@ -68,6 +56,22 @@ void TableroInicializar(Tablero* tablero)
         }
     }
 }
+
+void TableroCopiarPersonalizacion(char tablero[FILAS][COLUMNAS][3])
+{
+    for (int i = 0; i < FILAS; ++i)
+    {
+        for (int j = 0; j < COLUMNAS; ++j)
+        {
+            for (int k = 0; k < 3; ++k)
+            {
+                tableroPersonalizado[i][j][k] = tablero[i][j][k];
+            }
+        }
+    }
+    
+}
+
 
 void __imprimirLineaHorizontalSuperior(size_t largo)
 {

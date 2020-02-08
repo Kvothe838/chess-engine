@@ -24,10 +24,13 @@
 
 typedef Posicion** Tablero;
 
-void TableroInicializar(Tablero* tablero);
+char tableroPersonalizado[FILAS][COLUMNAS][3];
+
+void __TableroInicializar(char[FILAS][COLUMNAS][3], Tablero* tablero);
 void TableroImprimir(Tablero tablero);
 void TableroColocarPieza(Posicion* posicion, Pieza* pieza);
 Posicion* TableroObtenerPieza(Tablero tablero, Casilla casilla);
+void TableroCopiarPersonalizacion(char[FILAS][COLUMNAS][3]);
 void TableroMoverPieza(Tablero* tablero, char movimiento[4], char color);
 void TableroDestruir(Tablero *tablero);
 

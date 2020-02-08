@@ -13,7 +13,7 @@ MAIN = main
 DEBUG = degub
 
 # Flags con los que se van a compilar los correspondientes ejecutables
-CFLAGS = -Wall -Werror -pedantic -std=c99
+CFLAGS = -Wall -Werror -pedantic -std=c11
 CFLAGS_MAIN  = $(CFLAGS) -O3  -lm
 CFLAGS_DEBUG = $(CFLAGS) -O0  -ggdb -lm
 CFLAGS_TEST  = $(CFLAGS) 
@@ -27,7 +27,7 @@ HEADERS ?= $(wildcard $(LIB_DIR)/*.h)
 SOURCES ?= $(wildcard $(SRC_DIR)/*.c)
 
 # Los archivos .c utilizados para la compilacion de los tests
-TESTS ?= $(wildcard $(TEST_DIR)/*.c)
+TESTS ?= $(wildcard $(TEST_DIR)/*/*.c)
 
 #Objetos del programa (las variables con guion son para auxiliares
 # para poner la direccion correcta de los objetos, debido a que
@@ -107,18 +107,18 @@ test: $(TEST_NAMES)
 	@$(RM) $(TEST_OBJECTS) $(TEST_NAMES) *.gch
 
 # Etiqueta que compila cada test y luego lo ejecuta 
-$(TEST_NAMES): $(TEST_OBJECTS)
+$(TEST_NAMES): $(TEST_OBJECTS) $(MAIN_OBJECTS)
 	@$(call PRETTY_PRINT,$(CC) -o $@ $@.o $(MAIN_OBJECTS) $(CFLAGS_TEST))
 
 	@./$@
 
 # Ejecuta el programa princial
 run:
-	@./$(BIN_DIR)/main/$(MAIN)
+	@valgrind ./$(BIN_DIR)/main/$(MAIN)
 
 # Funcion de print usada para debuggear este makefile
 print:
-	@echo $(pad)
+	@echo $(TESTS)
 
 # Regla de crear los objetos del directorio test
 $(TEST_DIR)/%.o: $(TEST_DIR)/%.c
