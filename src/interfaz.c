@@ -8,6 +8,8 @@
 #define TURNO "Turno de los "
 #define ELEGIR "Movimiento: "
 #define CONTINUAR "Desea continuar la partida? (Y/N): "
+#define ERROR_MOVIMIENTO_INEXISTENTE "El movimiento que intenta hacer no es posible. Reintente."
+#define ERROR_MOVIMIENTO_DOBLE "Hay dos piezas que pueden realizar el movimiento deseado.\nPor favor, especifique con la notación específica."
 
 void Empezar(Juego* juego)
 {
@@ -33,23 +35,32 @@ void Empezar(Juego* juego)
 
         while ((c = getchar()) != '\n' && c != EOF);
 
-        TableroMoverPieza(&(juego->tablero), movimiento, jugador);
-        TableroImprimir(juego->tablero);
-
-        if (numeroDeMovimientos % 2 == 0)
-        {
-            printf("%s", CONTINUAR);
-            fgets(continuarLaPartida, 2, stdin);
-
-            while ((c = getchar()) != '\n' && c != EOF);
-
-            if (continuarLaPartida[0] == 'N' || continuarLaPartida[0] == 'n')
-            {
-                juegoTerminado = true;
-            }
-        }
+        bool movimientoInexistente;
+        bool movimientoCorrecto = TableroMoverPieza(&(juego->tablero), movimiento, jugador, &movimientoInexistente);
         
-        turnoDeLosBlancos = !turnoDeLosBlancos;
+        if(movimientoCorrecto)
+        {
+            TableroImprimir(juego->tablero);
+
+            if (numeroDeMovimientos % 2 == 0)
+            {
+                printf("%s", CONTINUAR);
+                fgets(continuarLaPartida, 2, stdin);
+
+                while ((c = getchar()) != '\n' && c != EOF);
+
+                if (continuarLaPartida[0] == 'N' || continuarLaPartida[0] == 'n')
+                {
+                    juegoTerminado = true;
+                }
+            }
+        
+            turnoDeLosBlancos = !turnoDeLosBlancos;
+        }
+        else
+        {
+            printf("\n%s\n\n", movimientoInexistente ? ERROR_MOVIMIENTO_INEXISTENTE : ERROR_MOVIMIENTO_DOBLE);
+        }        
     }
 
     TableroDestruir(&(juego->tablero));
