@@ -5,20 +5,24 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
-void __PiezaCrearCoordenadas(Coordenada** coordenadas, int len, int** coordenadasEnNumero/*, ...*/) {
+void __PiezaCrearCoordenadas(Coordenada** coordenadas, int len, int** coordenadasEnNumero/*, ...*/)
+{
     (*coordenadas) = (Coordenada*) malloc(len * sizeof(Coordenada));
 
-    for (int i = 0; i < len; i++) {
+    for (int i = 0; i < len; i++)
+    {
         ((*coordenadas)[i])[0] = (*coordenadasEnNumero)[2*i];
         ((*coordenadas)[i])[1] = (*coordenadasEnNumero)[2*i+1];
     }
 }
 
-void __ValoresCoordenadasInicializar(int** valoresCoordenadas, int cantidadMovimientos) {
+void __ValoresCoordenadasInicializar(int** valoresCoordenadas, int cantidadMovimientos)
+{
     (*valoresCoordenadas) = (int*) malloc(2 * cantidadMovimientos * sizeof(int));
 }
 
-void __ValoresCoordenadasLlenar_Rey(int** valoresCoordenadas) {
+void __ValoresCoordenadasLlenar_Rey(int** valoresCoordenadas)
+{
     (*valoresCoordenadas)[0] = (*valoresCoordenadas)[2] = (*valoresCoordenadas)[5] = (*valoresCoordenadas)[7] = 0;
     (*valoresCoordenadas)[1] = (*valoresCoordenadas)[4] = (*valoresCoordenadas)[8] = (*valoresCoordenadas)[9] = (*valoresCoordenadas)[10] = (*valoresCoordenadas)[13] = 1;
     (*valoresCoordenadas)[3] = (*valoresCoordenadas)[6] = (*valoresCoordenadas)[11] = (*valoresCoordenadas)[12] = (*valoresCoordenadas)[14] = (*valoresCoordenadas)[15] = -1;
@@ -33,75 +37,109 @@ void __ValoresCoordenadasLlenar_Rey(int** valoresCoordenadas) {
     (-1,-1)  */
 }
 
-void __ValoresCoordenadasLlenar_Reina(int** valoresCoordenadas) {
-    // for(int i = 0; i < 8; i++) {
-        for(int j = 0; j < 56; j++) {
-            if(j >= 0 && j < 7) {
-                (*valoresCoordenadas)[2*j] = 0;
-                (*valoresCoordenadas)[2*j+1] = j+1;
-            } else if(j >= 7 && j < 14) {
-                (*valoresCoordenadas)[2*j] = 0;
-                (*valoresCoordenadas)[2*j+1] = 6-j;
-            } else if(j >= 14 && j < 21) {
-                (*valoresCoordenadas)[2*j] = j-13;
-                (*valoresCoordenadas)[2*j+1] = 0;
-            } else if(j >= 21 && j < 28) {
-                (*valoresCoordenadas)[2*j] = 20-j;
-                (*valoresCoordenadas)[2*j+1] = 0;
-            } else if (j >= 28 && j < 35) {
-                (*valoresCoordenadas)[2*j] = j-27;
-                (*valoresCoordenadas)[2*j+1] = j-27;
-            } else if (j >= 35 && j < 42) {
-                (*valoresCoordenadas)[2*j] = 34-j;
-                (*valoresCoordenadas)[2*j+1] = 34-j;
-            } else if (j >= 42 && j < 49) {
-                (*valoresCoordenadas)[2*j] = j-41;
-                (*valoresCoordenadas)[2*j+1] = 41-j;
-            } else if (j >= 49 && j < 56) {
-                (*valoresCoordenadas)[2*j] = 48-j;
-                (*valoresCoordenadas)[2*j+1] = j-48;
-            }
-        }                
-    // }
-}
-
-void __ValoresCoordenadasLlenar_Torre(int** valoresCoordenadas) {
-        for(int j = 0; j < 28; j++) {
-            if(j >= 0 && j < 7) {
-                (*valoresCoordenadas)[2*j] = 0;
-                (*valoresCoordenadas)[2*j+1] = j+1;
-            } else if(j >= 7 && j < 14) {
-                (*valoresCoordenadas)[2*j] = 0;
-                (*valoresCoordenadas)[2*j+1] = 6-j;
-            } else if(j >= 14 && j < 21) {
-                (*valoresCoordenadas)[2*j] = j-13;
-                (*valoresCoordenadas)[2*j+1] = 0;
-            } else if(j >= 21 && j < 28) {
-                (*valoresCoordenadas)[2*j] = 20-j;
-                (*valoresCoordenadas)[2*j+1] = 0;
-            }
+void __ValoresCoordenadasLlenar_Reina(int** valoresCoordenadas)
+{
+    for(int j = 0; j < 56; j++)
+    {
+        if(j >= 0 && j < 7)
+        {
+            (*valoresCoordenadas)[2*j] = 0;
+            (*valoresCoordenadas)[2*j+1] = j+1;
+        } 
+        else if(j >= 7 && j < 14)
+        {
+            (*valoresCoordenadas)[2*j] = 0;
+            (*valoresCoordenadas)[2*j+1] = 6-j;
+        } 
+        else if(j >= 14 && j < 21)
+        {
+            (*valoresCoordenadas)[2*j] = j-13;
+            (*valoresCoordenadas)[2*j+1] = 0;
         }
+        else if(j >= 21 && j < 28)
+        {
+            (*valoresCoordenadas)[2*j] = 20-j;
+            (*valoresCoordenadas)[2*j+1] = 0;
+        }
+        else if (j >= 28 && j < 35)
+        {
+            (*valoresCoordenadas)[2*j] = j-27;
+            (*valoresCoordenadas)[2*j+1] = j-27;
+        }
+        else if (j >= 35 && j < 42)
+        {
+            (*valoresCoordenadas)[2*j] = 34-j;
+            (*valoresCoordenadas)[2*j+1] = 34-j;
+        }
+        else if (j >= 42 && j < 49)
+        {
+            (*valoresCoordenadas)[2*j] = j-41;
+            (*valoresCoordenadas)[2*j+1] = 41-j;
+        }
+        else if (j >= 49 && j < 56)
+        {
+            (*valoresCoordenadas)[2*j] = 48-j;
+            (*valoresCoordenadas)[2*j+1] = j-48;
+        }
+    }                
 }
 
-void __ValoresCoordenadasLlenar_Alfil(int** valoresCoordenadas) {
-    for(int j = 0; j < 28; j++) {
-        if (j >= 0 && j < 7) {
+void __ValoresCoordenadasLlenar_Torre(int** valoresCoordenadas)
+{
+    for(int j = 0; j < 28; j++)
+    {
+        if(j >= 0 && j < 7)
+        {
+            (*valoresCoordenadas)[2*j] = 0;
+            (*valoresCoordenadas)[2*j+1] = j+1;
+        }
+        else if(j >= 7 && j < 14)
+        {
+            (*valoresCoordenadas)[2*j] = 0;
+            (*valoresCoordenadas)[2*j+1] = 6-j;
+        }
+        else if(j >= 14 && j < 21)
+        {
+            (*valoresCoordenadas)[2*j] = j-13;
+            (*valoresCoordenadas)[2*j+1] = 0;
+        }
+        else if(j >= 21 && j < 28)
+        {
+            (*valoresCoordenadas)[2*j] = 20-j;
+            (*valoresCoordenadas)[2*j+1] = 0;
+        }
+    }
+}
+
+void __ValoresCoordenadasLlenar_Alfil(int** valoresCoordenadas)
+{
+    for(int j = 0; j < 28; j++)
+    {
+        if (j >= 0 && j < 7)
+        {
             (*valoresCoordenadas)[2*j] = j+1;
             (*valoresCoordenadas)[2*j+1] = j+1;
-        } else if (j >= 7 && j < 14) {
+        }
+        else if (j >= 7 && j < 14)
+        {
             (*valoresCoordenadas)[2*j] = 6-j;
             (*valoresCoordenadas)[2*j+1] = 6-j;
-        } else if (j >= 14 && j < 21) {
+        }
+        else if (j >= 14 && j < 21)
+        {
             (*valoresCoordenadas)[2*j] = j-13;
             (*valoresCoordenadas)[2*j+1] = 13-j;
-        } else if (j >= 21 && j < 28) {
+        }
+        else if (j >= 21 && j < 28)
+        {
             (*valoresCoordenadas)[2*j] = 20-j;
             (*valoresCoordenadas)[2*j+1] = j-20;
         }
     }
 }
 
-void __ValoresCoordenadasLlenar_Caballo(int** valoresCoordenadas) {
+void __ValoresCoordenadasLlenar_Caballo(int** valoresCoordenadas)
+{
     (*valoresCoordenadas)[0] = (*valoresCoordenadas)[2] = (*valoresCoordenadas)[5] = (*valoresCoordenadas)[7] = 2;
     (*valoresCoordenadas)[1] = (*valoresCoordenadas)[4] = (*valoresCoordenadas)[8] = (*valoresCoordenadas)[15] = 1;
     (*valoresCoordenadas)[3] = (*valoresCoordenadas)[6] = (*valoresCoordenadas)[10] = (*valoresCoordenadas)[13] = -1;
@@ -117,15 +155,18 @@ void __ValoresCoordenadasLlenar_Caballo(int** valoresCoordenadas) {
     (-2,1)  */
 }
 
-void __ValoresCoordenadasLlenar_Peon(int** valoresCoordenadas) {
+void __ValoresCoordenadasLlenar_Peon(int** valoresCoordenadas)
+{
     (*valoresCoordenadas)[0] = 1;
     (*valoresCoordenadas)[1] = 0;
 }
 
-int PiezaObtenerCantidadMovimientos(TipoPieza tipo) {
+int PiezaObtenerCantidadMovimientos(TipoPieza tipo)
+{
     int cantidad;
 
-    switch (tipo) {
+    switch (tipo)
+    {
         case REY:
             cantidad = 8;            
             break;
@@ -157,10 +198,12 @@ int PiezaObtenerCantidadMovimientos(TipoPieza tipo) {
 void __PiezaRepresentacionYMovimientos(Pieza* pieza, TipoPieza tipo)
 {
     setlocale(LC_ALL, "");
+    
     int base = 0x2654;
     Coordenada* coordenadas;
     int* valoresCoordenadas;
     int cantidadMovimientos = PiezaObtenerCantidadMovimientos(tipo);
+
     __ValoresCoordenadasInicializar(&valoresCoordenadas, cantidadMovimientos);
 
     if(pieza->esBlanca)
@@ -168,7 +211,8 @@ void __PiezaRepresentacionYMovimientos(Pieza* pieza, TipoPieza tipo)
         base += 6;
     }
     
-    switch (tipo) {
+    switch (tipo)
+    {
         case REY:
             base += 0;
             __ValoresCoordenadasLlenar_Rey(&valoresCoordenadas);
@@ -211,11 +255,6 @@ void __PiezaRepresentacionYMovimientos(Pieza* pieza, TipoPieza tipo)
 
     pieza->representacion = base;
     pieza->coordenadasMovimientosPosibles = coordenadas;
-
-    /*TODO Por alguna razón, hacer esto rompe todo, pero debería ser posible pasarle
-    el valor de coordenadas a pieza->coordenadasMovimientosPosibles y liberar coordendas.
-    Qué se yo, lo dejo en mejora o por si Valgrind me rompe las pelotas.*/
-    //free(coordenadas);
 }
 
 void PiezaCrear(Pieza* pieza, TipoPieza tipo, bool esBlanca)
@@ -224,6 +263,7 @@ void PiezaCrear(Pieza* pieza, TipoPieza tipo, bool esBlanca)
     pieza->esBlanca = esBlanca;
     pieza->posicion = NULL;
     pieza->coordenadasMovimientosPosibles = NULL;
+
     __PiezaRepresentacionYMovimientos(pieza, tipo);
 }
 

@@ -7,5 +7,6 @@ int main(void)
     Juego juego;
 
     Empezar(&juego);
+    
     return EXIT_SUCCESS;
 }

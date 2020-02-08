@@ -18,9 +18,7 @@ void __TableroInicializar(char tableroProvisorio[FILAS][COLUMNAS][3], Tablero* t
 {
     Pieza *pieza;
     int coordenada[2];
-
     *tablero = (Tablero) malloc(FILAS * sizeof(Posicion*));
-
     cantidadDePiezasBlancas = 0;
     cantidadDePiezasNegras = 0;
     
@@ -32,11 +30,13 @@ void __TableroInicializar(char tableroProvisorio[FILAS][COLUMNAS][3], Tablero* t
         for (int x = 0; x < COLUMNAS; x++)
         {
             coordenada[1] = x;
+
             PosicionInicializar(&((*tablero)[y][x]), coordenada);
             
             if (strcmp(tableroProvisorio[y][x], NADA) != 0)
             {
                 pieza = (Pieza*)malloc(sizeof(Pieza));
+
                 PiezaCrear(pieza, tableroProvisorio[y][x][0], tableroProvisorio[y][x][1] == 'B');
                 TableroColocarPieza(&(*tablero)[y][x], pieza);
 
@@ -68,10 +68,8 @@ void TableroCopiarPersonalizacion(char tablero[FILAS][COLUMNAS][3])
                 tableroPersonalizado[i][j][k] = tablero[i][j][k];
             }
         }
-    }
-    
+    }    
 }
-
 
 void __imprimirLineaHorizontalSuperior(size_t largo)
 {
@@ -150,9 +148,9 @@ void TableroImprimir(Tablero tablero)
 
         for (int j = 0; j < COLUMNAS; j++)
         {
-            if(!PosicionEstaVacia(tablero[FILAS-i-1][j])) 
+            if(!PosicionEstaVacia(tablero[FILAS - i - 1][j])) 
             {
-                Pieza piezaTemp = *tablero[FILAS-i-1][j].ranura;
+                Pieza piezaTemp = *tablero[FILAS - i - 1][j].ranura;
                 PiezaImprimir(piezaTemp);
             } 
             else
@@ -177,6 +175,7 @@ void TableroImprimir(Tablero tablero)
 void TableroColocarPieza(Posicion* posicion, Pieza *pieza)
 {
     posicion->ranura = pieza;
+
     PiezaColocar(pieza, posicion);
 }
  
@@ -204,7 +203,6 @@ void TableroDestruir(Tablero *tablero)
     
     free(piezasBlancas);
     free(piezasNegras);
-
     free(*tablero);
 }
 
@@ -223,6 +221,7 @@ Posicion* TableroObtenerPieza(Tablero tablero, Casilla casilla)
     int fila, columna;
     fila = __TraducirFilaAInteger(casilla.fila);
     columna = __TraducirColumnaAInteger(casilla.columna);
+
     return &tablero[fila][columna];
 }
 
@@ -230,6 +229,7 @@ void __MoverPieza(Tablero* tablero, Casilla casilla, Posicion* posicionInicial, 
 {
     Posicion* posicionFinal = TableroObtenerPieza(*tablero, casilla);
     posicionInicial->ranura = NULL;
+
     TableroColocarPieza(posicionFinal, pieza);
 }
 
@@ -264,6 +264,7 @@ void TableroMoverPieza(Tablero* tablero, char movimiento[4], char color)
                     casillasPosibles = (Casilla*) realloc(casillasPosibles, (cantidadPiezasPosibles+1) * sizeof(Casilla));                    
                     casillasPosibles[cantidadPiezasPosibles] = casillas[j];
                     found = true;
+                    
                     break;
                 }
             }
@@ -279,7 +280,8 @@ void TableroMoverPieza(Tablero* tablero, char movimiento[4], char color)
         free(casillas);
     }
 
-    switch(cantidadPiezasPosibles){
+    switch(cantidadPiezasPosibles)
+    {
         case 0:
             printf("No se encontraron movimientos posibles.");
             break;

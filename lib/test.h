@@ -56,4 +56,3 @@ void __attribute__((destructor)) resultado()
     }
     printf("%s %s: %lu/%lu\n\n", RESULTADO, ARCHIVO, PRUEBAS_APROBADAS, NUMERO_PRUEBAS);
 }
-

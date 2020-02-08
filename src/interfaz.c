@@ -12,35 +12,40 @@
 void Empezar(Juego* juego)
 {
     TableroInicializar(&(juego->tablero));
+    
     size_t numeroDeMovimientos = 0;
-    char Jugador = 'B';
-    bool JuegoTerminado = false, turnoDeLosBlancos = true;
+    char jugador = 'B';
+    bool juegoTerminado = false, turnoDeLosBlancos = true;
     char continuarLaPartida[2];
     char movimiento[4];
     char c;
+
     TableroImprimir(juego->tablero);
 
-    while (!JuegoTerminado)
+    while (!juegoTerminado)
     {
         numeroDeMovimientos++;
-        Jugador = (turnoDeLosBlancos)? 'B':'N';
+        jugador = turnoDeLosBlancos ? 'B' : 'N';
         
-        printf("%s%s\n", TURNO, (turnoDeLosBlancos)? "Blancos":"Negros");
+        printf("%s%s\n", TURNO, turnoDeLosBlancos ? "Blancos" : "Negros");
         printf("%s", ELEGIR);
         fgets(movimiento, 4, stdin);
+
         while ((c = getchar()) != '\n' && c != EOF);
 
-        TableroMoverPieza(&(juego->tablero), movimiento, Jugador);
+        TableroMoverPieza(&(juego->tablero), movimiento, jugador);
         TableroImprimir(juego->tablero);
 
         if (numeroDeMovimientos % 2 == 0)
         {
             printf("%s", CONTINUAR);
             fgets(continuarLaPartida, 2, stdin);
+
             while ((c = getchar()) != '\n' && c != EOF);
+
             if (continuarLaPartida[0] == 'N' || continuarLaPartida[0] == 'n')
             {
-                JuegoTerminado = true;
+                juegoTerminado = true;
             }
         }
         
