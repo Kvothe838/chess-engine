@@ -26,7 +26,6 @@ void Empezar(Juego* juego)
 
     while (!juegoTerminado)
     {
-        numeroDeMovimientos++;
         jugador = turnoDeLosBlancos ? 'B' : 'N';
         
         printf("%s%s\n", TURNO, turnoDeLosBlancos ? "Blancos" : "Negros");
@@ -40,6 +39,7 @@ void Empezar(Juego* juego)
         
         if(movimientoCorrecto)
         {
+            numeroDeMovimientos++;
             TableroImprimir(juego->tablero);
 
             if (numeroDeMovimientos % 2 == 0)
