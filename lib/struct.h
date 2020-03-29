@@ -39,4 +39,10 @@
         SIETE = 7,
         OCHO = 8
     } Fila;
+
+    typedef enum {
+        ST_OK,
+        ST_ERR_MOV_INEXISTENTE,
+        ST_ERR_MOV_INCORRECTO
+    } status_t;
 #endif
