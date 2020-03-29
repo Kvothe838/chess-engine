@@ -40,7 +40,8 @@
         OCHO = 8
     } Fila;
 
-    typedef enum {
+    typedef enum
+    {
         ST_OK,
         ST_ERR_MOV_INEXISTENTE,
         ST_ERR_MOV_INCORRECTO
