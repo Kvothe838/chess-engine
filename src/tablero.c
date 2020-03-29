@@ -5,6 +5,8 @@
 #include <posicion.h>
 #include <pieza.h>
 #include <casilla.h>
+#include <ataques.h>
+
 
 #define CANTIDAD_PIEZAS 32
 
@@ -228,6 +230,18 @@ Posicion* TableroObtenerPieza(Tablero tablero, Casilla casilla)
 void __MoverPieza(Tablero* tablero, Casilla casilla, Posicion* posicionInicial, Pieza* pieza)
 {
     Posicion* posicionFinal = TableroObtenerPieza(*tablero, casilla);
+    Pieza *piezaQueEstaEnLaPosicionFinal = posicionFinal->ranura;
+    if (piezaQueEstaEnLaPosicionFinal != NULL)
+    {
+        if (pieza->esBlanca)
+        {
+            PiezaEsAtacada(piezaQueEstaEnLaPosicionFinal, &zonaPiezasEliminadasPorLasBlancas);
+        }
+        else
+        {
+            PiezaEsAtacada(piezaQueEstaEnLaPosicionFinal, &zonaPiezasEliminadasPorLasNegras);
+        }
+    }
     posicionInicial->ranura = NULL;
 
     TableroColocarPieza(posicionFinal, pieza);

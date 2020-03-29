@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include <interfaz.h>
 #include <tablero.h>
+#include <ataques.h>
 #include <tipo_tablero.h>
 #include <stdlib.h>
 
@@ -40,7 +41,9 @@ void Empezar(Juego* juego)
         if(movimientoCorrecto)
         {
             numeroDeMovimientos++;
+            mostrarPiezasEliminadas(zonaPiezasEliminadasPorLasNegras);
             TableroImprimir(juego->tablero);
+            mostrarPiezasEliminadas(zonaPiezasEliminadasPorLasBlancas);
 
             if (numeroDeMovimientos % 2 == 0)
             {
