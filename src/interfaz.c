@@ -36,7 +36,8 @@ void Empezar(Juego* juego)
 
         status_t statusMovimiento = TableroMoverPieza(&(juego->tablero), movimiento, jugador);
         
-        switch(statusMovimiento){
+        switch(statusMovimiento)
+        {
             case ST_OK:
                 numeroDeMovimientos++;
                 TableroImprimir(juego->tablero);
