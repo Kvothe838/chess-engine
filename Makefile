@@ -18,7 +18,7 @@ CFLAGS_MAIN  = $(CFLAGS) -O3  -lm
 CFLAGS_DEBUG = $(CFLAGS) -O0  -ggdb -lm
 CFLAGS_TEST  = $(CFLAGS) 
 # Variable interna de Makefile para definir los flgas de los objetos
-CPPFLAGS ?= $(CFLAGS) -I$(LIB_DIR) -ggdb
+CFLAGS_OBJECTS ?= $(CFLAGS) -I$(LIB_DIR) -ggdb
 
 # Los archivos .h que fueron usados en el programa (Actaulmente no usado)
 HEADERS ?= $(wildcard $(LIB_DIR)/*.h)
@@ -122,12 +122,12 @@ print:
 
 # Regla de crear los objetos del directorio test
 $(TEST_DIR)/%.o: $(TEST_DIR)/%.c
-	@$(call PRETTY_PRINT, $(CC) $< $(CPPFLAGS) -DARCHIVO=$(COMILLA)$<$(COMILLA) -c -o $@)
+	@$(call PRETTY_PRINT, $(CC) $< $(CFLAGS_OBJECTS) -DARCHIVO=$(COMILLA)$<$(COMILLA) -c -o $@)
 
 # Regla para crear todos los objetos a partir de los sources
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
-	@$(call PRETTY_PRINT, $(CC) $< $(CPPFLAGS) -c -o $@)
+	@$(call PRETTY_PRINT, $(CC) $< $(CFLAGS_OBJECTS) -c -o $@)
 
 # Elimina los posibles archivos extras que se creen en el proceso (actualmente no hace mucho)
 clean:
