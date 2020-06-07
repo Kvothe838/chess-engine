@@ -35,35 +35,39 @@ void Empezar(Juego* juego)
 
         while ((c = getchar()) != '\n' && c != EOF);
 
-        bool movimientoInexistente;
-        bool movimientoCorrecto = TableroMoverPieza(&(juego->tablero), movimiento, jugador, &movimientoInexistente);
+        status_t statusMovimiento = TableroMoverPieza(&(juego->tablero), movimiento, jugador);
         
-        if(movimientoCorrecto)
+        switch(statusMovimiento)
         {
-            numeroDeMovimientos++;
-            mostrarPiezasEliminadas(zonaPiezasEliminadasPorLasNegras);
-            TableroImprimir(juego->tablero);
-            mostrarPiezasEliminadas(zonaPiezasEliminadasPorLasBlancas);
-
-            if (numeroDeMovimientos % 2 == 0)
-            {
-                printf("%s", CONTINUAR);
-                fgets(continuarLaPartida, 2, stdin);
-
-                while ((c = getchar()) != '\n' && c != EOF);
-
-                if (continuarLaPartida[0] == 'N' || continuarLaPartida[0] == 'n')
+            case ST_OK:
+                numeroDeMovimientos++;
+                TableroImprimir(juego->tablero);
+                
+                if (numeroDeMovimientos % 2 == 0)
                 {
-                    juegoTerminado = true;
+                    printf("%s", CONTINUAR);
+                    fgets(continuarLaPartida, 2, stdin);
+
+                    while ((c = getchar()) != '\n' && c != EOF);
+
+                    if (continuarLaPartida[0] == 'N' || continuarLaPartida[0] == 'n')
+                    {
+                        juegoTerminado = true;
+                    }
                 }
-            }
-        
-            turnoDeLosBlancos = !turnoDeLosBlancos;
-        }
-        else
-        {
-            printf("\n%s\n\n", movimientoInexistente ? ERROR_MOVIMIENTO_INEXISTENTE : ERROR_MOVIMIENTO_DOBLE);
-        }        
+            
+                turnoDeLosBlancos = !turnoDeLosBlancos;
+
+                break;
+            case ST_ERR_MOV_INEXISTENTE:
+                printf("\n%s\n\n", ERROR_MOVIMIENTO_INEXISTENTE);
+
+                break;
+            case ST_ERR_MOV_INCORRECTO:
+                printf("\n%s\n\n", ERROR_MOVIMIENTO_DOBLE);
+
+                break;
+        }   
     }
 
     TableroDestruir(&(juego->tablero));

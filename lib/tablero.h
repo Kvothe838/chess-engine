@@ -31,6 +31,6 @@
     void TableroColocarPieza(Posicion* posicion, Pieza* pieza);
     Posicion* TableroObtenerPieza(Tablero tablero, Casilla casilla);
     void TableroCopiarPersonalizacion(char[FILAS][COLUMNAS][3]);
-    bool TableroMoverPieza(Tablero* tablero, char movimiento[4], char color, bool* movimientoInexistente);
+    status_t TableroMoverPieza(Tablero* tablero, char movimiento[4], char color);
     void TableroDestruir(Tablero *tablero);
 #endif

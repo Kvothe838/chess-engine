@@ -247,8 +247,9 @@ void __MoverPieza(Tablero* tablero, Casilla casilla, Posicion* posicionInicial, 
     TableroColocarPieza(posicionFinal, pieza);
 }
 
-bool TableroMoverPieza(Tablero* tablero, char movimiento[4], char color, bool* movimientoInexistente)
+status_t TableroMoverPieza(Tablero* tablero, char movimiento[4], char color)
 {
+    status_t status;
     Pieza* piezaAEvaluar;
     Pieza** piezasDelColor = color == 'B' ? piezasBlancas : piezasNegras;
     Pieza** piezasPosibles = NULL;
@@ -257,7 +258,6 @@ bool TableroMoverPieza(Tablero* tablero, char movimiento[4], char color, bool* m
     bool found;
     int cantidadDePiezasDelColor = color == 'B' ? cantidadDePiezasBlancas : cantidadDePiezasNegras;    
     int cantidadPiezasPosibles = 0;
-    bool movimientoCorrecto = false;
 
     for (int i = 0; i < cantidadDePiezasDelColor; ++i)
     {
@@ -298,16 +298,16 @@ bool TableroMoverPieza(Tablero* tablero, char movimiento[4], char color, bool* m
     switch(cantidadPiezasPosibles)
     {
         case 0:
-            *movimientoInexistente = true;
+            status = ST_ERR_MOV_INEXISTENTE;
 
             break;
         case 1:
             __MoverPieza(tablero, casillasPosibles[0], piezasPosibles[0]->posicion, piezasPosibles[0]);
-            movimientoCorrecto = true;
+            status = ST_OK;
 
             break;
         default:
-            *movimientoInexistente = false;
+            status = ST_ERR_MOV_INCORRECTO;
 
             break;
     }
@@ -315,5 +315,5 @@ bool TableroMoverPieza(Tablero* tablero, char movimiento[4], char color, bool* m
     free(casillasPosibles);
     free(piezasPosibles);
 
-    return movimientoCorrecto;
+    return status;
 }
