@@ -26,7 +26,6 @@
 
     char tableroPersonalizado[FILAS][COLUMNAS][3];
 
-    void __TableroInicializar(char[FILAS][COLUMNAS][3], Tablero* tablero);
     void TableroImprimir(Tablero tablero);
     void TableroColocarPieza(Posicion* posicion, Pieza* pieza);
     Posicion* TableroObtenerPieza(Tablero tablero, Casilla casilla);
