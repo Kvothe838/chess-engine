@@ -38,7 +38,7 @@ void Empezar(Juego* juego)
 
         while ((c = getchar()) != '\n' && c != EOF);
 
-        status_t statusMovimiento = CalcularMovimiento(juego, movimiento, jugador);/*TableroMoverPieza(&(juego->tablero), movimiento, jugador);*/
+        status_t statusMovimiento = CalcularMovimiento(juego, movimiento, jugador);
         
         switch(statusMovimiento)
         {
