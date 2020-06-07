@@ -6,6 +6,7 @@
 #include <pieza.h>
 #include <casilla.h>
 #include <ataques.h>
+#include <imprimir.h>
 
 
 #define CANTIDAD_PIEZAS 32
@@ -73,76 +74,9 @@ void TableroCopiarPersonalizacion(char tablero[FILAS][COLUMNAS][3])
     }    
 }
 
-void __imprimirLineaHorizontalSuperior(size_t largo)
-{
-    printf("\n");
-    printf("\u250C");
-
-    for (int i = 0; i < largo; ++i)
-    {
-        for (int j = 0; j < 3; ++j)
-        {
-            printf("\u2500");
-        }
-
-        if(i != (largo - 1))
-        {
-            printf("\u252C");
-        }        
-    }
-
-    printf("\u2510");
-    printf("\n");   
-}
-
-void __imprimirLineaHorizontalCentral(size_t largo)
-{
-    printf("\n");
-    printf("\u251C");
-
-    for (int i = 0; i < largo; ++i)
-    {
-        for (int j = 0; j < 3; ++j)
-        {
-            printf("\u2500");
-        }
-
-        if(i != (largo - 1))
-        {
-            printf("\u253C");
-        }        
-    }
-
-    printf("\u2524");
-    printf("\n");   
-}
-
-void __imprimirLineaHorizontalInferior(size_t largo)
-{
-    printf("\n");
-    printf("\u2514");
-
-    for (int i = 0; i < largo; ++i)
-    {
-        for (int j = 0; j < 3; ++j)
-        {
-            printf("\u2500");
-        }
-
-        if(i != (largo - 1))
-        {
-            printf("\u2534");
-        }        
-    }
-
-    printf("\u2518");
-    printf("\n");
-   
-}
-
 void TableroImprimir(Tablero tablero)
 {
-    __imprimirLineaHorizontalSuperior(COLUMNAS);
+    imprimirLineaHorizontalSuperior(COLUMNAS);
     
     for (int i = 0; i < FILAS; i++)
     {
@@ -165,11 +99,11 @@ void TableroImprimir(Tablero tablero)
         
         if(i != (FILAS - 1))
         {
-            __imprimirLineaHorizontalCentral(COLUMNAS);
+            imprimirLineaHorizontalCentral(COLUMNAS);
         }
         else
         {
-            __imprimirLineaHorizontalInferior(COLUMNAS);
+            imprimirLineaHorizontalInferior(COLUMNAS);
         }        
     }
 }
