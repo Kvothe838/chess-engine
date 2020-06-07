@@ -198,7 +198,7 @@ status_t TableroMoverPieza(Tablero* tablero, char movimiento[4], char color)
         Casilla* casillas = NULL;
         piezaAEvaluar = piezasDelColor[i];
 
-        if (piezaAEvaluar->tipo == movimiento[0])
+        if (piezaAEvaluar->tipo == movimiento[0] && piezaAEvaluar->posicion != NULL)
         {
             posicionInicial = piezaAEvaluar->posicion;
             found = false;
