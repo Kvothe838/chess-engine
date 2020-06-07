@@ -127,6 +127,7 @@ void TableroDestruir(Tablero *tablero)
         PiezaDestruir(piezasNegras[i]);
     }
 
+    /*Libero las piezas que esten en el tablero*/
     for (int y = 0; y < FILAS; y++)
     {
         for (int x = 0; x < COLUMNAS; x++)
@@ -137,6 +138,8 @@ void TableroDestruir(Tablero *tablero)
         free((*tablero)[y]);
     }
     
+    destruirZona(&zonaPiezasEliminadasPorLasBlancas);
+    destruirZona(&zonaPiezasEliminadasPorLasNegras);
     free(piezasBlancas);
     free(piezasNegras);
     free(*tablero);

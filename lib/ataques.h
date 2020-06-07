@@ -19,6 +19,7 @@ zonaPiezasEliminadas zonaPiezasEliminadasPorLasBlancas;
 zonaPiezasEliminadas zonaPiezasEliminadasPorLasNegras;
 void PiezaEsAtacada(Pieza*, zonaPiezasEliminadas*);
 void mostrarPiezasEliminadas(zonaPiezasEliminadas);
+void destruirZona(zonaPiezasEliminadas*);
 
 
 #endif

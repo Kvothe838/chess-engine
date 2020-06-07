@@ -11,6 +11,7 @@ void initializarZona(zonaPiezasEliminadas* zona)
         zona->contador = 0;
     }
 }
+
 void PiezaEsAtacada(Pieza* pieza, zonaPiezasEliminadas* zona)
 {   
     initializarZona(zona);
@@ -38,4 +39,12 @@ void mostrarPiezasEliminadas(zonaPiezasEliminadas zona)
     printf("\u2502");
     imprimirLineaHorizontalInferior(zona.contador);
     printf("\n");
+}
+
+void destruirZona(zonaPiezasEliminadas* zona)
+{
+    for(int i = 0; i < zona->contador; i++)
+    {
+        free(zona->piezas[i]);
+    }
 }
