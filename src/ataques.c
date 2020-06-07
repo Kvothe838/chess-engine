@@ -14,6 +14,11 @@ void initializarZona(zonaPiezasEliminadas* zona)
 
 void PiezaEsAtacada(Pieza* pieza, zonaPiezasEliminadas* zona)
 {   
+    /*
+    Truquito, como la posicion en donde esta la pieza
+    va a ser ocupada con la pieza que la esta atacando
+    no tengo que modificarlo.
+    */
     initializarZona(zona);
     zona->piezas[zona->contador++] = pieza;
     pieza->posicion = NULL;
