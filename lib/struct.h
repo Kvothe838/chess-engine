@@ -44,6 +44,7 @@
     {
         ST_OK,
         ST_ERR_MOV_INEXISTENTE,
-        ST_ERR_MOV_INCORRECTO
+        ST_ERR_MOV_INCORRECTO,
+        ST_ERR_ATAQ_ALIADO
     } status_t;
 #endif

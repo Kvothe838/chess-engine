@@ -164,12 +164,19 @@ Posicion* TableroObtenerPieza(Tablero tablero, Casilla casilla)
     return &tablero[fila][columna];
 }
 
-void __MoverPieza(Tablero* tablero, Casilla casilla, Posicion* posicionInicial, Pieza* pieza)
+bool __MoverPieza(Tablero* tablero, Casilla casilla, Posicion* posicionInicial, Pieza* pieza)
 {
+
     Posicion* posicionFinal = TableroObtenerPieza(*tablero, casilla);
     Pieza *piezaQueEstaEnLaPosicionFinal = posicionFinal->ranura;
+
     if (piezaQueEstaEnLaPosicionFinal != NULL)
     {
+        if (pieza->esBlanca == piezaQueEstaEnLaPosicionFinal->esBlanca)
+        {
+            return false;
+        }
+
         if (pieza->esBlanca)
         {
             PiezaEsAtacada(piezaQueEstaEnLaPosicionFinal, &zonaPiezasEliminadasPorLasBlancas);
@@ -182,6 +189,7 @@ void __MoverPieza(Tablero* tablero, Casilla casilla, Posicion* posicionInicial, 
     posicionInicial->ranura = NULL;
 
     TableroColocarPieza(posicionFinal, pieza);
+    return true;
 }
 
 status_t TableroMoverPieza(Tablero* tablero, char movimiento[4], char color)
@@ -239,8 +247,14 @@ status_t TableroMoverPieza(Tablero* tablero, char movimiento[4], char color)
 
             break;
         case 1:
-            __MoverPieza(tablero, casillasPosibles[0], piezasPosibles[0]->posicion, piezasPosibles[0]);
-            status = ST_OK;
+            if(__MoverPieza(tablero, casillasPosibles[0], piezasPosibles[0]->posicion, piezasPosibles[0]))
+            {
+                status = ST_OK;
+            }
+            else
+            {
+                status = ST_ERR_ATAQ_ALIADO;
+            }
 
             break;
         default:

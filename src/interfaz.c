@@ -11,6 +11,7 @@
 #define CONTINUAR "Desea continuar la partida? (Y/N): "
 #define ERROR_MOVIMIENTO_INEXISTENTE "El movimiento que intenta hacer no es posible. Reintente."
 #define ERROR_MOVIMIENTO_DOBLE "Hay dos piezas que pueden realizar el movimiento deseado.\nPor favor, especifique con la notación específica."
+#define ERROR_ATAQUE_ALIADO "Esta intentando atacar una pieza que le pertenece. Reintente."
 
 void Empezar(Juego* juego)
 {
@@ -68,6 +69,10 @@ void Empezar(Juego* juego)
                 break;
             case ST_ERR_MOV_INCORRECTO:
                 printf("\n%s\n\n", ERROR_MOVIMIENTO_DOBLE);
+
+                break;
+            case ST_ERR_ATAQ_ALIADO:
+                printf("\n%s\n\n", ERROR_ATAQUE_ALIADO);
 
                 break;
         }   
