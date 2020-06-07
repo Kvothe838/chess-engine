@@ -41,8 +41,11 @@ void Empezar(Juego* juego)
         {
             case ST_OK:
                 numeroDeMovimientos++;
+
+                mostrarPiezasEliminadas(zonaPiezasEliminadasPorLasNegras);
                 TableroImprimir(juego->tablero);
-                
+                mostrarPiezasEliminadas(zonaPiezasEliminadasPorLasBlancas);
+
                 if (numeroDeMovimientos % 2 == 0)
                 {
                     printf("%s", CONTINUAR);
