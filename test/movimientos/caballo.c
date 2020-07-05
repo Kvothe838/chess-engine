@@ -2,6 +2,7 @@
 #include <tablero.h>
 #define TABLERO_PERSONALIZADO
 #include <tipo_tablero.h>
+#include <interfaz.h>
 
 void testMoverUnCaballo1()
 {
@@ -18,17 +19,19 @@ void testMoverUnCaballo1()
     };
     TableroCopiarPersonalizacion(tableroProvisorio);
 
-    Tablero tablero;
+    Juego testJuego;
+    char jugador = 'B';
 
-    TableroInicializar(&tablero);
+    TableroInicializar(&(testJuego.tablero));
     /*TableroImprimir(tablero);*/
 
-    TableroMoverPieza(&tablero, "CE7");
+    TableroMoverPieza(&(testJuego.tablero), "CE7", jugador);
     /*TableroImprimir(tablero);*/
 
-    ASSERT(tablero[4][3].ranura == NULL);
-    ASSERT(tablero[6][4].ranura != NULL);
-    TableroDestruir(&tablero);
+    ASSERT(testJuego.tablero[4][3].ranura == NULL);
+    ASSERT(testJuego.tablero[6][4].ranura != NULL);
+    /*TableroDestruir(&(testJuego.tablero));*/
+    Terminar(&testJuego);
 }
 
 void testMoverUnCaballo2()
@@ -46,17 +49,19 @@ void testMoverUnCaballo2()
     };
     TableroCopiarPersonalizacion(tableroProvisorio);
 
-    Tablero tablero;
+    Juego testJuego;
+    char jugador = 'B';
 
-    TableroInicializar(&tablero);
+    TableroInicializar(&(testJuego.tablero));
     /*TableroImprimir(tablero);*/
 
-    TableroMoverPieza(&tablero, "CF6");
+    TableroMoverPieza(&(testJuego.tablero), "CF6", jugador);
     /*TableroImprimir(tablero);*/
 
-    ASSERT(tablero[4][3].ranura == NULL);
-    ASSERT(tablero[5][5].ranura != NULL);
-    TableroDestruir(&tablero);
+    ASSERT(testJuego.tablero[4][3].ranura == NULL);
+    ASSERT(testJuego.tablero[5][5].ranura != NULL);
+    /*TableroDestruir(&(testJuego.tablero));*/
+    Terminar(&testJuego);
 }
 
 void testMoverUnCaballo3()
@@ -74,17 +79,19 @@ void testMoverUnCaballo3()
     };
     TableroCopiarPersonalizacion(tableroProvisorio);
 
-    Tablero tablero;
+    Juego testJuego;
+    char jugador = 'B';
 
-    TableroInicializar(&tablero);
+    TableroInicializar(&(testJuego.tablero));
     /*TableroImprimir(tablero);*/
 
-    TableroMoverPieza(&tablero, "CF4");
+    TableroMoverPieza(&(testJuego.tablero), "CF4", jugador);
     /*TableroImprimir(tablero);*/
 
-    ASSERT(tablero[4][3].ranura == NULL);
-    ASSERT(tablero[3][5].ranura != NULL);
-    TableroDestruir(&tablero);
+    ASSERT(testJuego.tablero[4][3].ranura == NULL);
+    ASSERT(testJuego.tablero[3][5].ranura != NULL);
+    /*TableroDestruir(&(testJuego.tablero));*/
+    Terminar(&testJuego);
 }
 
 void testMoverUnCaballo4()
@@ -102,17 +109,19 @@ void testMoverUnCaballo4()
     };
     TableroCopiarPersonalizacion(tableroProvisorio);
 
-    Tablero tablero;
+    Juego testJuego;
+    char jugador = 'B';
 
-    TableroInicializar(&tablero);
+    TableroInicializar(&(testJuego.tablero));
     /*TableroImprimir(tablero);*/
 
-    TableroMoverPieza(&tablero, "CE3");
+    TableroMoverPieza(&(testJuego.tablero), "CE3", jugador);
     /*TableroImprimir(tablero);*/
 
-    ASSERT(tablero[4][3].ranura == NULL);
-    ASSERT(tablero[2][4].ranura != NULL);
-    TableroDestruir(&tablero);
+    ASSERT(testJuego.tablero[4][3].ranura == NULL);
+    ASSERT(testJuego.tablero[2][4].ranura != NULL);
+    /*TableroDestruir(&(testJuego.tablero));*/
+    Terminar(&testJuego);
 }
 
 void testMoverUnCaballo5()
@@ -130,17 +139,19 @@ void testMoverUnCaballo5()
     };
     TableroCopiarPersonalizacion(tableroProvisorio);
 
-    Tablero tablero;
+    Juego testJuego;
+    char jugador = 'B';
 
-    TableroInicializar(&tablero);
+    TableroInicializar(&(testJuego.tablero));
     /*TableroImprimir(tablero);*/
 
-    TableroMoverPieza(&tablero, "CC3");
+    TableroMoverPieza(&(testJuego.tablero), "CC3", jugador);
     /*TableroImprimir(tablero);*/
 
-    ASSERT(tablero[4][3].ranura == NULL);
-    ASSERT(tablero[2][2].ranura != NULL);
-    TableroDestruir(&tablero);
+    ASSERT(testJuego.tablero[4][3].ranura == NULL);
+    ASSERT(testJuego.tablero[2][2].ranura != NULL);
+    /*TableroDestruir(&(testJuego.tablero));*/
+    Terminar(&testJuego);
 }
 
 void testMoverUnCaballo6()
@@ -158,17 +169,19 @@ void testMoverUnCaballo6()
     };
     TableroCopiarPersonalizacion(tableroProvisorio);
 
-    Tablero tablero;
+    Juego testJuego;
+    char jugador = 'B';
 
-    TableroInicializar(&tablero);
+    TableroInicializar(&(testJuego.tablero));
     /*TableroImprimir(tablero);*/
 
-    TableroMoverPieza(&tablero, "CB4");
+    TableroMoverPieza(&(testJuego.tablero), "CB4", jugador);
     /*TableroImprimir(tablero);*/
 
-    ASSERT(tablero[4][3].ranura == NULL);
-    ASSERT(tablero[3][1].ranura != NULL);
-    TableroDestruir(&tablero);
+    ASSERT(testJuego.tablero[4][3].ranura == NULL);
+    ASSERT(testJuego.tablero[3][1].ranura != NULL);
+    /*TableroDestruir(&(testJuego.tablero));*/
+    Terminar(&testJuego);
 }
 
 void testMoverUnCaballo7()
@@ -186,17 +199,19 @@ void testMoverUnCaballo7()
     };
     TableroCopiarPersonalizacion(tableroProvisorio);
 
-    Tablero tablero;
+    Juego testJuego;
+    char jugador = 'B';
 
-    TableroInicializar(&tablero);
+    TableroInicializar(&(testJuego.tablero));
     /*TableroImprimir(tablero);*/
 
-    TableroMoverPieza(&tablero, "CB6");
+    TableroMoverPieza(&(testJuego.tablero), "CB6", jugador);
     /*TableroImprimir(tablero);*/
 
-    ASSERT(tablero[4][3].ranura == NULL);
-    ASSERT(tablero[5][1].ranura != NULL);
-    TableroDestruir(&tablero);
+    ASSERT(testJuego.tablero[4][3].ranura == NULL);
+    ASSERT(testJuego.tablero[5][1].ranura != NULL);
+    /*TableroDestruir(&(testJuego.tablero));*/
+    Terminar(&testJuego);
 }
 
 void testMoverUnCaballo8()
@@ -214,17 +229,19 @@ void testMoverUnCaballo8()
     };
     TableroCopiarPersonalizacion(tableroProvisorio);
 
-    Tablero tablero;
+    Juego testJuego;
+    char jugador = 'B';
 
-    TableroInicializar(&tablero);
+    TableroInicializar(&(testJuego.tablero));
     /*TableroImprimir(tablero);*/
 
-    TableroMoverPieza(&tablero, "CC7");
+    TableroMoverPieza(&(testJuego.tablero), "CC7", jugador);
     /*TableroImprimir(tablero);*/
 
-    ASSERT(tablero[4][3].ranura == NULL);
-    ASSERT(tablero[6][2].ranura != NULL);
-    TableroDestruir(&tablero);
+    ASSERT(testJuego.tablero[4][3].ranura == NULL);
+    ASSERT(testJuego.tablero[6][2].ranura != NULL);
+    /*TableroDestruir(&(testJuego.tablero));*/
+    Terminar(&testJuego);
 }
 
 

@@ -2,7 +2,7 @@
 #include <tablero.h>
 #define TABLERO_PERSONALIZADO
 #include <tipo_tablero.h>
-
+#include <interfaz.h>
 
 void testMoverLaTorreVertical()
 {
@@ -19,9 +19,10 @@ void testMoverLaTorreVertical()
     };
     TableroCopiarPersonalizacion(tableroProvisorio);
 
-    Tablero tablero;
+    Juego testJuego;
+    char jugador = 'B';
 
-    TableroInicializar(&tablero);
+    TableroInicializar(&(testJuego.tablero));
     /*TableroImprimir(tablero);*/
 
     char* posicionInicial = "TD1";
@@ -34,20 +35,21 @@ void testMoverLaTorreVertical()
     for (int i = 1; i < 8; ++i)
     {
         movimiento[2] = posicionInicial[2] + (char)i;
-        TableroMoverPieza(&tablero, movimiento);
+        TableroMoverPieza(&(testJuego.tablero), movimiento, jugador);
         /*TableroImprimir(tablero);*/
         
-        ASSERT(tablero[0][3].ranura == NULL);
-        ASSERT(tablero[i][3].ranura != NULL);
+        ASSERT(testJuego.tablero[0][3].ranura == NULL);
+        ASSERT(testJuego.tablero[i][3].ranura != NULL);
 
-        TableroMoverPieza(&tablero, posicionInicial);
-        ASSERT(tablero[0][3].ranura != NULL);
-        ASSERT(tablero[i][3].ranura == NULL);
+        TableroMoverPieza(&(testJuego.tablero), posicionInicial, jugador);
+        ASSERT(testJuego.tablero[0][3].ranura != NULL);
+        ASSERT(testJuego.tablero[i][3].ranura == NULL);
 
     }
     
     free(movimiento);
-    TableroDestruir(&tablero);
+    /*TableroDestruir(&(testJuego.tablero));*/
+    Terminar(&testJuego);
 }
 
 void testMoverLaTorreHorizontal()
@@ -65,9 +67,10 @@ void testMoverLaTorreHorizontal()
     };
     TableroCopiarPersonalizacion(tableroProvisorio);
 
-    Tablero tablero;
+    Juego testJuego;
+    char jugador = 'B';
 
-    TableroInicializar(&tablero);
+    TableroInicializar(&(testJuego.tablero));
     /*TableroImprimir(tablero);*/
 
     char* posicionInicial = "TA5";
@@ -80,21 +83,22 @@ void testMoverLaTorreHorizontal()
     for (int i = 1; i < 8; ++i)
     {
         movimiento[1] = posicionInicial[1] + (char)i;
-        TableroMoverPieza(&tablero, movimiento);
+        TableroMoverPieza(&(testJuego.tablero), movimiento, jugador);
         /*TableroImprimir(tablero);*/
         
-        ASSERT(tablero[4][0].ranura == NULL);
-        ASSERT(tablero[4][i].ranura != NULL);
+        ASSERT(testJuego.tablero[4][0].ranura == NULL);
+        ASSERT(testJuego.tablero[4][i].ranura != NULL);
 
-        TableroMoverPieza(&tablero, posicionInicial);
+        TableroMoverPieza(&(testJuego.tablero), posicionInicial, jugador);
         /*TableroImprimir(tablero);*/
-        ASSERT(tablero[4][0].ranura != NULL);
-        ASSERT(tablero[4][i].ranura == NULL);
+        ASSERT(testJuego.tablero[4][0].ranura != NULL);
+        ASSERT(testJuego.tablero[4][i].ranura == NULL);
 
     }
     
     free(movimiento);
-    TableroDestruir(&tablero);
+    /*TableroDestruir(&(testJuego.tablero));*/
+    Terminar(&testJuego);
 }
 
 

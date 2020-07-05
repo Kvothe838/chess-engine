@@ -2,6 +2,7 @@
 #include <tablero.h>
 #define TABLERO_PERSONALIZADO
 #include <tipo_tablero.h>
+#include <interfaz.h>
 
 void testMoverUnPeonEnUnaPosicion()
 {
@@ -18,17 +19,19 @@ void testMoverUnPeonEnUnaPosicion()
     };
     TableroCopiarPersonalizacion(tableroProvisorio);
 
-    Tablero tablero;
+    Juego testJuego;
+    char jugador = 'B';
 
-    TableroInicializar(&tablero);
+    TableroInicializar(&(testJuego.tablero));
     /*TableroImprimir(tablero);*/
 
-    TableroMoverPieza(&tablero, "PA2");
+    TableroMoverPieza(&(testJuego.tablero), "PA2", jugador);
     /*TableroImprimir(tablero);*/
 
-    ASSERT(tablero[0][0].ranura == NULL);
-    ASSERT(tablero[1][0].ranura != NULL);
-    TableroDestruir(&tablero);
+    ASSERT(testJuego.tablero[0][0].ranura == NULL);
+    ASSERT(testJuego.tablero[1][0].ranura != NULL);
+    /*TableroDestruir(&(testJuego.tablero));*/
+    Terminar(&testJuego);
 }
 
 void testMoverUnPeonDosPosicionesEnSuPosiconInicial()
@@ -46,17 +49,19 @@ void testMoverUnPeonDosPosicionesEnSuPosiconInicial()
     };
     TableroCopiarPersonalizacion(tableroProvisorio);
 
-    Tablero tablero;
+    Juego testJuego;
+    char jugador = 'B';
 
-    TableroInicializar(&tablero);
+    TableroInicializar(&(testJuego.tablero));
     /*TableroImprimir(tablero);*/
 
-    TableroMoverPieza(&tablero, "PA3");
+    TableroMoverPieza(&(testJuego.tablero), "PA3", jugador);
     /*TableroImprimir(tablero);*/
 
-    ASSERT(tablero[0][0].ranura == NULL);
-    ASSERT(tablero[2][0].ranura != NULL);
-    TableroDestruir(&tablero);
+    ASSERT(testJuego.tablero[0][0].ranura == NULL);
+    ASSERT(testJuego.tablero[2][0].ranura != NULL);
+    /*TableroDestruir(&(testJuego.tablero));*/
+    Terminar(&testJuego);
 }
 
 void testNoMoverUnPeonDosPosicionesEnUnaPosicionesNoInicial()
@@ -74,19 +79,21 @@ void testNoMoverUnPeonDosPosicionesEnUnaPosicionesNoInicial()
     };
     TableroCopiarPersonalizacion(tableroProvisorio);
 
-    Tablero tablero;
+    Juego testJuego;
+    char jugador = 'B';
 
-    TableroInicializar(&tablero);
+    TableroInicializar(&(testJuego.tablero));
     /*TableroImprimir(tablero);*/
 
-    TableroMoverPieza(&tablero, "PA2");
+    TableroMoverPieza(&(testJuego.tablero), "PA2", jugador);
     /*TableroImprimir(tablero);*/
-    TableroMoverPieza(&tablero, "PA4");
+    TableroMoverPieza(&(testJuego.tablero), "PA4", jugador);
     /*TableroImprimir(tablero);*/
     
-    ASSERT(tablero[3][0].ranura == NULL);
-    ASSERT(tablero[1][0].ranura != NULL);
-    TableroDestruir(&tablero);
+    ASSERT(testJuego.tablero[3][0].ranura == NULL);
+    ASSERT(testJuego.tablero[1][0].ranura != NULL);
+    /*TableroDestruir(&(testJuego.tablero));*/
+    Terminar(&testJuego);
 }
 
 int main(void)
