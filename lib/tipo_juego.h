@@ -13,10 +13,10 @@
     };
 
     #if defined(TABLERO_PERSONALIZADO)
-        #define INICIALIZAR_JUEGO(args) Inicializar(tableroPersonalizado, args)
+        #define INICIALIZAR_JUEGO(args) JuegoInicializar(tableroPersonalizado, args)
 
     #else
-        #define INICIALIZAR_JUEGO(args) Inicializar(__tablero_inicial, args)
+        #define INICIALIZAR_JUEGO(args) JuegoInicializar(__tablero_inicial, args)
 
     #endif
 #endif
