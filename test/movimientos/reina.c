@@ -1,7 +1,8 @@
 #include <test.h>
-#include <tablero.h>
+/*#include <tablero.h>*/
+#include <movimiento.h>
 #define TABLERO_PERSONALIZADO
-#include <tipo_tablero.h>
+#include <tipo_juego.h>
 #include <interfaz.h>
 
 void testMoverLaReinaVertical()
@@ -22,7 +23,7 @@ void testMoverLaReinaVertical()
     Juego testJuego;
     char jugador = 'B';
 
-    TableroInicializar(&(testJuego.tablero));
+    INICIALIZAR_JUEGO(&(testJuego));
     /*TableroImprimir(tablero);*/
 
     char* posicionInicial = "RD1";
@@ -35,13 +36,13 @@ void testMoverLaReinaVertical()
     for (int i = 1; i < 8; ++i)
     {
         movimiento[2] = posicionInicial[2] + (char)i;
-        TableroMoverPieza(&(testJuego.tablero), movimiento, jugador);
+        CalcularMovimiento(&(testJuego), movimiento, jugador);
         /*TableroImprimir(tablero);*/
         
         ASSERT(testJuego.tablero[0][3].ranura == NULL);
         ASSERT(testJuego.tablero[i][3].ranura != NULL);
 
-        TableroMoverPieza(&(testJuego.tablero), posicionInicial, jugador);
+        CalcularMovimiento(&(testJuego), posicionInicial, jugador);
         ASSERT(testJuego.tablero[0][3].ranura != NULL);
         ASSERT(testJuego.tablero[i][3].ranura == NULL);
 
@@ -70,7 +71,7 @@ void testMoverLaReinaHorizontal()
     Juego testJuego;
     char jugador = 'B';
 
-    TableroInicializar(&(testJuego.tablero));
+    INICIALIZAR_JUEGO(&(testJuego));
     /*TableroImprimir(tablero);*/
 
     char* posicionInicial = "RA5";
@@ -83,13 +84,13 @@ void testMoverLaReinaHorizontal()
     for (int i = 1; i < 8; ++i)
     {
         movimiento[1] = posicionInicial[1] + (char)i;
-        TableroMoverPieza(&(testJuego.tablero), movimiento, jugador);
+        CalcularMovimiento(&(testJuego), movimiento, jugador);
         /*TableroImprimir(tablero);*/
         
         ASSERT(testJuego.tablero[4][0].ranura == NULL);
         ASSERT(testJuego.tablero[4][i].ranura != NULL);
 
-        TableroMoverPieza(&(testJuego.tablero), posicionInicial, jugador);
+        CalcularMovimiento(&(testJuego), posicionInicial, jugador);
         /*TableroImprimir(tablero);*/
         ASSERT(testJuego.tablero[4][0].ranura != NULL);
         ASSERT(testJuego.tablero[4][i].ranura == NULL);
@@ -120,7 +121,7 @@ void testMoverLaReinaDiagonalPositiva()
     Juego testJuego;
     char jugador = 'B';
 
-    TableroInicializar(&(testJuego.tablero));
+    INICIALIZAR_JUEGO(&(testJuego));
     /*TableroImprimir(tablero);*/
 
     char* posicionInicial = "RA1";
@@ -134,13 +135,13 @@ void testMoverLaReinaDiagonalPositiva()
     {
         movimiento[1] = posicionInicial[1] + (char)i;
         movimiento[2] = posicionInicial[2] + (char)i;
-        TableroMoverPieza(&(testJuego.tablero), movimiento, jugador);
+        CalcularMovimiento(&(testJuego), movimiento, jugador);
         /*TableroImprimir(tablero);*/
         
         ASSERT(testJuego.tablero[0][0].ranura == NULL);
         ASSERT(testJuego.tablero[i][i].ranura != NULL);
 
-        TableroMoverPieza(&(testJuego.tablero), posicionInicial, jugador);
+        CalcularMovimiento(&(testJuego), posicionInicial, jugador);
         ASSERT(testJuego.tablero[0][0].ranura != NULL);
         ASSERT(testJuego.tablero[i][i].ranura == NULL);
 
@@ -169,7 +170,7 @@ void testMoverLaReinaDiagonalNegatica()
     Juego testJuego;
     char jugador = 'B';
 
-    TableroInicializar(&(testJuego.tablero));
+    INICIALIZAR_JUEGO(&(testJuego));
     /*TableroImprimir(tablero);*/
 
     char* posicionInicial = "RH1";
@@ -183,13 +184,13 @@ void testMoverLaReinaDiagonalNegatica()
     {
         movimiento[1] = posicionInicial[1] - (char)i;
         movimiento[2] = posicionInicial[2] + (char)i;
-        TableroMoverPieza(&(testJuego.tablero), movimiento, jugador);
+        CalcularMovimiento(&(testJuego), movimiento, jugador);
         /*TableroImprimir(tablero);*/
         
         ASSERT(testJuego.tablero[0][7].ranura == NULL);
         ASSERT(testJuego.tablero[i][7 - i].ranura != NULL);
 
-        TableroMoverPieza(&(testJuego.tablero), posicionInicial, jugador);
+        CalcularMovimiento(&(testJuego), posicionInicial, jugador);
         ASSERT(testJuego.tablero[0][7].ranura != NULL);
         ASSERT(testJuego.tablero[i][7 - i].ranura == NULL);
 

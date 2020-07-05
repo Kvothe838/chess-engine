@@ -1,7 +1,8 @@
 #include <test.h>
-#include <tablero.h>
+/*#include <tablero.h>*/
+#include <movimiento.h>
 #define TABLERO_PERSONALIZADO
-#include <tipo_tablero.h>
+#include <tipo_juego.h>
 #include <interfaz.h>
 
 void testMoverElReyHaciaAbajo()
@@ -22,10 +23,10 @@ void testMoverElReyHaciaAbajo()
     Juego testJuego;
     char jugador = 'B';
 
-    TableroInicializar(&(testJuego.tablero));
+    INICIALIZAR_JUEGO(&(testJuego));
     /*TableroImprimir(tablero);*/
 
-    TableroMoverPieza(&(testJuego.tablero), "KD6", jugador);
+    CalcularMovimiento(&(testJuego), "KD6", jugador);
     /*TableroImprimir(tablero);*/
 
     ASSERT(testJuego.tablero[4][3].ranura == NULL);
@@ -52,10 +53,10 @@ void testMoverElReyHaciaArriba()
     Juego testJuego;
     char jugador = 'B';
 
-    TableroInicializar(&(testJuego.tablero));
+    INICIALIZAR_JUEGO(&(testJuego));
     /*TableroImprimir(tablero);*/
 
-    TableroMoverPieza(&(testJuego.tablero), "KD4", jugador);
+    CalcularMovimiento(&(testJuego), "KD4", jugador);
     /*TableroImprimir(tablero);*/
 
     ASSERT(testJuego.tablero[4][3].ranura == NULL);
@@ -82,10 +83,10 @@ void testMoverElReyHaciaLaIzquierda()
     Juego testJuego;
     char jugador = 'B';
 
-    TableroInicializar(&(testJuego.tablero));
+    INICIALIZAR_JUEGO(&(testJuego));
     /*TableroImprimir(tablero);*/
 
-    TableroMoverPieza(&(testJuego.tablero), "KC5", jugador);
+    CalcularMovimiento(&(testJuego), "KC5", jugador);
     /*TableroImprimir(tablero);*/
 
     ASSERT(testJuego.tablero[4][3].ranura == NULL);
@@ -113,10 +114,10 @@ void testMoverElReyHaciaLaDerecha()
     Juego testJuego;
     char jugador = 'B';
 
-    TableroInicializar(&(testJuego.tablero));
+    INICIALIZAR_JUEGO(&(testJuego));
     /*TableroImprimir(tablero);*/
 
-    TableroMoverPieza(&(testJuego.tablero), "KE5", jugador);
+    CalcularMovimiento(&(testJuego), "KE5", jugador);
     /*TableroImprimir(tablero);*/
 
     ASSERT(testJuego.tablero[4][3].ranura == NULL);
@@ -143,10 +144,10 @@ void testMoverElReyDiagonalSuperiorIzquierda()
     Juego testJuego;
     char jugador = 'B';
 
-    TableroInicializar(&(testJuego.tablero));
+    INICIALIZAR_JUEGO(&(testJuego));
     /*TableroImprimir(tablero);*/
 
-    TableroMoverPieza(&(testJuego.tablero), "KC4", jugador);
+    CalcularMovimiento(&(testJuego), "KC4", jugador);
     /*TableroImprimir(tablero);*/
 
     ASSERT(testJuego.tablero[4][3].ranura == NULL);
@@ -173,10 +174,10 @@ void testMoverElReyDiagonalSuperiorDerecha()
     Juego testJuego;
     char jugador = 'B';
 
-    TableroInicializar(&(testJuego.tablero));
+    INICIALIZAR_JUEGO(&(testJuego));
     /*TableroImprimir(tablero);*/
 
-    TableroMoverPieza(&(testJuego.tablero), "KE4", jugador);
+    CalcularMovimiento(&(testJuego), "KE4", jugador);
     /*TableroImprimir(tablero);*/
 
     ASSERT(testJuego.tablero[4][3].ranura == NULL);
@@ -203,10 +204,10 @@ void testMoverElReyDiagonalInferiorIzquierda()
     Juego testJuego;
     char jugador = 'B';
 
-    TableroInicializar(&(testJuego.tablero));
+    INICIALIZAR_JUEGO(&(testJuego));
     /*TableroImprimir(tablero);*/
 
-    TableroMoverPieza(&(testJuego.tablero), "KC6", jugador);
+    CalcularMovimiento(&(testJuego), "KC6", jugador);
     /*TableroImprimir(tablero);*/
 
     ASSERT(testJuego.tablero[4][3].ranura == NULL);
@@ -234,10 +235,10 @@ void testMoverElReyDiagonalInferiorDerecha()
     Juego testJuego;
     char jugador = 'B';
 
-    TableroInicializar(&(testJuego.tablero));
+    INICIALIZAR_JUEGO(&(testJuego));
     /*TableroImprimir(tablero);*/
 
-    TableroMoverPieza(&(testJuego.tablero), "KE6", jugador);
+    CalcularMovimiento(&(testJuego), "KE6", jugador);
     /*TableroImprimir(tablero);*/
 
     ASSERT(testJuego.tablero[4][3].ranura == NULL);

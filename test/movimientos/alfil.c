@@ -1,7 +1,8 @@
 #include <test.h>
-#include <tablero.h>
+/*#include <tablero.h>*/
+#include <movimiento.h>
 #define TABLERO_PERSONALIZADO
-#include <tipo_tablero.h>
+#include <tipo_juego.h>
 #include <interfaz.h>
 
 void testMoverElAlfilDiagonalPositiva()
@@ -23,7 +24,7 @@ void testMoverElAlfilDiagonalPositiva()
     char jugador = 'B';
     
 
-    TableroInicializar(&(testJuego.tablero));
+    INICIALIZAR_JUEGO(&(testJuego));
     /*TableroImprimir(tablero);*/
 
     char* posicionInicial = "AA1";
@@ -37,13 +38,13 @@ void testMoverElAlfilDiagonalPositiva()
     {
         movimiento[1] = posicionInicial[1] + (char)i;
         movimiento[2] = posicionInicial[2] + (char)i;
-        TableroMoverPieza(&(testJuego.tablero), movimiento, jugador);
+        CalcularMovimiento(&(testJuego), movimiento, jugador);
         /*TableroImprimir(tablero);*/
         
         ASSERT(testJuego.tablero[0][0].ranura == NULL);
         ASSERT(testJuego.tablero[i][i].ranura != NULL);
 
-        TableroMoverPieza(&(testJuego.tablero), movimiento, jugador);
+        CalcularMovimiento(&(testJuego), movimiento, jugador);
         ASSERT(testJuego.tablero[0][0].ranura != NULL);
         ASSERT(testJuego.tablero[i][i].ranura == NULL);
 
@@ -71,7 +72,7 @@ void testMoverElAlfilDiagonalNegatica()
     Juego testJuego;
     char jugador = 'B';
 
-    TableroInicializar(&(testJuego.tablero));
+    INICIALIZAR_JUEGO(&(testJuego));
     /*TableroImprimir(tablero);*/
 
     char* posicionInicial = "AH1";
@@ -85,13 +86,13 @@ void testMoverElAlfilDiagonalNegatica()
     {
         movimiento[1] = posicionInicial[1] - (char)i;
         movimiento[2] = posicionInicial[2] + (char)i;
-        TableroMoverPieza(&(testJuego.tablero), movimiento, jugador);
+        CalcularMovimiento(&(testJuego), movimiento, jugador);
         /*TableroImprimir(tablero);*/
         
         ASSERT(testJuego.tablero[0][7].ranura == NULL);
         ASSERT(testJuego.tablero[i][7 - i].ranura != NULL);
 
-        TableroMoverPieza(&(testJuego.tablero), movimiento, jugador);
+        CalcularMovimiento(&(testJuego), movimiento, jugador);
         ASSERT(testJuego.tablero[0][7].ranura != NULL);
         ASSERT(testJuego.tablero[i][7 - i].ranura == NULL);
 

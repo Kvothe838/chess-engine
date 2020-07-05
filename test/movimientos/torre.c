@@ -1,7 +1,8 @@
 #include <test.h>
-#include <tablero.h>
+/*#include <tablero.h>*/
+#include <movimiento.h>
 #define TABLERO_PERSONALIZADO
-#include <tipo_tablero.h>
+#include <tipo_juego.h>
 #include <interfaz.h>
 
 void testMoverLaTorreVertical()
@@ -22,7 +23,7 @@ void testMoverLaTorreVertical()
     Juego testJuego;
     char jugador = 'B';
 
-    TableroInicializar(&(testJuego.tablero));
+    INICIALIZAR_JUEGO(&(testJuego));
     /*TableroImprimir(tablero);*/
 
     char* posicionInicial = "TD1";
@@ -35,13 +36,13 @@ void testMoverLaTorreVertical()
     for (int i = 1; i < 8; ++i)
     {
         movimiento[2] = posicionInicial[2] + (char)i;
-        TableroMoverPieza(&(testJuego.tablero), movimiento, jugador);
+        CalcularMovimiento(&(testJuego), movimiento, jugador);
         /*TableroImprimir(tablero);*/
         
         ASSERT(testJuego.tablero[0][3].ranura == NULL);
         ASSERT(testJuego.tablero[i][3].ranura != NULL);
 
-        TableroMoverPieza(&(testJuego.tablero), posicionInicial, jugador);
+        CalcularMovimiento(&(testJuego), posicionInicial, jugador);
         ASSERT(testJuego.tablero[0][3].ranura != NULL);
         ASSERT(testJuego.tablero[i][3].ranura == NULL);
 
@@ -70,7 +71,7 @@ void testMoverLaTorreHorizontal()
     Juego testJuego;
     char jugador = 'B';
 
-    TableroInicializar(&(testJuego.tablero));
+    INICIALIZAR_JUEGO(&(testJuego));
     /*TableroImprimir(tablero);*/
 
     char* posicionInicial = "TA5";
@@ -83,13 +84,13 @@ void testMoverLaTorreHorizontal()
     for (int i = 1; i < 8; ++i)
     {
         movimiento[1] = posicionInicial[1] + (char)i;
-        TableroMoverPieza(&(testJuego.tablero), movimiento, jugador);
+        CalcularMovimiento(&(testJuego), movimiento, jugador);
         /*TableroImprimir(tablero);*/
         
         ASSERT(testJuego.tablero[4][0].ranura == NULL);
         ASSERT(testJuego.tablero[4][i].ranura != NULL);
 
-        TableroMoverPieza(&(testJuego.tablero), posicionInicial, jugador);
+        CalcularMovimiento(&(testJuego), posicionInicial, jugador);
         /*TableroImprimir(tablero);*/
         ASSERT(testJuego.tablero[4][0].ranura != NULL);
         ASSERT(testJuego.tablero[4][i].ranura == NULL);

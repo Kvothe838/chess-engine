@@ -1,7 +1,8 @@
 #include <test.h>
-#include <tablero.h>
+/*#include <tablero.h>*/
+#include <movimiento.h>
 #define TABLERO_PERSONALIZADO
-#include <tipo_tablero.h>
+#include <tipo_juego.h>
 #include <interfaz.h>
 
 void testMoverUnPeonEnUnaPosicion()
@@ -22,10 +23,10 @@ void testMoverUnPeonEnUnaPosicion()
     Juego testJuego;
     char jugador = 'B';
 
-    TableroInicializar(&(testJuego.tablero));
+    INICIALIZAR_JUEGO(&(testJuego));
     /*TableroImprimir(tablero);*/
 
-    TableroMoverPieza(&(testJuego.tablero), "PA2", jugador);
+    CalcularMovimiento(&(testJuego), "PA2", jugador);
     /*TableroImprimir(tablero);*/
 
     ASSERT(testJuego.tablero[0][0].ranura == NULL);
@@ -52,10 +53,10 @@ void testMoverUnPeonDosPosicionesEnSuPosiconInicial()
     Juego testJuego;
     char jugador = 'B';
 
-    TableroInicializar(&(testJuego.tablero));
+    INICIALIZAR_JUEGO(&(testJuego));
     /*TableroImprimir(tablero);*/
 
-    TableroMoverPieza(&(testJuego.tablero), "PA3", jugador);
+    CalcularMovimiento(&(testJuego), "PA3", jugador);
     /*TableroImprimir(tablero);*/
 
     ASSERT(testJuego.tablero[0][0].ranura == NULL);
@@ -82,12 +83,12 @@ void testNoMoverUnPeonDosPosicionesEnUnaPosicionesNoInicial()
     Juego testJuego;
     char jugador = 'B';
 
-    TableroInicializar(&(testJuego.tablero));
+    INICIALIZAR_JUEGO(&(testJuego));
     /*TableroImprimir(tablero);*/
 
-    TableroMoverPieza(&(testJuego.tablero), "PA2", jugador);
+    CalcularMovimiento(&(testJuego), "PA2", jugador);
     /*TableroImprimir(tablero);*/
-    TableroMoverPieza(&(testJuego.tablero), "PA4", jugador);
+    CalcularMovimiento(&(testJuego), "PA4", jugador);
     /*TableroImprimir(tablero);*/
     
     ASSERT(testJuego.tablero[3][0].ranura == NULL);
