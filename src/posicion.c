@@ -19,7 +19,12 @@ bool PosicionEstaVacia(Posicion posicion)
 
 void PosicionDestruir(Posicion* posicion)
 {
-    free(posicion->ranura);
+    /*
+    Una posicion no tendria que destruir la pieza que
+    tiene, si no que se tendria que destruir todas las piezas
+    en otro lado
+    */
+    /*free(posicion->ranura);*/
     free(posicion->casilla);
 }
 

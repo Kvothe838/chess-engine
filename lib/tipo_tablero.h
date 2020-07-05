@@ -13,10 +13,10 @@
     };
 
     #if defined(TABLERO_PERSONALIZADO)
-        #define TableroInicializar(args) __TableroInicializar(tableroPersonalizado, args)
+        #define TableroInicializar(args) Inicializar(tableroPersonalizado, args)
 
     #else
-        #define TableroInicializar(args) __TableroInicializar(__tablero_inicial, args)
+        #define TableroInicializar(args) Inicializar(__tablero_inicial, args)
 
     #endif
 #endif

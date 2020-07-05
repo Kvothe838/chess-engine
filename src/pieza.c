@@ -267,14 +267,6 @@ void PiezaCrear(Pieza* pieza, TipoPieza tipo, bool esBlanca)
     __PiezaRepresentacionYMovimientos(pieza, tipo);
 }
 
-void PiezaDestruir(Pieza* pieza)
-{
-    if(pieza != NULL && pieza->coordenadasMovimientosPosibles != NULL)
-    {
-        free(pieza->coordenadasMovimientosPosibles);
-    }
-}
-
 void PiezaCopiar(Pieza* copia, Pieza original)
 {
     copia->tipo = original.tipo;
@@ -294,4 +286,22 @@ bool PiezaEstaPuesta(Pieza pieza)
 void PiezaImprimir(Pieza pieza)
 {
     printf("\u2002%lc\u2002", pieza.representacion);
+}
+
+void PiezaDestruir(Pieza* pieza)
+{
+    if(pieza != NULL && pieza->coordenadasMovimientosPosibles != NULL)
+    {
+        free(pieza->coordenadasMovimientosPosibles);
+    }
+}
+
+void PiezaDestruirMultiples(Pieza*** conjuntoDePiezas, size_t cantidadDePiezas)
+{
+    for(size_t i = 0; i < cantidadDePiezas; ++i)
+    {
+        PiezaDestruir((*conjuntoDePiezas)[i]);
+        free((*conjuntoDePiezas)[i]);
+    }
+    free(*conjuntoDePiezas);
 }

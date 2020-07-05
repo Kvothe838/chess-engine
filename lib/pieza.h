@@ -3,6 +3,7 @@
 
     #include <stdbool.h>
     #include <struct.h>
+    #include <stdlib.h>
 
     struct Pieza
     {
@@ -14,10 +15,11 @@
     };
 
     void PiezaCrear(Pieza* pieza, TipoPieza tipo, bool esBlanca);
-    void PiezaDestruir(Pieza* pieza);
     void PiezaCopiar(Pieza* copia, Pieza original);
     bool PiezaEstaPuesta(Pieza pieza);
     void PiezaColocar(Pieza* pieza, Posicion* posicion);
     void PiezaImprimir(Pieza pieza);
     int PiezaObtenerCantidadMovimientos(TipoPieza tipo);
+    void PiezaDestruir(Pieza* pieza);
+    void PiezaDestruirMultiples(Pieza*** pieza, size_t catidadDePiezas);
 #endif
