@@ -5,7 +5,7 @@
 #include <tablero.h>
 #include <ataques.h>
 #include <movimiento.h>
-#include <tipo_tablero.h>
+#include <tipo_juego.h>
 #include <stdlib.h>
 
 #define TURNO "Turno de los "
