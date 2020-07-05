@@ -1,5 +1,5 @@
-#ifndef _TIPO_TABLERO_H
-    #define _TIPO_TABLERO_H
+#ifndef _TIPO_JUEGO_H
+    #define _TIPO_JUEGO_H
 
     char __tablero_inicial[FILAS][COLUMNAS][3] = {\
             {TORRE_BLANCO, CABALLO_BLANCO, ALFIL_BLANCO, REINA_BLANCO, REY_BLANCO, ALFIL_BLANCO, CABALLO_BLANCO, TORRE_BLANCO},\
@@ -13,10 +13,10 @@
     };
 
     #if defined(TABLERO_PERSONALIZADO)
-        #define TableroInicializar(args) Inicializar(tableroPersonalizado, args)
+        #define INICIALIZAR_JUEGO(args) Inicializar(tableroPersonalizado, args)
 
     #else
-        #define TableroInicializar(args) Inicializar(__tablero_inicial, args)
+        #define INICIALIZAR_JUEGO(args) Inicializar(__tablero_inicial, args)
 
     #endif
 #endif

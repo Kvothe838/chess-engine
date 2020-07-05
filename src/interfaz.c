@@ -17,7 +17,7 @@
 
 void Empezar(Juego* juego)
 {
-    TableroInicializar(juego);
+    INICIALIZAR_JUEGO(juego);
     
     size_t numeroDeMovimientos = 0;
     char jugador = 'B';
