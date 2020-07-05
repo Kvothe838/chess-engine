@@ -2,21 +2,9 @@
     #define _INTERFAZ_H
 
     #include <tablero.h>
-
-    typedef struct
-    {
-        Tablero tablero;
-
-        Pieza** piezasBlancas;
-        int cantidadDePiezasBlancas;
-
-        Pieza** piezasNegras;
-        int cantidadDePiezasNegras;
-    } Juego;
+    #include <juego.h>
 
     void Empezar(Juego*);
-
-    void Inicializar(char[FILAS][COLUMNAS][3], Juego* juego);
 
     void Terminar(Juego*);
 #endif
