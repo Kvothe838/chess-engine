@@ -50,7 +50,7 @@ void testMoverLaReinaVertical()
     
     free(movimiento);
     /*TableroDestruir(&(testJuego.tablero));*/
-    Terminar(&testJuego);
+    JuegoDestruir(&testJuego);
 }
 
 void testMoverLaReinaHorizontal()
@@ -99,7 +99,7 @@ void testMoverLaReinaHorizontal()
     
     free(movimiento);
     /*TableroDestruir(&(testJuego.tablero));*/
-    Terminar(&testJuego);
+    JuegoDestruir(&testJuego);
 }
 
 
@@ -149,7 +149,7 @@ void testMoverLaReinaDiagonalPositiva()
     
     free(movimiento);
     /*TableroDestruir(&(testJuego.tablero));*/
-    Terminar(&testJuego);
+    JuegoDestruir(&testJuego);
 }
 
 void testMoverLaReinaDiagonalNegatica()
@@ -198,7 +198,7 @@ void testMoverLaReinaDiagonalNegatica()
     
     free(movimiento);
     /*TableroDestruir(&(testJuego.tablero));*/
-    Terminar(&testJuego);
+    JuegoDestruir(&testJuego);
 }
 
 

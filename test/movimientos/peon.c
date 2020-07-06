@@ -32,7 +32,7 @@ void testMoverUnPeonEnUnaPosicion()
     ASSERT(testJuego.tablero[0][0].ranura == NULL);
     ASSERT(testJuego.tablero[1][0].ranura != NULL);
     /*TableroDestruir(&(testJuego.tablero));*/
-    Terminar(&testJuego);
+    JuegoDestruir(&testJuego);
 }
 
 void testMoverUnPeonDosPosicionesEnSuPosiconInicial()
@@ -62,7 +62,7 @@ void testMoverUnPeonDosPosicionesEnSuPosiconInicial()
     ASSERT(testJuego.tablero[0][0].ranura == NULL);
     ASSERT(testJuego.tablero[2][0].ranura != NULL);
     /*TableroDestruir(&(testJuego.tablero));*/
-    Terminar(&testJuego);
+    JuegoDestruir(&testJuego);
 }
 
 void testNoMoverUnPeonDosPosicionesEnUnaPosicionesNoInicial()
@@ -94,7 +94,7 @@ void testNoMoverUnPeonDosPosicionesEnUnaPosicionesNoInicial()
     ASSERT(testJuego.tablero[3][0].ranura == NULL);
     ASSERT(testJuego.tablero[1][0].ranura != NULL);
     /*TableroDestruir(&(testJuego.tablero));*/
-    Terminar(&testJuego);
+    JuegoDestruir(&testJuego);
 }
 
 int main(void)

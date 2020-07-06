@@ -51,7 +51,7 @@ void testMoverElAlfilDiagonalPositiva()
     }
     
     free(movimiento);
-    Terminar(&testJuego);
+    JuegoDestruir(&testJuego);
 }
 
 void testMoverElAlfilDiagonalNegatica()
@@ -99,7 +99,7 @@ void testMoverElAlfilDiagonalNegatica()
     }
     
     free(movimiento);
-    Terminar(&testJuego);
+    JuegoDestruir(&testJuego);
 }
 
 int main(void)

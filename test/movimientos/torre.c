@@ -50,7 +50,7 @@ void testMoverLaTorreVertical()
     
     free(movimiento);
     /*TableroDestruir(&(testJuego.tablero));*/
-    Terminar(&testJuego);
+    JuegoDestruir(&testJuego);
 }
 
 void testMoverLaTorreHorizontal()
@@ -99,7 +99,7 @@ void testMoverLaTorreHorizontal()
     
     free(movimiento);
     /*TableroDestruir(&(testJuego.tablero));*/
-    Terminar(&testJuego);
+    JuegoDestruir(&testJuego);
 }
 
 

@@ -32,7 +32,7 @@ void testMoverElReyHaciaAbajo()
     ASSERT(testJuego.tablero[4][3].ranura == NULL);
     ASSERT(testJuego.tablero[5][3].ranura != NULL);
     /*TableroDestruir(&(testJuego.tablero));*/
-    Terminar(&testJuego);
+    JuegoDestruir(&testJuego);
 }
 
 void testMoverElReyHaciaArriba()
@@ -62,7 +62,7 @@ void testMoverElReyHaciaArriba()
     ASSERT(testJuego.tablero[4][3].ranura == NULL);
     ASSERT(testJuego.tablero[3][3].ranura != NULL);
     /*TableroDestruir(&(testJuego.tablero));*/
-    Terminar(&testJuego);
+    JuegoDestruir(&testJuego);
 }
 
 void testMoverElReyHaciaLaIzquierda()
@@ -92,7 +92,7 @@ void testMoverElReyHaciaLaIzquierda()
     ASSERT(testJuego.tablero[4][3].ranura == NULL);
     ASSERT(testJuego.tablero[4][2].ranura != NULL);
     /*TableroDestruir(&(testJuego.tablero));*/
-    Terminar(&testJuego);
+    JuegoDestruir(&testJuego);
 }
 
 
@@ -123,7 +123,7 @@ void testMoverElReyHaciaLaDerecha()
     ASSERT(testJuego.tablero[4][3].ranura == NULL);
     ASSERT(testJuego.tablero[4][4].ranura != NULL);
     /*TableroDestruir(&(testJuego.tablero));*/
-    Terminar(&testJuego);
+    JuegoDestruir(&testJuego);
 }
 
 void testMoverElReyDiagonalSuperiorIzquierda()
@@ -153,7 +153,7 @@ void testMoverElReyDiagonalSuperiorIzquierda()
     ASSERT(testJuego.tablero[4][3].ranura == NULL);
     ASSERT(testJuego.tablero[3][2].ranura != NULL);
     /*TableroDestruir(&(testJuego.tablero));*/
-    Terminar(&testJuego);
+    JuegoDestruir(&testJuego);
 }
 
 void testMoverElReyDiagonalSuperiorDerecha()
@@ -183,7 +183,7 @@ void testMoverElReyDiagonalSuperiorDerecha()
     ASSERT(testJuego.tablero[4][3].ranura == NULL);
     ASSERT(testJuego.tablero[3][4].ranura != NULL);
     /*TableroDestruir(&(testJuego.tablero));*/
-    Terminar(&testJuego);
+    JuegoDestruir(&testJuego);
 }
 
 void testMoverElReyDiagonalInferiorIzquierda()
@@ -213,7 +213,7 @@ void testMoverElReyDiagonalInferiorIzquierda()
     ASSERT(testJuego.tablero[4][3].ranura == NULL);
     ASSERT(testJuego.tablero[3][2].ranura != NULL);
     /*TableroDestruir(&(testJuego.tablero));*/
-    Terminar(&testJuego);
+    JuegoDestruir(&testJuego);
 }
 
 
@@ -244,7 +244,7 @@ void testMoverElReyDiagonalInferiorDerecha()
     ASSERT(testJuego.tablero[4][3].ranura == NULL);
     ASSERT(testJuego.tablero[5][4].ranura != NULL);
     /*TableroDestruir(&(testJuego.tablero));*/
-    Terminar(&testJuego);
+    JuegoDestruir(&testJuego);
 }
 
 int main(void)

@@ -32,7 +32,7 @@ void testMoverUnCaballo1()
     ASSERT(testJuego.tablero[4][3].ranura == NULL);
     ASSERT(testJuego.tablero[6][4].ranura != NULL);
     /*TableroDestruir(&(testJuego.tablero));*/
-    Terminar(&testJuego);
+    JuegoDestruir(&testJuego);
 }
 
 void testMoverUnCaballo2()
@@ -62,7 +62,7 @@ void testMoverUnCaballo2()
     ASSERT(testJuego.tablero[4][3].ranura == NULL);
     ASSERT(testJuego.tablero[5][5].ranura != NULL);
     /*TableroDestruir(&(testJuego.tablero));*/
-    Terminar(&testJuego);
+    JuegoDestruir(&testJuego);
 }
 
 void testMoverUnCaballo3()
@@ -92,7 +92,7 @@ void testMoverUnCaballo3()
     ASSERT(testJuego.tablero[4][3].ranura == NULL);
     ASSERT(testJuego.tablero[3][5].ranura != NULL);
     /*TableroDestruir(&(testJuego.tablero));*/
-    Terminar(&testJuego);
+    JuegoDestruir(&testJuego);
 }
 
 void testMoverUnCaballo4()
@@ -122,7 +122,7 @@ void testMoverUnCaballo4()
     ASSERT(testJuego.tablero[4][3].ranura == NULL);
     ASSERT(testJuego.tablero[2][4].ranura != NULL);
     /*TableroDestruir(&(testJuego.tablero));*/
-    Terminar(&testJuego);
+    JuegoDestruir(&testJuego);
 }
 
 void testMoverUnCaballo5()
@@ -152,7 +152,7 @@ void testMoverUnCaballo5()
     ASSERT(testJuego.tablero[4][3].ranura == NULL);
     ASSERT(testJuego.tablero[2][2].ranura != NULL);
     /*TableroDestruir(&(testJuego.tablero));*/
-    Terminar(&testJuego);
+    JuegoDestruir(&testJuego);
 }
 
 void testMoverUnCaballo6()
@@ -182,7 +182,7 @@ void testMoverUnCaballo6()
     ASSERT(testJuego.tablero[4][3].ranura == NULL);
     ASSERT(testJuego.tablero[3][1].ranura != NULL);
     /*TableroDestruir(&(testJuego.tablero));*/
-    Terminar(&testJuego);
+    JuegoDestruir(&testJuego);
 }
 
 void testMoverUnCaballo7()
@@ -212,7 +212,7 @@ void testMoverUnCaballo7()
     ASSERT(testJuego.tablero[4][3].ranura == NULL);
     ASSERT(testJuego.tablero[5][1].ranura != NULL);
     /*TableroDestruir(&(testJuego.tablero));*/
-    Terminar(&testJuego);
+    JuegoDestruir(&testJuego);
 }
 
 void testMoverUnCaballo8()
@@ -242,7 +242,7 @@ void testMoverUnCaballo8()
     ASSERT(testJuego.tablero[4][3].ranura == NULL);
     ASSERT(testJuego.tablero[6][2].ranura != NULL);
     /*TableroDestruir(&(testJuego.tablero));*/
-    Terminar(&testJuego);
+    JuegoDestruir(&testJuego);
 }
 
 

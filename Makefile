@@ -38,7 +38,7 @@ __OBJECTS1 = $(notdir $(__OBJECTS2))
 OBJECTS  = $(patsubst %, $(OBJ_DIR)/%, $(__OBJECTS1))
 
 # Objetos del programa programa principal exceptuando main.c
-MAIN_OBJECTS = $(filter-out obj/main.o, $(OBJECTS))
+MAIN_OBJECTS = $(filter-out obj/main.o obj/interfaz.o, $(OBJECTS))
 
 # Objetos de los tests
 TEST_OBJECTS = $(patsubst %.c,%.o, $(TESTS))
