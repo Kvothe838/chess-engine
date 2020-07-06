@@ -4,7 +4,5 @@
     #include <tablero.h>
     #include <juego.h>
 
-    void Empezar(Juego*);
-
-    void Terminar(Juego*);
+    void Jugar(Juego*);
 #endif

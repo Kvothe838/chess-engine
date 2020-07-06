@@ -1,15 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <juego.h>
 #include <interfaz.h>
 
 int main(void)
 {
     Juego juego;
 
-    Empezar(&juego);
-
-    
-    Terminar(&juego);
+    Jugar(&juego);
     
     return EXIT_SUCCESS;
 }
