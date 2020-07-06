@@ -13,4 +13,5 @@ typedef struct
     } Juego;
 
     void JuegoInicializar(char[FILAS][COLUMNAS][3], Juego* juego);
+    void JuegoDestruir(Juego* juego);
 #endif

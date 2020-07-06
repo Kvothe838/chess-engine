@@ -6,10 +6,7 @@ int main(void)
 {
     Juego juego;
 
-    Empezar(&juego);
-
-    
-    Terminar(&juego);
+    Jugar(&juego);
     
     return EXIT_SUCCESS;
 }
