@@ -15,7 +15,7 @@
 #define ERROR_MOVIMIENTO_DOBLE "Hay dos piezas que pueden realizar el movimiento deseado.\nPor favor, especifique con la notación específica."
 #define ERROR_ATAQUE_ALIADO "Esta intentando atacar una pieza que le pertenece. Reintente."
 
-void Empezar(Juego* juego)
+void Jugar(Juego* juego)
 {
     INICIALIZAR_JUEGO(juego);
     

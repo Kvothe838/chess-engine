@@ -1,6 +1,8 @@
 #ifndef _JUEGO_H_
 #define _JUEGO_H_
 
+#include <tablero.h>
+
 typedef struct
     {
         Tablero tablero;
