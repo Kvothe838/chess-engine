@@ -3,7 +3,7 @@
 #include <movimiento.h>
 #define TABLERO_PERSONALIZADO
 #include <tipo_juego.h>
-#include <interfaz.h>
+#include <juego.h>
 
 void testMoverElReyHaciaAbajo()
 {
