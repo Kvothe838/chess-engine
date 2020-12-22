@@ -18,7 +18,7 @@
 void Jugar(Juego* juego)
 {
     INICIALIZAR_JUEGO(juego);
-    
+
     size_t numeroDeMovimientos = 0;
     char jugador = 'B';
     bool juegoTerminado = false, turnoDeLosBlancos = true;
@@ -31,7 +31,7 @@ void Jugar(Juego* juego)
     while (!juegoTerminado)
     {
         jugador = turnoDeLosBlancos ? 'B' : 'N';
-        
+
         printf("%s%s\n", TURNO, turnoDeLosBlancos ? "Blancos" : "Negros");
         printf("%s", ELEGIR);
         fgets(movimiento, 4, stdin);
@@ -39,15 +39,15 @@ void Jugar(Juego* juego)
         while ((c = getchar()) != '\n' && c != EOF);
 
         status_t statusMovimiento = CalcularMovimiento(juego, movimiento, jugador);
-        
+
         switch(statusMovimiento)
         {
             case ST_OK:
                 numeroDeMovimientos++;
 
-                mostrarPiezasEliminadas(zonaPiezasEliminadasPorLasNegras);
+                MostrarPiezasEliminadas(zonaPiezasEliminadasPorLasNegras);
                 TableroImprimir(juego->tablero);
-                mostrarPiezasEliminadas(zonaPiezasEliminadasPorLasBlancas);
+                MostrarPiezasEliminadas(zonaPiezasEliminadasPorLasBlancas);
 
                 if (numeroDeMovimientos % 2 == 0)
                 {
@@ -61,7 +61,7 @@ void Jugar(Juego* juego)
                         juegoTerminado = true;
                     }
                 }
-            
+
                 turnoDeLosBlancos = !turnoDeLosBlancos;
 
                 break;
@@ -77,7 +77,8 @@ void Jugar(Juego* juego)
                 printf("\n%s\n\n", ERROR_ATAQUE_ALIADO);
 
                 break;
-        }   
+        }
     }
+
     JuegoDestruir(juego);
 }

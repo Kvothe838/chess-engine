@@ -3,7 +3,7 @@
 #include <pieza.h>
 #include <imprimir.h>
 
-void initializarZona(zonaPiezasEliminadas* zona)
+void __inicializarZona(zonaPiezasEliminadas* zona)
 {
     if(!zona->estaInicializado)
     {
@@ -13,20 +13,23 @@ void initializarZona(zonaPiezasEliminadas* zona)
 }
 
 void PiezaEsAtacada(Pieza* pieza, zonaPiezasEliminadas* zona)
-{   
-    initializarZona(zona);
+{
+    __inicializarZona(zona);
     zona->piezas[zona->contador++] = pieza;
     pieza->posicion = NULL;
 }
 
-void mostrarPiezasEliminadas(zonaPiezasEliminadas zona)
+void MostrarPiezasEliminadas(zonaPiezasEliminadas zona)
 {
     if(zona.contador == 0)
     {
         return;
     }
+
     int limiteHorizontal = 8;
-    imprimirLineaHorizontalSuperior(zona.contador);
+
+    ImprimirLineaHorizontalSuperior(zona.contador);
+
     for(int i = 0; i < zona.contador; i++)
     {
         if (i == limiteHorizontal)
@@ -36,12 +39,13 @@ void mostrarPiezasEliminadas(zonaPiezasEliminadas zona)
         printf("\u2502");
         PiezaImprimir(*(zona.piezas[i]));
     }
+
     printf("\u2502");
-    imprimirLineaHorizontalInferior(zona.contador);
+    ImprimirLineaHorizontalInferior(zona.contador);
     printf("\n");
 }
 
-void destruirZona(zonaPiezasEliminadas* zona)
+void DestruirZona(zonaPiezasEliminadas* zona)
 {
     for(int i = 0; i < zona->contador; i++)
     {

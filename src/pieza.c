@@ -5,7 +5,7 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
-void __PiezaCrearCoordenadas(Coordenada** coordenadas, int len, int** coordenadasEnNumero/*, ...*/)
+void __crearCoordenadas(Coordenada** coordenadas, int len, int** coordenadasEnNumero/*, ...*/)
 {
     (*coordenadas) = (Coordenada*) malloc(len * sizeof(Coordenada));
 
@@ -16,28 +16,28 @@ void __PiezaCrearCoordenadas(Coordenada** coordenadas, int len, int** coordenada
     }
 }
 
-void __ValoresCoordenadasInicializar(int** valoresCoordenadas, int cantidadMovimientos)
+void __inicializarValoresCoordenadas(int** valoresCoordenadas, int cantidadMovimientos)
 {
     (*valoresCoordenadas) = (int*) malloc(2 * cantidadMovimientos * sizeof(int));
 }
 
-void __ValoresCoordenadasLlenar_Rey(int** valoresCoordenadas)
+void __llenarValoresCoordenadas_Rey(int** valoresCoordenadas)
 {
     (*valoresCoordenadas)[0] = (*valoresCoordenadas)[2] = (*valoresCoordenadas)[5] = (*valoresCoordenadas)[7] = 0;
     (*valoresCoordenadas)[1] = (*valoresCoordenadas)[4] = (*valoresCoordenadas)[8] = (*valoresCoordenadas)[9] = (*valoresCoordenadas)[10] = (*valoresCoordenadas)[13] = 1;
     (*valoresCoordenadas)[3] = (*valoresCoordenadas)[6] = (*valoresCoordenadas)[11] = (*valoresCoordenadas)[12] = (*valoresCoordenadas)[14] = (*valoresCoordenadas)[15] = -1;
-/*  Coordenadas más visibles 
-    (0,1), 
-    (0,-1), 
-    (1,0), 
-    (-1,0), 
-    (1,1), 
-    (1,-1), 
-    (-1,1), 
+/*  Coordenadas más visibles
+    (0,1),
+    (0,-1),
+    (1,0),
+    (-1,0),
+    (1,1),
+    (1,-1),
+    (-1,1),
     (-1,-1)  */
 }
 
-void __ValoresCoordenadasLlenar_Reina(int** valoresCoordenadas)
+void __llenarValoresCoordenadas_Reina(int** valoresCoordenadas)
 {
     for(int j = 0; j < 56; j++)
     {
@@ -81,10 +81,10 @@ void __ValoresCoordenadasLlenar_Reina(int** valoresCoordenadas)
             (*valoresCoordenadas)[2*j] = 48-j;
             (*valoresCoordenadas)[2*j+1] = j-48;
         }
-    }                
+    }
 }
 
-void __ValoresCoordenadasLlenar_Torre(int** valoresCoordenadas)
+void __llenarValoresCoordenadas_Torre(int** valoresCoordenadas)
 {
     for(int j = 0; j < 28; j++)
     {
@@ -111,7 +111,7 @@ void __ValoresCoordenadasLlenar_Torre(int** valoresCoordenadas)
     }
 }
 
-void __ValoresCoordenadasLlenar_Alfil(int** valoresCoordenadas)
+void __llenarValoresCoordenadas_Alfil(int** valoresCoordenadas)
 {
     for(int j = 0; j < 28; j++)
     {
@@ -138,24 +138,24 @@ void __ValoresCoordenadasLlenar_Alfil(int** valoresCoordenadas)
     }
 }
 
-void __ValoresCoordenadasLlenar_Caballo(int** valoresCoordenadas)
+void __llenarValoresCoordenadas_Caballo(int** valoresCoordenadas)
 {
     (*valoresCoordenadas)[0] = (*valoresCoordenadas)[2] = (*valoresCoordenadas)[5] = (*valoresCoordenadas)[7] = 2;
     (*valoresCoordenadas)[1] = (*valoresCoordenadas)[4] = (*valoresCoordenadas)[8] = (*valoresCoordenadas)[15] = 1;
     (*valoresCoordenadas)[3] = (*valoresCoordenadas)[6] = (*valoresCoordenadas)[10] = (*valoresCoordenadas)[13] = -1;
     (*valoresCoordenadas)[9] = (*valoresCoordenadas)[11] = (*valoresCoordenadas)[12] = (*valoresCoordenadas)[14] = -2;
-/*  Coordenadas más visibles 
-    (2,1),     
-    (2,-1), 
+/*  Coordenadas más visibles
+    (2,1),
+    (2,-1),
     (1,2),
-    (-1,2), 
-    (1,-2),     
-    (-1,-2), 
-    (-2,-1), 
+    (-1,2),
+    (1,-2),
+    (-1,-2),
+    (-2,-1),
     (-2,1)  */
 }
 
-void __ValoresCoordenadasLlenar_Peon(int** valoresCoordenadas)
+void __llenarValoresCoordenadas_Peon(int** valoresCoordenadas)
 {
     (*valoresCoordenadas)[0] = 1;
     (*valoresCoordenadas)[1] = 0;
@@ -168,7 +168,7 @@ int PiezaObtenerCantidadMovimientos(TipoPieza tipo)
     switch (tipo)
     {
         case REY:
-            cantidad = 8;            
+            cantidad = 8;
             break;
 
         case REINA:
@@ -195,62 +195,62 @@ int PiezaObtenerCantidadMovimientos(TipoPieza tipo)
     return cantidad;
 }
 
-void __PiezaRepresentacionYMovimientos(Pieza* pieza, TipoPieza tipo)
+void __representacionYMovimientos(Pieza* pieza, TipoPieza tipo)
 {
     setlocale(LC_ALL, "");
-    
+
     int base = 0x2654;
     Coordenada* coordenadas;
     int* valoresCoordenadas;
     int cantidadMovimientos = PiezaObtenerCantidadMovimientos(tipo);
 
-    __ValoresCoordenadasInicializar(&valoresCoordenadas, cantidadMovimientos);
+    __inicializarValoresCoordenadas(&valoresCoordenadas, cantidadMovimientos);
 
     if(pieza->esBlanca)
     {
         base += 6;
     }
-    
+
     switch (tipo)
     {
         case REY:
             base += 0;
-            __ValoresCoordenadasLlenar_Rey(&valoresCoordenadas);
-            
+            __llenarValoresCoordenadas_Rey(&valoresCoordenadas);
+
             break;
 
         case REINA:
             base += 1;
-            __ValoresCoordenadasLlenar_Reina(&valoresCoordenadas);            
+            __llenarValoresCoordenadas_Reina(&valoresCoordenadas);
 
             break;
 
         case TORRE:
             base += 2;
-            __ValoresCoordenadasLlenar_Torre(&valoresCoordenadas);
+            __llenarValoresCoordenadas_Torre(&valoresCoordenadas);
 
             break;
 
         case ALFIL:
             base += 3;
-            __ValoresCoordenadasLlenar_Alfil(&valoresCoordenadas);
+            __llenarValoresCoordenadas_Alfil(&valoresCoordenadas);
 
             break;
 
         case CABALLO:
             base += 4;
-            __ValoresCoordenadasLlenar_Caballo(&valoresCoordenadas);
+            __llenarValoresCoordenadas_Caballo(&valoresCoordenadas);
 
             break;
 
         case PEON:
             base += 5;
-            __ValoresCoordenadasLlenar_Peon(&valoresCoordenadas);
+            __llenarValoresCoordenadas_Peon(&valoresCoordenadas);
 
             break;
     }
 
-    __PiezaCrearCoordenadas(&coordenadas, cantidadMovimientos, &valoresCoordenadas);
+    __crearCoordenadas(&coordenadas, cantidadMovimientos, &valoresCoordenadas);
     free(valoresCoordenadas);
 
     pieza->representacion = base;
@@ -264,7 +264,7 @@ void PiezaCrear(Pieza* pieza, TipoPieza tipo, bool esBlanca)
     pieza->posicion = NULL;
     pieza->coordenadasMovimientosPosibles = NULL;
 
-    __PiezaRepresentacionYMovimientos(pieza, tipo);
+    __representacionYMovimientos(pieza, tipo);
 }
 
 void PiezaCopiar(Pieza* copia, Pieza original)

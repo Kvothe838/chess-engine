@@ -12,14 +12,14 @@ typedef struct
     Pieza* piezas[16];
     int contador;
     bool estaInicializado;
-}zonaPiezasEliminadas;
+} zonaPiezasEliminadas;
 
 
 zonaPiezasEliminadas zonaPiezasEliminadasPorLasBlancas;
 zonaPiezasEliminadas zonaPiezasEliminadasPorLasNegras;
 void PiezaEsAtacada(Pieza*, zonaPiezasEliminadas*);
-void mostrarPiezasEliminadas(zonaPiezasEliminadas);
-void destruirZona(zonaPiezasEliminadas*);
+void MostrarPiezasEliminadas(zonaPiezasEliminadas);
+void DestruirZona(zonaPiezasEliminadas*);
 
 
 #endif

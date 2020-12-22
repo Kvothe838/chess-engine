@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void imprimirLineaHorizontalSuperior(size_t);
-void imprimirLineaHorizontalCentral(size_t);
-void imprimirLineaHorizontalInferior(size_t);
+void ImprimirLineaHorizontalSuperior(size_t);
+void ImprimirLineaHorizontalCentral(size_t);
+void ImprimirLineaHorizontalInferior(size_t);
 
 #endif

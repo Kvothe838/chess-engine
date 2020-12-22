@@ -19,24 +19,24 @@ void TableroCopiarPersonalizacion(char tablero[FILAS][COLUMNAS][3])
                 tableroPersonalizado[i][j][k] = tablero[i][j][k];
             }
         }
-    }    
+    }
 }
 
 void TableroImprimir(Tablero tablero)
 {
-    imprimirLineaHorizontalSuperior(COLUMNAS);
-    
+    ImprimirLineaHorizontalSuperior(COLUMNAS);
+
     for (int i = 0; i < FILAS; i++)
     {
         printf("\u2502");
 
         for (int j = 0; j < COLUMNAS; j++)
         {
-            if(!PosicionEstaVacia(tablero[FILAS - i - 1][j])) 
+            if(!PosicionEstaVacia(tablero[FILAS - i - 1][j]))
             {
                 Pieza piezaTemp = *tablero[FILAS - i - 1][j].ranura;
                 PiezaImprimir(piezaTemp);
-            } 
+            }
             else
             {
                 printf("   ");
@@ -44,15 +44,15 @@ void TableroImprimir(Tablero tablero)
 
             printf("\u2502");
         }
-        
+
         if(i != (FILAS - 1))
         {
-            imprimirLineaHorizontalCentral(COLUMNAS);
+            ImprimirLineaHorizontalCentral(COLUMNAS);
         }
         else
         {
-            imprimirLineaHorizontalInferior(COLUMNAS);
-        }        
+            ImprimirLineaHorizontalInferior(COLUMNAS);
+        }
     }
 }
 
@@ -63,12 +63,12 @@ void TableroColocarPieza(Posicion* posicion, Pieza *pieza)
     PiezaColocar(pieza, posicion);
 }
 
-int __TraducirFilaAInteger(Fila fila)
+int __traducirFilaAInteger(Fila fila)
 {
     return (int)(fila - 1);
 }
 
-int __TraducirColumnaAInteger(Columna columna)
+int __traducirColumnaAInteger(Columna columna)
 {
     return (int)(columna - 'A');
 }
@@ -76,8 +76,8 @@ int __TraducirColumnaAInteger(Columna columna)
 Posicion* TableroObtenerPieza(Tablero tablero, Casilla casilla)
 {
     int fila, columna;
-    fila = __TraducirFilaAInteger(casilla.fila);
-    columna = __TraducirColumnaAInteger(casilla.columna);
+    fila = __traducirFilaAInteger(casilla.fila);
+    columna = __traducirColumnaAInteger(casilla.columna);
 
     return &tablero[fila][columna];
 }
@@ -90,9 +90,9 @@ void TableroDestruir(Tablero *tablero)
         {
             PosicionDestruir(&(*tablero)[y][x]);
         }
-        
+
         free((*tablero)[y]);
     }
-    
+
     free(*tablero);
 }

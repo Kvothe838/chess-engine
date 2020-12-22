@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-bool __PosicionPosibleValida(Coordenada coordenadaRelativa, Casilla casillaPieza, Casilla* casillaTemp)
+bool __posicionPosibleValida(Coordenada coordenadaRelativa, Casilla casillaPieza, Casilla* casillaTemp)
 {
     int filaPosible = coordenadaRelativa[0] + casillaPieza.fila + 1;
 
@@ -13,7 +13,7 @@ bool __PosicionPosibleValida(Coordenada coordenadaRelativa, Casilla casillaPieza
         return false;
     }
 
-    int columnaPosible = coordenadaRelativa[1] + (int)casillaPieza.columna ;
+    int columnaPosible = coordenadaRelativa[1] + (int)casillaPieza.columna;
 
     if(columnaPosible < A || columnaPosible > H)
     {
@@ -27,20 +27,20 @@ bool __PosicionPosibleValida(Coordenada coordenadaRelativa, Casilla casillaPieza
 }
 
 /* Basado en la casilla de la posicion y los movimientos relativos posibles de la ranura
-de la posicion, filtra y transforma las casillas posibles (movimientos absolutos), 
+de la posicion, filtra y transforma las casillas posibles (movimientos absolutos),
 y devuelve la cantidad de movimientos posibles absolutos.*/
 int CasillaObtenerPosibles(Posicion* posicion, Casilla** casillas)
 {
     int cantidadMovimientosPosibles = PiezaObtenerCantidadMovimientos(posicion->ranura->tipo);
-    int cantidadMovimientos = 0;    
-    Coordenada* movimientosPosibles = posicion->ranura->coordenadasMovimientosPosibles;    
+    int cantidadMovimientos = 0;
+    Coordenada* movimientosPosibles = posicion->ranura->coordenadasMovimientosPosibles;
     (*casillas) = NULL;
-    
+
     for(int i = 0; i < cantidadMovimientosPosibles; i++)
     {
-        Casilla* casillaTemp = (Casilla*) malloc(sizeof(Casilla));
-        
-        if(__PosicionPosibleValida(movimientosPosibles[i], *(posicion->casilla), casillaTemp))
+        Casilla* casillaTemp = (Casilla*)malloc(sizeof(Casilla));
+
+        if(__posicionPosibleValida(movimientosPosibles[i], *(posicion->casilla), casillaTemp))
         {
             cantidadMovimientos++;
             (*casillas) = realloc(*casillas, cantidadMovimientos * sizeof(Coordenada));
@@ -48,7 +48,7 @@ int CasillaObtenerPosibles(Posicion* posicion, Casilla** casillas)
         }
 
         free(casillaTemp);
-    }    
+    }
 
     return cantidadMovimientos;
 }

@@ -12,7 +12,7 @@ status_t CalcularMovimiento(Juego* juego, char movimiento[4], char color)
     Casilla* casillasPosibles = NULL;
     Posicion* posicionInicial;
     bool found;
-    int cantidadDePiezasDelColor = color == 'B' ? juego->cantidadDePiezasBlancas : juego->cantidadDePiezasNegras;    
+    int cantidadDePiezasDelColor = color == 'B' ? juego->cantidadDePiezasBlancas : juego->cantidadDePiezasNegras;
     int cantidadPiezasPosibles = 0;
 
     for (int i = 0; i < cantidadDePiezasDelColor; ++i)
@@ -26,22 +26,21 @@ status_t CalcularMovimiento(Juego* juego, char movimiento[4], char color)
             found = false;
 
             int cantidadPosiblesMovimientos = CasillaObtenerPosibles(posicionInicial, &casillas);
-            
 
             for (int j = 0; j < cantidadPosiblesMovimientos; ++j)
             {
                 if (casillas[j].columna == (Columna)movimiento[1] &&
                     casillas[j].fila == (Fila)(movimiento[2] - '0'))
                 {
-                    casillasPosibles = (Casilla*) realloc(casillasPosibles, (cantidadPiezasPosibles+1) * sizeof(Casilla));                    
+                    casillasPosibles = (Casilla*) realloc(casillasPosibles, (cantidadPiezasPosibles+1) * sizeof(Casilla));
                     casillasPosibles[cantidadPiezasPosibles] = casillas[j];
                     found = true;
-                    
+
                     break;
                 }
             }
 
-            if(found) 
+            if(found)
             {
                 piezasPosibles = (Pieza**) realloc(piezasPosibles, (cantidadPiezasPosibles + 1) * sizeof(Pieza*));
                 piezasPosibles[cantidadPiezasPosibles] = piezaAEvaluar;

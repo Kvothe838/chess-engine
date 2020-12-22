@@ -23,7 +23,7 @@ void JuegoInicializar(char tableroProvisorio[FILAS][COLUMNAS][3], Juego* juego)
             coordenada[1] = x;
 
             PosicionInicializar(&((juego->tablero)[y][x]), coordenada);
-            
+
             if (strcmp(tableroProvisorio[y][x], NADA) != 0)
             {
                 pieza = (Pieza*)malloc(sizeof(Pieza));
@@ -43,7 +43,7 @@ void JuegoInicializar(char tableroProvisorio[FILAS][COLUMNAS][3], Juego* juego)
                     juego->piezasNegras[juego->cantidadDePiezasNegras] = pieza;
                     juego->cantidadDePiezasNegras++;
                 }
-            }            
+            }
         }
     }
 }

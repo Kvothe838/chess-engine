@@ -8,6 +8,6 @@ int main(void)
     Juego juego;
 
     Jugar(&juego);
-    
+
     return EXIT_SUCCESS;
 }

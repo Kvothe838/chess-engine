@@ -1,7 +1,7 @@
 #include <imprimir.h>
 
 
-void imprimirLineaHorizontalSuperior(size_t largo)
+void ImprimirLineaHorizontalSuperior(size_t largo)
 {
     if(largo == 0)
     {
@@ -21,14 +21,14 @@ void imprimirLineaHorizontalSuperior(size_t largo)
         if(i != (largo - 1))
         {
             printf("\u252C");
-        }        
+        }
     }
 
     printf("\u2510");
-    printf("\n");   
+    printf("\n");
 }
 
-void imprimirLineaHorizontalCentral(size_t largo)
+void ImprimirLineaHorizontalCentral(size_t largo)
 {
     if(largo == 0)
     {
@@ -48,14 +48,14 @@ void imprimirLineaHorizontalCentral(size_t largo)
         if(i != (largo - 1))
         {
             printf("\u253C");
-        }        
+        }
     }
 
     printf("\u2524");
-    printf("\n");   
+    printf("\n");
 }
 
-void imprimirLineaHorizontalInferior(size_t largo)
+void ImprimirLineaHorizontalInferior(size_t largo)
 {
     if(largo == 0)
     {
@@ -75,10 +75,9 @@ void imprimirLineaHorizontalInferior(size_t largo)
         if(i != (largo - 1))
         {
             printf("\u2534");
-        }        
+        }
     }
 
     printf("\u2518");
     printf("\n");
-   
 }
