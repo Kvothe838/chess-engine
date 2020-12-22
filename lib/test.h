@@ -13,11 +13,19 @@ size_t PRUEBAS_APROBADAS = 0;
 char* FUNCION_ACTUAL = NULL;
 bool FUNCION_PASA = true;
 
+#define ANSI_COLOR_RED     "\x1b[31m"
+#define ANSI_COLOR_GREEN   "\x1b[32m"
+#define ANSI_COLOR_YELLOW  "\x1b[33m"
+#define ANSI_COLOR_BLUE    "\x1b[34m"
+#define ANSI_COLOR_MAGENTA "\x1b[35m"
+#define ANSI_COLOR_CYAN    "\x1b[36m"
+#define ANSI_COLOR_RESET   "\x1b[0m"
+
 #define PRINT_ANALISIS()\
 {\
     if(FUNCION_PASA)\
     {\
-        printf("%s\n", APROBADO);\
+        printf(ANSI_COLOR_GREEN "%s\n" ANSI_COLOR_RESET, APROBADO);\
         PRUEBAS_APROBADAS++;\
     }\
     printf("\n");\
@@ -43,7 +51,7 @@ bool FUNCION_PASA = true;
     if(!(CONDICION))\
     {\
         FUNCION_PASA = false;\
-        printf("%s%d%s\"%s\"\n", FALLO1, __LINE__, FALLO2, #CONDICION);\
+        printf(ANSI_COLOR_RED "%s%d%s\"%s\"\n" ANSI_COLOR_RESET, FALLO1, __LINE__, FALLO2, #CONDICION);\
     }\
 }
 
