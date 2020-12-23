@@ -156,19 +156,29 @@ void __llenarValoresCoordenadas_Caballo(int** valoresCoordenadas)
     (-2,1)  */
 }
 
-void __llenarValoresCoordenadas_Peon(int** valoresCoordenadas)
+void __llenarValoresCoordenadas_Peon(int** valoresCoordenadas, bool esBlanca)
 {
+  if(esBlanca){
     (*valoresCoordenadas)[0] = 1;
-    (*valoresCoordenadas)[1] = 0;
+  } else {
+    (*valoresCoordenadas)[0] = -1;
+  }
+  (*valoresCoordenadas)[1] = 0;
 }
 
 int PiezaObtenerMovimientosEspecialesPosibles(Casilla casilla, TipoPieza tipo, bool esBlanca, Coordenada** movimientosPosibles, int cantidadMovimientosPosibles){
   switch(tipo){
     case PEON:
-      if((esBlanca && casilla.fila == DOS) || (!esBlanca && casilla.fila == SIETE)){
+      printf("\nFILA: %d", casilla.fila);
+      if((esBlanca && casilla.fila == 1) || (!esBlanca && casilla.fila == 6)){
         (*movimientosPosibles) = (Coordenada*) realloc(*movimientosPosibles, (cantidadMovimientosPosibles + 1) * sizeof(Coordenada));
 
-        ((*movimientosPosibles)[cantidadMovimientosPosibles])[0] = 2;
+        if(esBlanca){
+          ((*movimientosPosibles)[cantidadMovimientosPosibles])[0] = 2;
+        } else {
+          ((*movimientosPosibles)[cantidadMovimientosPosibles])[0] = -2;
+        }
+
         ((*movimientosPosibles)[cantidadMovimientosPosibles])[1] = 0;
 
         return cantidadMovimientosPosibles + 1;
@@ -265,7 +275,7 @@ void __representacionYMovimientos(Pieza* pieza, TipoPieza tipo)
 
         case PEON:
             base += 5;
-            __llenarValoresCoordenadas_Peon(&valoresCoordenadas);
+            __llenarValoresCoordenadas_Peon(&valoresCoordenadas, pieza->esBlanca);
 
             break;
     }
