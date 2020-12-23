@@ -169,7 +169,6 @@ void __llenarValoresCoordenadas_Peon(int** valoresCoordenadas, bool esBlanca)
 int PiezaObtenerMovimientosEspecialesPosibles(Casilla casilla, TipoPieza tipo, bool esBlanca, Coordenada** movimientosPosibles, int cantidadMovimientosPosibles){
   switch(tipo){
     case PEON:
-      printf("\nFILA: %d", casilla.fila);
       if((esBlanca && casilla.fila == 1) || (!esBlanca && casilla.fila == 6)){
         (*movimientosPosibles) = (Coordenada*) realloc(*movimientosPosibles, (cantidadMovimientosPosibles + 1) * sizeof(Coordenada));
 
