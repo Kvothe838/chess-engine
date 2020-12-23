@@ -22,7 +22,6 @@ void testMoverElAlfilDiagonalPositiva()
 
     Juego testJuego;
     char jugador = 'B';
-    
 
     INICIALIZAR_JUEGO(&(testJuego));
     /*TableroImprimir(tablero);*/
@@ -40,16 +39,12 @@ void testMoverElAlfilDiagonalPositiva()
         movimiento[2] = posicionInicial[2] + (char)i;
         CalcularMovimiento(&(testJuego), movimiento, jugador);
         /*TableroImprimir(tablero);*/
-        
+
         ASSERT(testJuego.tablero[0][0].ranura == NULL);
         ASSERT(testJuego.tablero[i][i].ranura != NULL);
 
-        CalcularMovimiento(&(testJuego), movimiento, jugador);
-        ASSERT(testJuego.tablero[0][0].ranura != NULL);
-        ASSERT(testJuego.tablero[i][i].ranura == NULL);
-
     }
-    
+
     free(movimiento);
     JuegoDestruir(&testJuego);
 }
@@ -88,22 +83,18 @@ void testMoverElAlfilDiagonalNegatica()
         movimiento[2] = posicionInicial[2] + (char)i;
         CalcularMovimiento(&(testJuego), movimiento, jugador);
         /*TableroImprimir(tablero);*/
-        
+
         ASSERT(testJuego.tablero[0][7].ranura == NULL);
         ASSERT(testJuego.tablero[i][7 - i].ranura != NULL);
 
-        CalcularMovimiento(&(testJuego), movimiento, jugador);
-        ASSERT(testJuego.tablero[0][7].ranura != NULL);
-        ASSERT(testJuego.tablero[i][7 - i].ranura == NULL);
-
     }
-    
+
     free(movimiento);
     JuegoDestruir(&testJuego);
 }
 
 int main(void)
-{   
+{
     testMoverElAlfilDiagonalPositiva();
     testMoverElAlfilDiagonalNegatica();
     return 0;

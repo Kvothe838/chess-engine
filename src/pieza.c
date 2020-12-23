@@ -2,6 +2,7 @@
 #include <locale.h>
 #include <pieza.h>
 #include <posicion.h>
+#include <casilla.h>
 #include <stdarg.h>
 #include <stdlib.h>
 
@@ -45,12 +46,12 @@ void __llenarValoresCoordenadas_Reina(int** valoresCoordenadas)
         {
             (*valoresCoordenadas)[2*j] = 0;
             (*valoresCoordenadas)[2*j+1] = j+1;
-        } 
+        }
         else if(j >= 7 && j < 14)
         {
             (*valoresCoordenadas)[2*j] = 0;
             (*valoresCoordenadas)[2*j+1] = 6-j;
-        } 
+        }
         else if(j >= 14 && j < 21)
         {
             (*valoresCoordenadas)[2*j] = j-13;
@@ -159,6 +160,25 @@ void __llenarValoresCoordenadas_Peon(int** valoresCoordenadas)
 {
     (*valoresCoordenadas)[0] = 1;
     (*valoresCoordenadas)[1] = 0;
+}
+
+int PiezaObtenerMovimientosEspecialesPosibles(Casilla casilla, TipoPieza tipo, bool esBlanca, Coordenada** movimientosPosibles, int cantidadMovimientosPosibles){
+  switch(tipo){
+    case PEON:
+      if((esBlanca && casilla.fila == DOS) || (!esBlanca && casilla.fila == SIETE)){
+        (*movimientosPosibles) = (Coordenada*) realloc(*movimientosPosibles, (cantidadMovimientosPosibles + 1) * sizeof(Coordenada));
+
+        ((*movimientosPosibles)[cantidadMovimientosPosibles])[0] = 2;
+        ((*movimientosPosibles)[cantidadMovimientosPosibles])[1] = 0;
+
+        return cantidadMovimientosPosibles + 1;
+      }
+
+      return cantidadMovimientosPosibles;
+      break;
+    default:
+      return cantidadMovimientosPosibles;
+  }
 }
 
 int PiezaObtenerCantidadMovimientos(TipoPieza tipo)

@@ -37,7 +37,7 @@ void testMoverUnPeonEnUnaPosicion()
 
 void testMoverUnPeonDosPosicionesEnSuPosiconInicial()
 {
-    char tableroProvisorio[FILAS][COLUMNAS][3] = 
+    char tableroProvisorio[FILAS][COLUMNAS][3] =
     {
         {PEON_BLANCO, NADA, NADA, NADA, NADA, NADA, NADA, NADA},
         {NADA, NADA, NADA, NADA, NADA, NADA, NADA, NADA},

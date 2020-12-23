@@ -36,7 +36,9 @@ int CasillaObtenerPosibles(Posicion* posicion, Casilla** casillas)
     Coordenada* movimientosPosibles = posicion->ranura->coordenadasMovimientosPosibles;
     (*casillas) = NULL;
 
-    for(int i = 0; i < cantidadMovimientosPosibles; i++)
+    int cantidadMovimientosTotales = PiezaObtenerMovimientosEspecialesPosibles((*posicion->casilla), posicion->ranura->tipo, posicion->ranura->esBlanca, &movimientosPosibles, cantidadMovimientosPosibles);
+
+    for(int i = 0; i < cantidadMovimientosTotales; i++)
     {
         Casilla* casillaTemp = (Casilla*)malloc(sizeof(Casilla));
 
@@ -50,5 +52,6 @@ int CasillaObtenerPosibles(Posicion* posicion, Casilla** casillas)
         free(casillaTemp);
     }
 
-    return cantidadMovimientos;
+
+    return cantidadMovimientosTotales;
 }

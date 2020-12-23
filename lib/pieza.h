@@ -22,4 +22,5 @@
     int PiezaObtenerCantidadMovimientos(TipoPieza tipo);
     void PiezaDestruir(Pieza* pieza);
     void PiezaDestruirMultiples(Pieza*** pieza, size_t catidadDePiezas);
+    int PiezaObtenerMovimientosEspecialesPosibles(Casilla casilla, TipoPieza tipo, bool esBlanca, Coordenada** movimientosPosibles, int cantidadMovimientosPosibles);
 #endif
